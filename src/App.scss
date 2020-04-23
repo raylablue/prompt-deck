@@ -5,6 +5,7 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  color: #aaa;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -30,10 +31,12 @@
   0% {
     transform: translateY(0);
   }
+
   50% {
-    transform: translateY(10px)
+    transform: translateY(10px);
   }
+
   100% {
-    transform: translateY(0px)
+    transform: translateY(0);
   }
 }
