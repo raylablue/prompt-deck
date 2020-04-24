@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import logo from '../logo.svg';
+import { Counter } from '../features/counter/Counter';
 import './App.scss';
 
 function App() {
@@ -55,6 +55,15 @@ function App() {
             React Redux
           </a>
         </span>
+        <div>
+          <p>you are currently logged out</p>
+          <button
+            className="btn btn-primary btn-lg"
+            type="button"
+          >
+            Login
+          </button>
+        </div>
       </header>
     </div>
   );
