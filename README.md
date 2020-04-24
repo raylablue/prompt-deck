@@ -1,4 +1,36 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+## [PromptDeck](http://localhost:3000)
+This project utilizes the Firebase and Redux to view, create, and generate writing prompts.
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), 
+using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+
+
+## How to run the project locally
+### `Local Setup`
+1. Install Node.js (recommended version v13.4.0)
+2. Clone this repo
+3. Run `npm install` in the cloned repo's root
+4. Run `npm start` to view the locally hosted site in the browser
+
+### `Development server`
+Run `npm start` for a dev server. 
+Page will automatically open in browser, 
+or navigate to http://localhost:300 to view it in the browser.
+The page will reload if you make edits.
+You will also see any lint errors in the console.
+
+### `Create a Build`
+Run `npm run build` to build the project for produciton. The build artifacts will be stored
+in the `build/` directory. 
+
+## Project Notes
+### `Thought Process`
+
+
+### `With more time`
+
+
+
 
 ## Available Scripts
 
