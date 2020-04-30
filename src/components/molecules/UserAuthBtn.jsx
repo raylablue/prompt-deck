@@ -1,29 +1,34 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import FirebaseContext from "../../firebase/context";
-
+import FirebaseContext from '../../firebase/context';
 
 function UserAuthBtn() {
-  const { user, firebase} = useContext(FirebaseContext);
-  const [userLogin, setUserLogin] = useState("signin");
+  const { user, firebase } = useContext(FirebaseContext);
+  const [userLogin, setUserLogin] = useState('');
+
+  const handleClick = () => {
+    if (user) {
+      return firebase.logout();
+    }
+  };
 
   const loginBtn = () => {
     if (user) {
-      setUserLogin("logout");
+      setUserLogin('logout');
     } else {
-      setUserLogin("signin");
+      setUserLogin('signin');
     }
-    console.log('user', user);
   };
 
   useEffect(() => {
-    console.log('user', user);
-  }, []);
+    loginBtn();
+  }, [user]);
 
   return (
     <button
       className="btn btn-primary"
       type="button"
+      onClick={handleClick}
     >
       <NavLink
         to="/signin"

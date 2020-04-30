@@ -13,7 +13,6 @@ import firebase from '../firebase/firebase';
 
 function App() {
   const user = useAuth();
-  console.log(user);
   return (
     <>
       <Router>
