@@ -7,26 +7,27 @@ import {
 import './App.scss';
 import Home from '../components/pages/PageHome';
 import Signin from '../components/pages/PageSignin';
-import Logout from '../components/pages/PageLogout';
-
+import useAuth from '../firebase/useAuth';
+import FirebaseContext from '../firebase/context';
+import firebase from '../firebase/firebase';
 
 function App() {
+  const user = useAuth();
+  console.log(user);
   return (
     <>
       <Router>
-        <Switch>
-          <Route path="/signin">
-            <Signin />
-          </Route>
+        <FirebaseContext.Provider value={{ user, firebase }}>
+          <Switch>
+            <Route path="/signin">
+              <Signin />
+            </Route>
 
-          <Route path="/logout">
-            <Logout />
-          </Route>
-
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </FirebaseContext.Provider>
       </Router>
     </>
   );

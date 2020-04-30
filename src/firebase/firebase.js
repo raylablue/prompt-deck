@@ -1,14 +1,21 @@
 import app from 'firebase/app';
 import 'firebase/auth';
-import firebaseui from 'firebaseui';
-import firebase from 'firebase';
+import * as firebaseui from 'firebaseui';
+import 'firebase/firestore';
 import firebaseConfig from './config';
-import uiConfig from './uiConfig';
 
-// Initialize Firebase
-app.initializeApp(firebaseConfig);
+class Firebase {
+  constructor() {
+    app.initializeApp(firebaseConfig);
+    this.auth = app.auth();
+    this.ui = new firebaseui.auth.AuthUI(this.auth);
+    this.db = app.firestore();
+  }
 
-// Initialize the FirebaseUI Widget using Firebase.
-const ui = new firebaseui.auth.AuthUI(firebase.auth());
-// The start method will wait until the DOM is loaded.
-ui.start('#firebaseui-auth-container', uiConfig);
+  async logout() {
+    await this.auth.signOut();
+  }
+}
+const firebase = new Firebase();
+
+export default firebase;
