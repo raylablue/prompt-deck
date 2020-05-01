@@ -1,13 +1,15 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink, useHistory} from 'react-router-dom';
 import FirebaseContext from '../../firebase/context';
 
 function UserAuthBtn() {
   const { user, firebase } = useContext(FirebaseContext);
   const [userLogin, setUserLogin] = useState('');
+  const history = useHistory();
 
   const handleClick = () => {
     if (user) {
+      history.push('/');
       return firebase.logout();
     }
   };

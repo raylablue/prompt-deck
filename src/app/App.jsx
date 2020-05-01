@@ -12,11 +12,17 @@ import FirebaseContext from '../firebase/context';
 import firebase from '../firebase/firebase';
 
 function App() {
-  const user = useAuth();
+  const { authUser, isFirebaseLoaded } = useAuth();
+  const firebaseContextValue = {
+    user: authUser,
+    firebase,
+    isFirebaseLoaded,
+  };
+
   return (
     <>
       <Router>
-        <FirebaseContext.Provider value={{ user, firebase }}>
+        <FirebaseContext.Provider value={firebaseContextValue}>
           <Switch>
             <Route path="/signin">
               <Signin />

@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 
 function useAuth() {
   const [authUser, setAuthUser] = React.useState(null);
+  const [isFirebaseLoaded, setIsFirebaseLoaded] = React.useState(false);
 
   React.useEffect(() => {
     const unsubscribe = firebase.auth()
@@ -12,12 +13,17 @@ function useAuth() {
         } else {
           setAuthUser(null);
         }
+
+        setIsFirebaseLoaded(true);
       });
 
     return () => unsubscribe();
   }, []);
 
-  return authUser;
+  return {
+    authUser,
+    isFirebaseLoaded,
+  };
 }
 
 export default useAuth;
