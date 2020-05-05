@@ -12,11 +12,10 @@ import FirebaseContext from '../firebase/context';
 import firebase from '../firebase/firebase';
 
 function App() {
-  const { authUser, isFirebaseLoaded } = useAuth();
+  const { authUser } = useAuth();
   const firebaseContextValue = {
     user: authUser,
     firebase,
-    isFirebaseLoaded,
   };
 
   return (

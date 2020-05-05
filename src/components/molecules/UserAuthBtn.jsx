@@ -1,18 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react';
-import {NavLink, useHistory} from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import FirebaseContext from '../../firebase/context';
 
 function UserAuthBtn() {
   const { user, firebase } = useContext(FirebaseContext);
   const [userLogin, setUserLogin] = useState('');
   const history = useHistory();
-
-  const handleClick = () => {
-    if (user) {
-      history.push('/');
-      return firebase.logout();
-    }
-  };
 
   const loginBtn = () => {
     if (user) {
@@ -22,9 +15,17 @@ function UserAuthBtn() {
     }
   };
 
+  const handleClick = () => {
+    if (user) {
+      history.push('/');
+      return firebase.logout();
+    }
+    return loginBtn();
+  };
+
   useEffect(() => {
     loginBtn();
-  }, [user]);
+  }, [user, loginBtn]);
 
   return (
     <button
