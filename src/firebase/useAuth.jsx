@@ -1,5 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase';
+import { useDispatch } from 'react-redux';
+import { setUser } from '../redux/actions';
 
 function getUserFromLocalStorage() {
   const userString = localStorage.getItem('user');
@@ -11,28 +13,25 @@ function getUserFromLocalStorage() {
 }
 
 function useAuth() {
-  const [authUser, setAuthUser] = React.useState(null);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    setAuthUser(getUserFromLocalStorage());
+    dispatch(setUser(getUserFromLocalStorage()));
 
-    const unsubscribe = firebase.auth()
+    const unsubscribe = firebase
+      .auth()
       .onAuthStateChanged((user) => {
         if (user) {
-          setAuthUser(user);
+          dispatch(setUser(user));
           localStorage.setItem('user', JSON.stringify(user));
         } else {
-          setAuthUser(null);
+          dispatch(setUser(null));
           localStorage.removeItem('user');
         }
       });
 
     return () => unsubscribe();
   }, []);
-
-  return {
-    authUser,
-  };
 }
 
 export default useAuth;

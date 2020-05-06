@@ -1,11 +1,12 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import FirebaseContext from '../../firebase/context';
+import firebase from '../../firebase/firebase';
+import { useSelector } from "react-redux";
 
 function UserAuthBtn() {
-  const { user, firebase } = useContext(FirebaseContext);
   const [userLogin, setUserLogin] = useState('');
   const history = useHistory();
+  const user = useSelector((state) => state.user);
 
   const loginBtn = () => {
     if (user) {
@@ -25,7 +26,7 @@ function UserAuthBtn() {
 
   useEffect(() => {
     loginBtn();
-  }, [user, loginBtn]);
+  }, [user]);
 
   return (
     <button

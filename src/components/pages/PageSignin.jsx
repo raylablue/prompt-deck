@@ -1,11 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Header from '../organisms/Header';
 import uiConfig from '../../firebase/uiConfig';
 import firebase from '../../firebase/firebase';
-import FirebaseContext from '../../firebase/context';
+import store from '../../redux/store';
+import {useSelector} from "react-redux";
 
 function Signin() {
-  const { user } = useContext(FirebaseContext);
+  const user = useSelector(state => state.user);
+  console.log('signin page user', user)
 
   useEffect(() => {
     firebase.ui.start('#firebase-sign-in', uiConfig);

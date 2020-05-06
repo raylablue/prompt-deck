@@ -8,20 +8,13 @@ import './App.scss';
 import Home from '../components/pages/PageHome';
 import Signin from '../components/pages/PageSignin';
 import useAuth from '../firebase/useAuth';
-import FirebaseContext from '../firebase/context';
-import firebase from '../firebase/firebase';
 
 function App() {
-  const { authUser } = useAuth();
-  const firebaseContextValue = {
-    user: authUser,
-    firebase,
-  };
+  useAuth();
 
   return (
     <>
       <Router>
-        <FirebaseContext.Provider value={firebaseContextValue}>
           <Switch>
             <Route path="/signin">
               <Signin />
@@ -31,7 +24,6 @@ function App() {
               <Home />
             </Route>
           </Switch>
-        </FirebaseContext.Provider>
       </Router>
     </>
   );
