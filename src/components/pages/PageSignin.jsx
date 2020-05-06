@@ -8,8 +8,10 @@ function Signin() {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
-    firebase.ui.start('#firebase-sign-in', uiConfig);
-  }, []);
+    if (!user) {
+      firebase.ui.start('#firebase-sign-in', uiConfig);
+    }
+  }, [user]);
 
   if (user) {
     return (
