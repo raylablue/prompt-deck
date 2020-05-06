@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import firebase from '../../firebase/firebase';
-import { useSelector } from "react-redux";
 
 function UserAuthBtn() {
   const [userLogin, setUserLogin] = useState('');
   const history = useHistory();
   const user = useSelector((state) => state.user);
 
-  const loginBtn = () => {
-    if (user) {
-      setUserLogin('logout');
-    } else {
-      setUserLogin('signin');
-    }
-  };
+  const loginBtn = useCallback(
+    () => {
+      if (user) {
+        setUserLogin('logout');
+      } else {
+        setUserLogin('signin');
+      }
+    },
+    [user],
+  );
 
   const handleClick = () => {
     if (user) {
@@ -26,7 +29,7 @@ function UserAuthBtn() {
 
   useEffect(() => {
     loginBtn();
-  }, [user]);
+  }, [user, loginBtn]);
 
   return (
     <button

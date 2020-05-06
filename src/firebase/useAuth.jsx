@@ -1,5 +1,5 @@
 import React from 'react';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../redux/actions';
 
@@ -31,7 +31,7 @@ function useAuth() {
       });
 
     return () => unsubscribe();
-  }, []);
+  }, [dispatch]);
 }
 
 export default useAuth;

@@ -15,15 +15,15 @@ function App() {
   return (
     <>
       <Router>
-          <Switch>
-            <Route path="/signin">
-              <Signin />
-            </Route>
+        <Switch>
+          <Route path="/signin">
+            <Signin />
+          </Route>
 
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
       </Router>
     </>
   );

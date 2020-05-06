@@ -1,5 +1,5 @@
+import { combineReducers } from 'redux';
 import { SET_USER } from './actions';
-import {combineReducers} from 'redux';
 
 function user(state = null, action) {
   switch (action.type) {
