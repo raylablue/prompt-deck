@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import firebase from '../../firebase/firebase';
+import firebase from '../../../firebase/firebase';
 
 function UserAuthBtn() {
   const [userLogin, setUserLogin] = useState('');

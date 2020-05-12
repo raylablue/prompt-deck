@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Header from '../organisms/Header';
+import Header from '../organisms/Header/Header';
 import uiConfig from '../../firebase/uiConfig';
 import firebase from '../../firebase/firebase';
 

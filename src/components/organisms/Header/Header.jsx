@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faBars } from '@fortawesome/free-solid-svg-icons';
-import UserAuthBtn from '../molecules/UserAuthBtn';
-import NavLinks from '../molecules/NavLinks';
+import UserAuthBtn from './UserAuthBtn';
+import NavLinkCollection from './NavLinkCollection';
+import navLinks from './nav-links';
 
 function Header() {
   const [collapse, setCollapse] = useState(true);
@@ -57,12 +58,9 @@ function Header() {
       <div
         className={`${navClass} navbar-collapse`}
       >
-        <NavLinks />
-        <ul className="navbar-nav ml-auto o-nav-bar__nav-width p-3 bg-secondary">
-          <li className="o-nav-bar__nav-item">
-            username
-          </li>
-        </ul>
+        <NavLinkCollection
+          links={navLinks}
+        />
         <UserAuthBtn />
       </div>
     </nav>
