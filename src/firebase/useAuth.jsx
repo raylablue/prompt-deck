@@ -9,7 +9,7 @@ function useAuth() {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const unsubscribe = firebase
+    firebase
       .auth()
       .onAuthStateChanged((user) => {
         if (user) {
@@ -20,8 +20,6 @@ function useAuth() {
           localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
         }
       });
-
-    return () => unsubscribe();
   }, [dispatch]);
 }
 

@@ -1,12 +1,12 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
   Switch,
 } from 'react-router-dom';
 import './App.scss';
 import Home from '../components/pages/PageHome';
-import Signin from '../components/pages/PageSignin';
+import SignIn from '../components/pages/PageSignIn';
 import useAuth from '../firebase/useAuth';
 
 function App() {
@@ -14,17 +14,17 @@ function App() {
 
   return (
     <>
-      <Router>
+      <BrowserRouter>
         <Switch>
           <Route path="/signin">
-            <Signin />
+            <SignIn />
           </Route>
 
           <Route path="/">
             <Home />
           </Route>
         </Switch>
-      </Router>
+      </BrowserRouter>
     </>
   );
 }

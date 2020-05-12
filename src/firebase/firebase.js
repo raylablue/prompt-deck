@@ -12,8 +12,8 @@ class Firebase {
     this.db = app.firestore();
   }
 
-  async logout() {
-    await this.auth.signOut();
+  logout() {
+    return this.auth.signOut();
   }
 }
 const firebase = new Firebase();

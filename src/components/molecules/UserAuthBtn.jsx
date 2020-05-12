@@ -24,6 +24,7 @@ function UserAuthBtn() {
       history.push('/');
       return firebase.logout();
     }
+
     return loginBtn();
   };
 

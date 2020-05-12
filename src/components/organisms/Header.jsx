@@ -3,23 +3,21 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faBars } from '@fortawesome/free-solid-svg-icons';
 import UserAuthBtn from '../molecules/UserAuthBtn';
+import NavLinks from '../molecules/NavLinks';
 
 function Header() {
-  const [collapse, setCollapse] = useState();
+  const [collapse, setCollapse] = useState(true);
   const [toggleClass, setToggleClass] = useState('');
-  const [toggleAria, setToggleAria] = useState('');
   const [navClass, setNavClass] = useState('');
 
   const updateToggleClass = (isActive) => {
     if (isActive) {
-      setToggleClass('navbar-toggler collapsed');
-      setToggleAria('false');
-      setNavClass('navbar-collapse collapse');
+      setToggleClass('collapsed');
+      setNavClass('collapse');
       return;
     }
-    setToggleClass('navbar-toggler');
-    setToggleAria('true');
-    setNavClass('navbar-collapse collapse show');
+    setToggleClass('');
+    setNavClass('collapse show');
   };
 
   useEffect(() => {
@@ -46,13 +44,8 @@ function Header() {
         />
       </NavLink>
       <button
-        className={`${toggleClass} p-1`}
+        className={`${toggleClass} navbar-toggler p-1`}
         type="button"
-        data-toggle="collapse"
-        data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded={toggleAria}
-        aria-label="Toggle navigation"
         onClick={toggleClick}
       >
         <FontAwesomeIcon
@@ -62,39 +55,9 @@ function Header() {
       </button>
 
       <div
-        className={navClass}
+        className={`${navClass} navbar-collapse`}
       >
-        <ul className="navbar-nav mr-auto o-nav-bar__nav-width pl-1">
-          <li className="o-nav-bar__nav-item">
-            <NavLink
-              to="/"
-              className="nav-link"
-              activeClassName="chosen"
-            >
-              Home
-            </NavLink>
-          </li>
-
-          <li className="o-nav-bar__nav-item">
-            <NavLink
-              to="/decks"
-              className="nav-link"
-              activeClassName="chosen"
-            >
-              Decks
-            </NavLink>
-          </li>
-
-          <li className="o-nav-bar__nav-item">
-            <NavLink
-              to="/about"
-              className="nav-link"
-              activeClassName="chosen"
-            >
-              About
-            </NavLink>
-          </li>
-        </ul>
+        <NavLinks />
         <ul className="navbar-nav ml-auto o-nav-bar__nav-width p-3 bg-secondary">
           <li className="o-nav-bar__nav-item">
             username

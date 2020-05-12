@@ -4,7 +4,7 @@ import Header from '../organisms/Header';
 import uiConfig from '../../firebase/uiConfig';
 import firebase from '../../firebase/firebase';
 
-function Signin() {
+function SignIn() {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -36,4 +36,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default SignIn;
