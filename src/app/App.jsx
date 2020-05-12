@@ -1,71 +1,31 @@
 import React from 'react';
-import logo from '../logo.svg';
-import { Counter } from '../features/counter/Counter';
+import {
+  BrowserRouter,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import './App.scss';
+import Home from '../components/pages/PageHome';
+import SignIn from '../components/pages/PageSignIn';
+import useAuth from '../firebase/useAuth';
 
 function App() {
+  useAuth();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.jsx</code>
-          {' '}
-          and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,
-          <span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-        <div>
-          <p>you are currently logged out</p>
-          <button
-            className="btn btn-primary btn-lg"
-            type="button"
-          >
-            Login
-          </button>
-        </div>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/signin">
+            <SignIn />
+          </Route>
+
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 }
 
