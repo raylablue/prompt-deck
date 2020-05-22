@@ -5,8 +5,8 @@ import {
   Switch,
 } from 'react-router-dom';
 import './App.scss';
-import Home from '../components/pages/PageHome';
-import SignIn from '../components/pages/PageSignIn';
+import PageHome from '../components/pages/PageHome/PageHome';
+import PageSignIn from '../components/pages/PageSignIn/PageSignIn';
 import useAuth from '../firebase/useAuth';
 
 function App() {
@@ -17,11 +17,11 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/signin">
-            <SignIn />
+            <PageSignIn />
           </Route>
 
           <Route path="/">
-            <Home />
+            <PageHome />
           </Route>
         </Switch>
       </BrowserRouter>

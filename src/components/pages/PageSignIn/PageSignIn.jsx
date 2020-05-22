@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Header from '../organisms/Header/Header';
-import uiConfig from '../../firebase/uiConfig';
-import firebase from '../../firebase/firebase';
+import Header from '../../organisms/Header/Header';
+import uiConfig from '../../../firebase/uiConfig';
+import firebase from '../../../firebase/firebase';
 
-function SignIn() {
+function PageSignIn() {
   const user = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -15,7 +15,9 @@ function SignIn() {
 
   if (user) {
     return (
-      <>
+      <div
+        data-test=""
+      >
         <Header />
         <h2>You are already signed in</h2>
         <p>
@@ -23,12 +25,14 @@ function SignIn() {
           left to do here unless you would like to log out so
           you can sign back in again.
         </p>
-      </>
+      </div>
     );
   }
 
   return (
-    <div>
+    <div
+      data-test=""
+    >
       <Header />
       <h1>Sign In</h1>
       <div id="firebase-sign-in" />
@@ -36,4 +40,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default PageSignIn;
