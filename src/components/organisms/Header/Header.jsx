@@ -34,7 +34,10 @@ function Header() {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg o-nav-bar__filmstrip px-2">
+    <nav
+      data-test="organism-header"
+      className="navbar navbar-expand-lg o-nav-bar__filmstrip px-2"
+    >
       <NavLink
         to="/"
         className="o-nav-bar__ticket-logo"
