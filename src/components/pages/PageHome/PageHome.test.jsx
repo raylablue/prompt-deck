@@ -10,7 +10,7 @@ describe('Home page', () => {
     return { wrapper };
   };
 
-  test('renders without error', () => {
+  it('renders without error', () => {
     const { wrapper } = setup();
     const component = findByTestAttr(wrapper, 'page-home');
     expect(component.length).toBe(1);

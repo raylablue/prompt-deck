@@ -16,7 +16,7 @@ function PageSignIn() {
   if (user) {
     return (
       <div
-        data-test=""
+        data-test="already-signed-in-message"
       >
         <Header />
         <h2>You are already signed in</h2>
@@ -31,9 +31,8 @@ function PageSignIn() {
 
   return (
     <div
-      data-test=""
+      data-test="signin-widget"
     >
-      <Header />
       <h1>Sign In</h1>
       <div id="firebase-sign-in" />
     </div>
