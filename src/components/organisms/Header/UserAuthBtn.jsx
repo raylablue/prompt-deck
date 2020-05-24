@@ -34,6 +34,7 @@ function UserAuthBtn() {
 
   return (
     <button
+      data-test="user-auth-btn"
       className="btn btn-primary"
       type="button"
       onClick={handleClick}
