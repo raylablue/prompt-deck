@@ -1,7 +1,7 @@
 import React from 'react';
 import * as firebase from 'firebase/app';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../redux/actions';
+import { setUserAction } from '../redux/actions/set-user/set-user.action';
 
 export const USER_LOCAL_STORAGE_KEY = 'user';
 
@@ -13,10 +13,10 @@ function useAuth() {
       .auth()
       .onAuthStateChanged((user) => {
         if (user) {
-          dispatch(setUser(user));
+          dispatch(setUserAction(user));
           localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
         } else {
-          dispatch(setUser(null));
+          dispatch(setUserAction(null));
           localStorage.removeItem(USER_LOCAL_STORAGE_KEY);
         }
       });

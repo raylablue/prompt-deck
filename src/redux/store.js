@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import reducers from './reducers';
+import combineReducers from './reducers/reducers';
 import { USER_LOCAL_STORAGE_KEY } from '../firebase/useAuth';
 
 function getUserFromLocalStorage() {
@@ -11,10 +11,12 @@ function getUserFromLocalStorage() {
   return null;
 }
 
+// wrap in function
 const initialState = { user: getUserFromLocalStorage() };
 
+// wrap in function
 const store = createStore(
-  reducers,
+  combineReducers,
   initialState,
 
   // setup of the redux console dev tools
