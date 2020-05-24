@@ -11,9 +11,9 @@ function UserAuthBtn() {
   const loginBtn = useCallback(
     () => {
       if (user) {
-        setUserLogin('logout');
+        setUserLogin(<span data-test="text-logout">logout</span>);
       } else {
-        setUserLogin('signin');
+        setUserLogin(<span data-test="text-signin">signin</span>);
       }
     },
     [user],

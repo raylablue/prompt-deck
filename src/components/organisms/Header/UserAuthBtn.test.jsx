@@ -28,4 +28,18 @@ describe('User auth button', () => {
     const component = findByTestAttr(wrapper, 'user-auth-btn');
     expect(component.length).toBe(1);
   });
+
+  it('should render `logout` when there is a user', () => {
+    const user = {};
+    const { wrapper } = setup(user);
+    const component = findByTestAttr(wrapper, 'text-logout');
+    expect(component.length).toBe(1);
+  });
+
+  it('should render `signin` when there is no user', () => {
+    const user = null;
+    const { wrapper } = setup(user);
+    const component = findByTestAttr(wrapper, 'text-signin');
+    expect(component.length).toBe(1);
+  });
 });
