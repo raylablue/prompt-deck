@@ -11,17 +11,19 @@ function getUserFromLocalStorage() {
   return null;
 }
 
-// wrap in function
-const initialState = { user: getUserFromLocalStorage() };
+function storeInit() {
+  const initialState = { user: getUserFromLocalStorage() };
 
-// wrap in function
-const store = createStore(
-  combineReducers,
-  initialState,
+  const store = createStore(
+    combineReducers,
+    initialState,
 
-  // setup of the redux console dev tools
-  // eslint-disable-next-line no-underscore-dangle
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
+    // setup of the redux console dev tools
+    /* istanbul ignore next */
+    // eslint-disable-next-line no-underscore-dangle
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  );
+  return store;
+}
 
-export default store;
+export default storeInit;
