@@ -21,5 +21,4 @@ describe('redux store', () => {
     expect(store.getState().user)
       .toEqual(user);
   });
-
 });

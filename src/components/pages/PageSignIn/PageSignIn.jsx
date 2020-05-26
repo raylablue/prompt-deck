@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import Header from '../../organisms/Header/Header';
 import uiConfig from '../../../firebase/uiConfig';
 import firebase from '../../../firebase/firebase';
+import Header from '../../organisms/NavBar/Header/Header';
 
 function PageSignIn() {
   const user = useSelector((state) => state.user);

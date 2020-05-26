@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faBars } from '@fortawesome/free-solid-svg-icons';
-import UserAuthBtn from './UserAuthBtn';
-import NavLinkCollection from './NavLinkCollection';
-import navLinks from './nav-links';
+import UserAuthBtn from '../UserAuthBtn/UserAuthBtn';
+import NavLinkCollection from '../NavLinkCollection';
+import navLinks from '../nav-links';
 
 function Header() {
   const [collapse, setCollapse] = useState(true);
@@ -48,6 +48,7 @@ function Header() {
         />
       </NavLink>
       <button
+        data-test="dropdown"
         className={`${toggleClass} navbar-toggler p-1`}
         type="button"
         onClick={toggleClick}
@@ -59,6 +60,7 @@ function Header() {
       </button>
 
       <div
+        data-test="this-a-div"
         className={`${navClass} navbar-collapse`}
       >
         <NavLinkCollection

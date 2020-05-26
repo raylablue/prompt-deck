@@ -9,11 +9,15 @@ import PageHome from '../components/pages/PageHome/PageHome';
 import PageSignIn from '../components/pages/PageSignIn/PageSignIn';
 import useAuth from '../firebase/useAuth';
 
+/* istanbul ignore file */
+
 function App() {
   useAuth();
 
   return (
-    <>
+    <div
+      data-test="component-app"
+    >
       <BrowserRouter>
         <Switch>
           <Route path="/signin">
@@ -25,7 +29,7 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
