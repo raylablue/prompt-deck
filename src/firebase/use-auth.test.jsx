@@ -1,5 +1,5 @@
 import '../tests/firebase-mocks';
-import '../tests/use-dispatch-mock';
+import '../tests/redux-mock';
 import React from 'react';
 import localStorage from '../tests/mock-local-storage';
 import storeInit from '../redux/store';

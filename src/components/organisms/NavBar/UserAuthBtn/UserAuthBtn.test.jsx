@@ -43,14 +43,23 @@ describe('User auth button', () => {
     expect(component.length).toBe(1);
   });
 
-  // describe('when button is clicked', () => {
-  //   it('should run logout when clicked if user exists', () => {
-  //     const user = {};
-  //     const { wrapper } = setup(user);
-  //     const mockLogout = jest.fn()
-  //     const button = findByTestAttr(wrapper, 'user-auth-btn');
-  //     button.simulate('click', { preventDefault() {} });
-  //   });
-  //
-  // });
+  describe('when button is clicked', () => {
+    it('should run logout when clicked if user exists', () => {
+      const user = {};
+      const { wrapper } = setup(user);
+      const buttonText = findByTestAttr(wrapper, 'text-logout');
+      findByTestAttr(wrapper, 'user-auth-btn').simulate('click');
+
+      expect(buttonText.length).toBe(1);
+    });
+
+    it('should return signin button when clicked if user does not exist', () => {
+      const user = null;
+      const { wrapper } = setup(user);
+      const buttonText = findByTestAttr(wrapper, 'text-signin');
+      findByTestAttr(wrapper, 'user-auth-btn').simulate('click');
+
+      expect(buttonText.length).toBe(1);
+    });
+  });
 });
