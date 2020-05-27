@@ -9,11 +9,12 @@
     "eject": "react-scripts eject",
     "lint": "npm run lint:css && npm run lint:js",
     "lint:css": "stylelint \"**/*.scss\"",
-    "lint:js": "eslint --ext .jsx,.js src/ --max-warnings 0"
+    "lint:js": "eslint --ext .jsx,.js src/ --max-warnings 0",
+    "test:coverage": "npm test -- --collectCoverage --watchAll=false"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint && npm run test:coverage"
     }
   },
   "eslintConfig": {
