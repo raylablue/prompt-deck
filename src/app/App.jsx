@@ -8,6 +8,8 @@ import './App.scss';
 import PageHome from '../components/pages/PageHome/PageHome';
 import PageSignIn from '../components/pages/PageSignIn/PageSignIn';
 import useAuth from '../firebase/useAuth';
+import PageCards from "../components/pages/PageCards/PageCards";
+import PageCreateCards from "../components/pages/PageCreateCards/PageCreateCards";
 
 /* istanbul ignore file */
 
@@ -22,6 +24,14 @@ function App() {
         <Switch>
           <Route path="/signin">
             <PageSignIn />
+          </Route>
+
+          <Route path="/cards">
+            <PageCards />
+          </Route>
+
+          <Route path="/cards/create-cards">
+            <PageCreateCards />
           </Route>
 
           <Route path="/">
