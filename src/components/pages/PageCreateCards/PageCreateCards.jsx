@@ -1,18 +1,27 @@
 import React from 'react';
-import Header from '../../organisms/NavBar/Header/Header';
+import TemplateDefault from '../../Templates/TemplateDefault';
 
 function PageCreateCards() {
   return (
-    <div
-      data-test=""
-    >
-      <Header />
-      <h1>Cards Page</h1>
-      <p>
-        This form to create cards will go here.
-        This is just placeholder content.
-      </p>
-    </div>
+    <TemplateDefault>
+      <div
+        data-test="page-create-cards"
+      >
+        <h1>Create Cards Page</h1>
+        <form>
+          <label>Name:&nbsp;
+            <input
+              data-test=""
+              className=""
+              type="text"
+              placeholder="card name"
+              value=""
+              onChange=""
+            />
+          </label>
+        </form>
+      </div>
+    </TemplateDefault>
   );
 }
 

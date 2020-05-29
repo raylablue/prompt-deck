@@ -13,7 +13,7 @@ const navLinks = [
   },
   {
     name: 'Create Cards',
-    linkto: '/cards/create-cards',
+    linkto: '/create-cards',
   },
 ];
 

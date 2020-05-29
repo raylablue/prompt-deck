@@ -30,7 +30,7 @@ function App() {
             <PageCards />
           </Route>
 
-          <Route path="/cards/create-cards">
+          <Route path="/create-cards">
             <PageCreateCards />
           </Route>
 
