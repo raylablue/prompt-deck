@@ -18,7 +18,6 @@ function PageSignIn() {
       <TemplateDefault>
         <div
           data-test="already-signed-in-message"
-          className="container"
         >
           <h2>You are already signed in</h2>
           <p>

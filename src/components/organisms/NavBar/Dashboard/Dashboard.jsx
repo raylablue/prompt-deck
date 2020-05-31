@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 function Dashboard() {
   return (
     <nav
-      data-test="organism-header"
+      data-test="dashboard-render"
       className="navbar navbar-expand-lg px-2"
     >
       <div>

@@ -5,8 +5,7 @@ function PageCards() {
   return (
     <TemplateDefault>
       <div
-        data-test=""
-        className="container"
+        data-test="page-cards"
       >
         <h1>Cards Page</h1>
         <p>

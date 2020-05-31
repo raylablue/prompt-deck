@@ -6,7 +6,6 @@ function PageHome() {
     <TemplateDefault>
       <div
         data-test="page-home"
-        className="container"
       >
         <h1>Home Page</h1>
         <p>This is the home page of the web app. Everyone can view this.</p>
