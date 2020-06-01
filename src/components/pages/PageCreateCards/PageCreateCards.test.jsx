@@ -16,4 +16,23 @@ describe('Create cards page', () => {
     const component = findByTestAttr(wrapper, 'page-create-cards');
     expect(component.length).toBe(1);
   });
+
+  describe('state controlled input fields', () => {
+    const mockSetCurrentInput = jest.fn();
+
+    beforeEach(() => {
+      mockSetCurrentInput.mockClear();
+      React.useState = jest.fn(() => ['', mockSetCurrentInput]);
+    });
+
+    it('should update state with the  value of Name input box on change', () => {
+      const { wrapper } = setup();
+      const nameInput = findByTestAttr(wrapper, 'card-name');
+
+      const mockEvent = { target: { value: 'Card Name' } };
+      nameInput.simulate('change', mockEvent);
+
+      expect(mockSetCurrentInput).toHaveBeenCalledWith('Card Name');
+    });
+  });
 });

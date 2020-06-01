@@ -2,6 +2,7 @@ import React from 'react';
 import TemplateDefault from '../../Templates/TemplateDefault';
 
 function PageCreateCards() {
+  const [input, setInput] = React.useState('')
   return (
     <TemplateDefault>
       <div
@@ -9,14 +10,15 @@ function PageCreateCards() {
       >
         <h1>Create Cards Page</h1>
         <form>
-          <label>Name:&nbsp;
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label>
+            Name: &nbsp;
             <input
-              data-test=""
-              className=""
+              data-test="card-name"
               type="text"
               placeholder="card name"
-              value=""
-              onChange=""
+              value={input}
+              onChange={(event) => setInput(event.target.value)}
             />
           </label>
         </form>

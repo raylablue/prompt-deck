@@ -12,6 +12,7 @@ function PageCards() {
           This is the list of cards created by a user.
           Only a signed in user should be able to view this page.
         </p>
+
       </div>
     </TemplateDefault>
   );
