@@ -8,8 +8,8 @@ import './App.scss';
 import PageHome from '../components/pages/PageHome/PageHome';
 import PageSignIn from '../components/pages/PageSignIn/PageSignIn';
 import useAuth from '../firebase/useAuth';
-import PageCards from "../components/pages/PageCards/PageCards";
-import PageCreateCards from "../components/pages/PageCreateCards/PageCreateCards";
+import PageCards from '../components/pages/PageCards/PageCards';
+import PageCreateCards from '../components/pages/PageCreateCards/PageCreateCards';
 
 /* istanbul ignore file */
 

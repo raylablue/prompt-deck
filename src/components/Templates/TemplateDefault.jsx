@@ -19,10 +19,10 @@ const TemplateDefault = ({ children }) => {
             {children}
           </div>
         </div>
-        {/*Footer goes here*/}
+        {/* Footer goes here */}
       </>
     );
-  };
+  }
 
   return (
     <>

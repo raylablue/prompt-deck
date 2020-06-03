@@ -1,13 +1,26 @@
 import '../../../tests/firebase-mocks';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { Provider } from 'react-redux';
+import configureMockStore from 'redux-mock-store';
+import { MemoryRouter } from 'react-router';
 import { findByTestAttr } from '../../../tests/testUtils';
 import PageCreateCards from './PageCreateCards';
+import firebase from '../../../firebase/firebase';
 
 
 describe('Create cards page', () => {
-  const setup = () => {
-    const wrapper = shallow(<PageCreateCards />);
+  const setup = (user) => {
+    const mockStore = configureMockStore([]);
+    const store = mockStore({ user });
+
+    const wrapper = mount(
+      <Provider store={store}>
+        <MemoryRouter>
+          <PageCreateCards />
+        </MemoryRouter>
+      </Provider>,
+    );
     return { wrapper };
   };
 
@@ -29,10 +42,25 @@ describe('Create cards page', () => {
       const { wrapper } = setup();
       const nameInput = findByTestAttr(wrapper, 'card-name');
 
-      const mockEvent = { target: { value: 'Card Name' } };
+      const mockEvent = { target: { value: 'Sample Name' } };
       nameInput.simulate('change', mockEvent);
 
-      expect(mockSetCurrentInput).toHaveBeenCalledWith('Card Name');
+      expect(mockSetCurrentInput).toHaveBeenCalledWith('Sample Name');
+    });
+
+    xit('should send the filled in inputs to firebase', () => {
+      // eslint-disable-next-line no-undef
+      const spyFirebaseDbCollectionAdd = spyOn(firebase.db.collection, 'add');
+      const cardTitle = 'my title';
+      const userId = '1234';
+      // Fill out all the inputs with enzyme
+      // Click submit
+
+      const newCard = {
+        cardTitle,
+        createdBy: userId,
+      };
+      expect(spyFirebaseDbCollectionAdd).toHaveBeenCalledWith(newCard);
     });
   });
 });
