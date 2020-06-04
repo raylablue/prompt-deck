@@ -3,4 +3,7 @@ jest.mock('../firebase/firebase', () => ({
     start: jest.fn(),
   },
   logout: jest.fn(),
+  db: {
+    collection: () => {},
+  },
 }));
