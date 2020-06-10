@@ -29,44 +29,45 @@ describe('Cards page', () => {
     expect(component.length).toBe(1);
   });
 
-  // describe('Card display', () => {
-    // it('should call firestore and return cards created by the current user', async () => {
-    //   const user = { uid: '1234' };
-    //
-    //   const cardTitle = 'Sample title';
-    //   const userId = '1234';
-    //   const character = 'typeValue';
-    //   const side1 = 'first side text';
-    //   const side2 = 'second side text';
-    //   const side3 = 'third side text';
-    //   const side4 = 'fourth side text';
-    //
-    //   // data model retrieved from firestore
-    //   const sampleCard = {
-    //     cardTitle,
-    //     type: character,
-    //     createdBy: userId,
-    //     side1,
-    //     side2,
-    //     side3,
-    //     side4,
-    //   };
-    //   // mock firestore and spyOn get() value for the cards collection
-    //   const spyGet = jest.fn();
-    //   spyGet.mockReturnValue(() => new Promise((resolve) => resolve(sampleCard)));
-    //
-    //   const spyFirebaseDbCollection = jest.spyOn(firebase.db, 'collection');
-    //   spyFirebaseDbCollection.mockReturnValue({
-    //     get: spyGet,
-    //   });
-    //
-    //   const { wrapper } = setup(user);
-    //
-    //   // CLICK SUBMIT
-    //   const button = findByTestAttr(wrapper, 'temp-button');
-    //   await button.simulate('click');
-    //
-    //   expect(spyGet).toHaveBeenCalled();
-    // });
-  // });
+  describe('Card display', () => {
+    it('should call firestore and return cards created by the current user', async () => {
+      const user = { uid: '1234' };
+
+      const cardTitle = 'Sample title';
+      const userId = '1234';
+      const character = 'typeValue';
+      const side1 = 'first side text';
+      const side2 = 'second side text';
+      const side3 = 'third side text';
+      const side4 = 'fourth side text';
+
+      // data model retrieved from firestore
+      const sampleCard = {
+        cardTitle,
+        type: character,
+        createdBy: userId,
+        side1,
+        side2,
+        side3,
+        side4,
+      };
+      // mock firestore and spyOn get() value for the cards collection
+      const spyGet = jest.fn();
+      spyGet.mockReturnValue(() => new Promise((resolve) => resolve(sampleCard)));
+
+      const spyFirebaseDbCollection = jest.spyOn(firebase.db, 'collection');
+      spyFirebaseDbCollection.mockReturnValue({
+        get: spyGet,
+      });
+
+      const { wrapper } = setup(user);
+      const cardComponent = findByTestAttr(wrapper, 'card-component');
+
+      expect(cardComponent.length).toBe(1);
+    });
+
+    it('should render create cards message if no cards match uid', () => {
+
+    })
+  });
 });

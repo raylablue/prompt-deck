@@ -13,36 +13,41 @@ function PageCards() {
         .collection('cards')
         .get();
 
-      const cardList = cards.docs.map((card) => card.data());
-      return setCardData(cardList);
-    }
+      const cardList = cards.docs.map((card) => {
+        const data = card.data();
+        const cardId = card.id;
+        const cardValue = [data, cardId];
+        return cardValue;
+      });
 
+      setCardData(cardList);
+    }
     getCards();
   }, []);
 
 
   return (
     <TemplateDefault>
-      <div
-        data-test="page-cards"
-      >
+      <div data-test="page-cards">
         <h1>Cards Page</h1>
 
-        <div className="row">
+        <div className="row" data-test="card-component">
           {cardData.map((card) => (
-            <div className="col-sm-12 col-md-6 col-lg-4">
+            <div
+              className="col-sm-12 col-md-6 col-lg-4"
+              key={card[1]}
+            >
 
               <div
-                key={card.documentId}
                 className="p-3 mb-4 border border-dark"
               >
-                <h3>{card.cardTitle}</h3>
-                <h4>{card.type}</h4>
+                <h3>{card[0].cardTitle}</h3>
+                <h4>{card[0].type}</h4>
                 <ol>
-                  <li>{card.side1}</li>
-                  <li>{card.side2}</li>
-                  <li>{card.side2}</li>
-                  <li>{card.side4}</li>
+                  <li>{card[0].side1}</li>
+                  <li>{card[0].side2}</li>
+                  <li>{card[0].side3}</li>
+                  <li>{card[0].side4}</li>
                 </ol>
 
               </div>
