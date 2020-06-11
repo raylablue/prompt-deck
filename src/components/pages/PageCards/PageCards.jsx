@@ -1,30 +1,33 @@
 import React from 'react';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
 
 function PageCards() {
   const [cardData, setCardData] = React.useState([]);
-  // const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
+  const userId = user.uid;
 
   React.useEffect(() => {
     async function getCards() {
       const cards = await firebase.db
         .collection('cards')
+        .where('createdBy', '==', userId)
         .get();
 
       const cardList = cards.docs.map((card) => {
         const data = card.data();
+        console.log(data.createdBy);
         const cardId = card.id;
         const cardValue = [data, cardId];
+
         return cardValue;
       });
-
       setCardData(cardList);
     }
-    getCards();
-  }, []);
 
+    getCards();
+  }, [userId]);
 
   return (
     <TemplateDefault>
