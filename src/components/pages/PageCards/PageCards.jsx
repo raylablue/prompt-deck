@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
 
@@ -29,6 +30,22 @@ function PageCards() {
     getCards();
   }, [userId]);
 
+  if (cardData.length <= 0) {
+    return (
+      <TemplateDefault>
+        <div>
+          <p>
+            You don&apos;t have any cards, go make some!
+          </p>
+          <button type="button">
+            <Link to="/create-cards">
+              Create Cards
+            </Link>
+          </button>
+        </div>
+      </TemplateDefault>
+    );
+  }
   return (
     <TemplateDefault>
       <div data-test="page-cards">
