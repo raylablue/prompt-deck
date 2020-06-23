@@ -4,12 +4,12 @@ import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
 import configureMockStore from 'redux-mock-store';
+import { v4 } from 'uuid';
+import { act } from 'react-dom/test-utils';
 import firebase from '../../../firebase/firebase';
 import { findByTestAttr } from '../../../tests/testUtils';
 import PageCards from './PageCards';
 import { cardMock } from '../../../utils/mocks';
-import { v4 } from 'uuid';
-import {act} from "react-dom/test-utils";
 
 describe('PageCards Component', () => {
   const defaultArgs = {
@@ -37,7 +37,7 @@ describe('PageCards Component', () => {
       data: () => card,
       id: v4(),
     }));
-    spyGet.mockReturnValue(Promise.resolve(cardsAsData));
+    spyGet.mockReturnValue(Promise.resolve({ docs: cardsAsData }));
 
     const spyWhere = jest.fn();
     spyWhere.mockReturnValue({
@@ -109,4 +109,97 @@ describe('PageCards Component', () => {
       expect(cardsEl.length).toBe(2);
     });
   });
+
+  describe('Displaying card props', () => {
+    it('should show the card title', async () => {
+      const title = 'This is a Title';
+      const cards = [cardMock()];
+      cards[0].cardTitle = title;
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const cardTitle = findByTestAttr(wrapper, 'page-cards__title');
+
+      expect(cardTitle.text()).toBe(title);
+    });
+
+    it('should show the card type', async () => {
+      const type = 'Variety';
+      const cards = [cardMock()];
+      cards[0].type = type;
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const cardType = findByTestAttr(wrapper, 'page-cards__type');
+
+      expect(cardType.text()).toBe(type);
+    });
+
+    it('should show the card side one', async () => {
+      const sideOne = 'Alpha';
+      const cards = [cardMock()];
+      cards[0].side1 = sideOne;
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const cardSideOne = findByTestAttr(wrapper, 'page-cards__side-one');
+
+      expect(cardSideOne.text()).toBe(sideOne);
+    });
+
+    it('should show the card side two', async () => {
+      const sideTwo = 'Beta';
+      const cards = [cardMock()];
+      cards[0].side2 = sideTwo;
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const cardSideTwo = findByTestAttr(wrapper, 'page-cards__side-two');
+
+      expect(cardSideTwo.text()).toBe(sideTwo);
+    });
+
+    it('should show the card side three', async () => {
+      const sideThree = 'Gamma';
+      const cards = [cardMock()];
+      cards[0].side3 = sideThree;
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const cardSideThree = findByTestAttr(wrapper, 'page-cards__side-three');
+
+      expect(cardSideThree.text()).toBe(sideThree);
+    });
+
+    it('should show the card side four', async () => {
+      const sideFour = 'Omega';
+      const cards = [cardMock()];
+      cards[0].side4 = sideFour;
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const cardSideFour = findByTestAttr(wrapper, 'page-cards__side-four');
+
+      expect(cardSideFour.text()).toBe(sideFour);
+    });
+  });
+
+  it('should display alternate message when no cards are returned', async() => {
+    const cards = [];
+
+    const { wrapper } = await setup({ cards });
+    wrapper.update();
+    const noCardsMessage = findByTestAttr(wrapper, 'page-cards__alt-message');
+
+    expect(noCardsMessage.length).not.toBe(0);
+  });
+
+  // it('should display an error message if nothing returns from firebase', async () => {
+  //   // need to arrange the error returned from firebase mock here
+  //
+  //   const { wrapper } = await setup();
+  //   const catchErr = findByTestAttr(wrapper, 'page-cards__catch-err');
+  //
+  //   expect(catchErr.length).not.toBe(0);
+  // });
 });
