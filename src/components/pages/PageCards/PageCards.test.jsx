@@ -184,7 +184,7 @@ describe('PageCards Component', () => {
     });
   });
 
-  it('should display alternate message when no cards are returned', async() => {
+  it('should display alternate message when no cards are returned', async () => {
     const cards = [];
 
     const { wrapper } = await setup({ cards });
@@ -194,12 +194,14 @@ describe('PageCards Component', () => {
     expect(noCardsMessage.length).not.toBe(0);
   });
 
-  // it('should display an error message if nothing returns from firebase', async () => {
-  //   // need to arrange the error returned from firebase mock here
-  //
-  //   const { wrapper } = await setup();
-  //   const catchErr = findByTestAttr(wrapper, 'page-cards__catch-err');
-  //
-  //   expect(catchErr.length).not.toBe(0);
-  // });
+  it('should display an error message if an error returns from firebase', async () => {
+    const errMsg = 'error has happened';
+
+    const { spyGet, wrapper } = await setup();
+    spyGet.mockReturnValue(Promise.reject(errMsg));
+    wrapper.update();
+    const catchErr = findByTestAttr(wrapper, 'page-cards__catch-err');
+
+    expect(catchErr.length).not.toBe(0);
+  });
 });

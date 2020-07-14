@@ -22,7 +22,7 @@ function Dashboard() {
 
           <li className="o-nav-bar__nav-item">
             <NavLink
-              to="/create-cards"
+              to="/cards"
               className="nav-link"
               activeClassName="chosen"
             >
