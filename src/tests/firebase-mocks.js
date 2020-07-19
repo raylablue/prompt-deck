@@ -4,6 +4,6 @@ jest.mock('../firebase/firebase', () => ({
   },
   logout: jest.fn(),
   db: {
-    collection: () => {},
+    collection: jest.fn(),
   },
 }));
