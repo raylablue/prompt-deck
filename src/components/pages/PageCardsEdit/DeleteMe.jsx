@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 
-function PageCardsEdit() {
+function DeleteMe() {
   const user = useSelector((state) => state.user);
   const { id } = useParams();
 
@@ -108,58 +108,58 @@ function PageCardsEdit() {
 
   return (
     <TemplateDefault>
-    <form
-      data-test="page-cards-edit"
-      // onSubmit={handleUpdate}
-    >
-       <h1>
-         <input
-           value={card.cardTitle}
-           onChange={(e) => handleChangeName(e)}
-         />
-       </h1>
-       <br />
-       <select
-         value={card.type}
-         onChange={handleChangeType}
-       >
-         <option value="">--Please choose a type--</option>
-         <option value="character">Character</option>
-         <option value="conflict">Conflict</option>
-         <option value="circumstance">Circumstance</option>
-       </select>
-       <ol>
-         <li>
-           <input
-             value={card.side1}
-             onChange={handleChangeSideOne}
-           />
-         </li>
-         <li>
-           <input
-             value={card.side2}
-             onChange={handleChangeSideTwo}
-           />
-         </li>
-         <li>
-         <input
-           value={card.side3}
-           onChange={handleChangeSideThree}
-         />
-         </li>
-         <li>
-         <input
-           value={card.side4}
-           onChange={handleChangeSideFour}
-         />
-         </li>
-      </ol>
-       <button type="submit">
-         update
-       </button>
-    </form>
+      <form
+        data-test="page-cards-edit"
+        // onSubmit={handleUpdate}
+      >
+        <h1>
+          <input
+            value={card.cardTitle}
+            onChange={(e) => handleChangeName(e)}
+          />
+        </h1>
+        <br />
+        <select
+          value={card.type}
+          onChange={handleChangeType}
+        >
+          <option value="">--Please choose a type--</option>
+          <option value="character">Character</option>
+          <option value="conflict">Conflict</option>
+          <option value="circumstance">Circumstance</option>
+        </select>
+        <ol>
+          <li>
+            <input
+              value={card.side1}
+              onChange={handleChangeSideOne}
+            />
+          </li>
+          <li>
+            <input
+              value={card.side2}
+              onChange={handleChangeSideTwo}
+            />
+          </li>
+          <li>
+            <input
+              value={card.side3}
+              onChange={handleChangeSideThree}
+            />
+          </li>
+          <li>
+            <input
+              value={card.side4}
+              onChange={handleChangeSideFour}
+            />
+          </li>
+        </ol>
+        <button type="submit">
+          update
+        </button>
+      </form>
     </TemplateDefault>
   );
 }
 
-export default PageCardsEdit;
+export default DeleteMe;

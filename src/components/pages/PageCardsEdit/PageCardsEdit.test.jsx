@@ -1,77 +1,82 @@
+import '../../../tests/template-default-mocks';
 import '../../../tests/firebase-mocks';
 import '../../../tests/router-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
-import ReactRouter from 'react-router';
+import { useParams } from 'react-router-dom';
+import { act } from 'react-dom/test-utils';
 import firebase from '../../../firebase/firebase';
-import PageCardsEdit from './PageCardsEdit';
 import { findByTestAttr } from '../../../tests/testUtils';
-
+import { cardMock } from '../../../utils/mocks';
+import PageCardsEdit from './PageCardsEdit';
 
 describe('Page Cards Edit', () => {
-  const setup = async () => {
-    const wrapper = await mount(
-      <PageCardsEdit />,
-    );
+  const setup = async (card) => {
+
+    const spyGet = jest.fn();
+    spyGet.mockReturnValue(Promise.resolve({ data: () => card }));
+
+    const spyDoc = jest.fn();
+    spyDoc.mockReturnValue({
+      get: spyGet,
+    });
+
+    const spyCollection = firebase.db.collection;
+    spyCollection.mockReturnValue({
+      doc: spyDoc,
+    });
+
+    let wrapper;
+    await act(async () => {
+      wrapper = await mount(
+          <PageCardsEdit />,
+      );
+    });
 
     return {
       wrapper,
+      spyCollection,
+      spyDoc,
+      spyGet,
     };
   };
 
-  it('renders without error', async () => {
+  it('should render without error', async () => {
     const { wrapper } = await setup();
-
     const component = findByTestAttr(wrapper, 'page-cards-edit');
-
     expect(component.length).toBe(1);
   });
 
-  describe('firebase collection get cards', () => {
-    it('should call the collection with the expected arguments', async () => {
-      const spyCollection = firebase.db.collection;
-
-      await setup();
-
+  describe('firebase calls getData', () => {
+    it('should call collection with the expected arguments', async () => {
+      const { spyCollection } = await setup();
       expect(spyCollection).toBeCalledWith('cards');
     });
 
-    it('should call the doc with the expected arguments', async () => {
+    it('should call document with the expected id', async () => {
       const id = 'abc';
+      useParams.mockImplementation(() => ({ id }));
 
-      jest.spyOn(ReactRouter, 'useParams')
-        .mockImplementation(() => { return { id }; });
-
-      const spyDoc = jest.fn();
-      spyDoc.mockReturnValue({});
-
-      const spyCollection = jest.spyOn(firebase.db, 'collection');
-      spyCollection.mockReturnValue({
-        doc: spyDoc,
-      });
-
-      await setup();
+      const { spyDoc } = await setup();
 
       expect(spyDoc).toBeCalledWith(id);
     });
 
-    it('should call the doc with the expected arguments', async () => {
-      const id = 'abc';
+    it('should render the card', async () => {
+      const card = cardMock;
+      const { wrapper } = await setup(card);
+      wrapper.update();
+      const cardEl = findByTestAttr(wrapper, 'page-card-edit__card');
 
-      jest.spyOn(ReactRouter, 'useParams')
-        .mockImplementation(() => { return { id }; });
+      expect(cardEl.length).toBe(1);
+    });
 
-      const spyDoc = jest.fn();
-      spyDoc.mockReturnValue({});
+    it('should default to 0', async () => {
+      const { wrapper } = await setup();
+      wrapper.update();
+      const cardEl = findByTestAttr(wrapper, 'page-card-edit__card');
 
-      const spyCollection = jest.spyOn(firebase.db, 'collection');
-      spyCollection.mockReturnValue({
-        doc: spyDoc,
-      });
-
-      await setup();
-
-      expect(spyDoc).toBeCalledWith(id);
+      expect(cardEl.length).toBe(0);
     });
   });
 });
