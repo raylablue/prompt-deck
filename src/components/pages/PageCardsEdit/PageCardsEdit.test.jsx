@@ -78,5 +78,79 @@ describe('Page Cards Edit', () => {
 
       expect(cardEl.length).toBe(0);
     });
+
+    describe('Displaying Card Props', () => {
+      it('should display the card title', async () => {
+        const title = 'these are my things';
+        const card = cardMock();
+        card.cardTitle = title;
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        const cardTitle = findByTestAttr(wrapper, 'page-cards-edit__title');
+
+        expect(cardTitle.text()).toBe(title);
+      });
+
+      it('should display the card type', async () => {
+        const type = 'musings';
+        const card = cardMock();
+        card.type = type;
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        const cardType = findByTestAttr(wrapper, 'page-cards-edit__type');
+
+        expect(cardType.text()).toBe(type);
+      });
+
+      it('should display the card side one', async () => {
+        const sideOne = 'Pyramid Scheme';
+        const card = cardMock();
+        card.side1 = sideOne;
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        const cardSideOne = findByTestAttr(wrapper, 'page-cards-edit__side-one');
+
+        expect(cardSideOne.text()).toBe(sideOne);
+      });
+
+      it('should display the card side two', async () => {
+        const sideTwo = 'Join a Gym';
+        const card = cardMock();
+        card.side2 = sideTwo;
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        const cardSideTwo = findByTestAttr(wrapper, 'page-cards-edit__side-two');
+
+        expect(cardSideTwo.text()).toBe(sideTwo);
+      });
+
+      it('should display the card side three', async () => {
+        const sideThree = 'Take up Whittling';
+        const card = cardMock();
+        card.side3 = sideThree;
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        const cardSideThree = findByTestAttr(wrapper, 'page-cards-edit__side-three');
+
+        expect(cardSideThree.text()).toBe(sideThree);
+      });
+
+      it('should display the card side four', async () => {
+        const sideFour = 'Hitchhike Across Canada';
+        const card = cardMock();
+        card.side4 = sideFour;
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        const cardSideFour = findByTestAttr(wrapper, 'page-cards-edit__side-four');
+
+        expect(cardSideFour.text()).toBe(sideFour);
+      });
+    });
   });
 });

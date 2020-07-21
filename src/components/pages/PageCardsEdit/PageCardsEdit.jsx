@@ -16,6 +16,7 @@ function PageCardsEdit() {
 
       const cardData = response.data();
       setCard(cardData);
+      console.log(cardData);
     },
     [id],
   );
@@ -38,7 +39,14 @@ function PageCardsEdit() {
         data-test="page-card-edit__card"
         className="card"
       >
-        <h1>TestTitle</h1>
+        <h1 data-test="page-cards-edit__title">{card.cardTitle}</h1>
+        <h2 data-test="page-cards-edit__type">{card.type}</h2>
+        <ol>
+          <li data-test="page-cards-edit__side-one">{card.side1}</li>
+          <li data-test="page-cards-edit__side-two">{card.side2}</li>
+          <li data-test="page-cards-edit__side-three">{card.side3}</li>
+          <li data-test="page-cards-edit__side-four">{card.side4}</li>
+        </ol>
       </div>
     </TemplateDefault>
   );
