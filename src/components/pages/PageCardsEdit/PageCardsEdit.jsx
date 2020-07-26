@@ -25,7 +25,6 @@ function PageCardsEdit() {
 
   const handleSubmit = useCallback(
     async (e) => {
-      console.log('submit began');
       e.preventDefault();
 
       const updateCard = {
@@ -38,11 +37,10 @@ function PageCardsEdit() {
         side4: card.side4,
       };
 
-      await firebase.db.collection('cards')
+      await firebase.db
+        .collection('cards')
         .doc(id)
         .set(updateCard);
-
-      console.log('submit happened');
     },
     [card, user, id],
   );
@@ -114,16 +112,14 @@ function PageCardsEdit() {
         className="card"
       >
         <form
-          data-test="save-card"
+          data-test="page-cards-edit__submit"
           onSubmit={handleSubmit}
         >
-          <h1>
-            <input
-              data-test="page-cards-edit__title"
-              value={card.cardTitle}
-              onChange={(e) => handleChangeName(e)}
-            />
-          </h1>
+          <input
+            data-test="page-cards-edit__title"
+            value={card.cardTitle}
+            onChange={(e) => handleChangeName(e)}
+          />
           <select
             data-test="page-cards-edit__type"
             value={card.type}

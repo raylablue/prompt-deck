@@ -17,12 +17,16 @@ describe('Page Cards Edit', () => {
     const mockStore = configureMockStore([]);
     const store = mockStore({ user });
 
+    const spySet = jest.fn();
+    spySet.mockReturnValue(() => new Promise((resolve) => resolve()));
+
     const spyGet = jest.fn();
     spyGet.mockReturnValue(Promise.resolve({ data: () => card }));
 
     const spyDoc = jest.fn();
     spyDoc.mockReturnValue({
       get: spyGet,
+      set: spySet,
     });
 
     const spyCollection = firebase.db.collection;
@@ -44,6 +48,7 @@ describe('Page Cards Edit', () => {
       spyCollection,
       spyDoc,
       spyGet,
+      spySet,
     };
   };
 
@@ -229,55 +234,52 @@ describe('Page Cards Edit', () => {
   });
 
   describe('Update card form', () => {
-    xit('should send the filled in inputs to firebase to update card', async () => {
-      jest.clearAllMocks();
-      const user = { uid: 'thisisme' };
+    it('should send the filled in inputs to firebase to update card', async () => {
+      const user = { uid: '1234' };
       const card = cardMock();
       const spyPreventDefault = jest.fn();
 
-      // const cardTitle = card.cardTitle;
-      // const type = card.type;
-      // const userId = user.uid;
-      // const side1 = card.side1;
-      // const side2 = card.side2;
-      // const side3 = card.side3;
-      // const side4 = card.side4;
-
-      const updatedCard = {
+      const updateCard = {
         cardTitle: card.cardTitle,
-        // type,
-        // createdBy: userId,
-        // side1,
-        // side2,
-        // side3,
-        // side4,
+        type: card.type,
+        // createdBy: user.uid,
+        side1: card.side1,
+        side2: card.side2,
+        side3: card.side3,
+        side4: card.side4,
       };
 
-      // const spySet = jest.fn();
-      // spySet.mockReturnValue(() => new Promise((resolve) => resolve()));
-
-      const spyDoc = jest.fn();
-      // spyDoc.mockReturnValue({
-      //   get: spySet,
-      // });
-
-      const spyCollection = firebase.db.collection;
-      spyCollection.mockReturnValue({
-        doc: spyDoc,
-      });
-
-      const { wrapper } = await setup(user, card);
+      const { wrapper, spySet } = await setup(user, card);
       wrapper.update();
 
-      // const titleInput = findByTestAttr(wrapper, 'page-cards-edit__title');
-      // const mockTitleInput = { target: { value: card.cardTitle } };
-      // titleInput.simulate('change', mockTitleInput);
-      //
-      // const formSubmit = findByTestAttr(wrapper, 'save-card');
-      // formSubmit.simulate('submit');
-      await wrapper.find('form').simulate('submit', { preventDefault: spyPreventDefault });
+      const cardTitle = findByTestAttr(wrapper, 'page-cards-edit__title');
+      const mockTitleInput = { target: { value: 'Sample title' } };
+      cardTitle.simulate('change', mockTitleInput);
 
-      expect(spyCollection).toHaveBeenCalled();
+      const typeSelection = findByTestAttr(wrapper, 'page-cards-edit__type');
+      const mockTypeSelection = { target: { value: 'typeValue' } };
+      typeSelection.simulate('change', mockTypeSelection);
+
+      const sideInputOne = findByTestAttr(wrapper, 'page-cards-edit__side-one');
+      const mockSideInputOne = { target: { value: 'first side text' } };
+      sideInputOne.simulate('change', mockSideInputOne);
+
+      const sideInputTwo = findByTestAttr(wrapper, 'page-cards-edit__side-two');
+      const mockSideInputTwo = { target: { value: 'second side text' } };
+      sideInputTwo.simulate('change', mockSideInputTwo);
+
+      const sideInputThree = findByTestAttr(wrapper, 'page-cards-edit__side-three');
+      const mockSideInputThree = { target: { value: 'third side text' } };
+      sideInputThree.simulate('change', mockSideInputThree);
+
+      const sideInputFour = findByTestAttr(wrapper, 'page-cards-edit__side-four');
+      const mockSideInputFour = { target: { value: 'fourth side text' } };
+      sideInputFour.simulate('change', mockSideInputFour);
+
+      const submitForm = findByTestAttr(wrapper, 'page-cards-edit__submit');
+      await submitForm.simulate('submit', { preventDefault: spyPreventDefault });
+
+      expect(spySet).toHaveBeenCalledWith(updateCard);
     });
   });
 });
