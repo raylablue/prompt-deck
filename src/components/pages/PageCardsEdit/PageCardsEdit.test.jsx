@@ -9,9 +9,13 @@ import firebase from '../../../firebase/firebase';
 import { findByTestAttr } from '../../../tests/testUtils';
 import { cardMock } from '../../../utils/mocks';
 import PageCardsEdit from './PageCardsEdit';
+import configureMockStore from "redux-mock-store";
+import {Provider} from "react-redux";
 
 describe('Page Cards Edit', () => {
-  const setup = async (card) => {
+  const setup = async (card, user) => {
+    const mockStore = configureMockStore([]);
+    const store = mockStore({ user });
 
     const spyGet = jest.fn();
     spyGet.mockReturnValue(Promise.resolve({ data: () => card }));
@@ -29,7 +33,9 @@ describe('Page Cards Edit', () => {
     let wrapper;
     await act(async () => {
       wrapper = await mount(
-          <PageCardsEdit />,
+        <Provider store={store}>
+          <PageCardsEdit />
+        </Provider>,
       );
     });
 
@@ -87,9 +93,9 @@ describe('Page Cards Edit', () => {
 
         const { wrapper } = await setup(card);
         wrapper.update();
-        const cardTitle = findByTestAttr(wrapper, 'page-cards-edit__title');
+        const cardTitleEl = findByTestAttr(wrapper, 'page-cards-edit__title');
 
-        expect(cardTitle.text()).toBe(title);
+        expect(cardTitleEl.prop('value')).toBe(title);
       });
 
       it('should display the card type', async () => {
@@ -101,7 +107,7 @@ describe('Page Cards Edit', () => {
         wrapper.update();
         const cardType = findByTestAttr(wrapper, 'page-cards-edit__type');
 
-        expect(cardType.text()).toBe(type);
+        expect(cardType.prop('value')).toBe(type);
       });
 
       it('should display the card side one', async () => {
@@ -113,7 +119,7 @@ describe('Page Cards Edit', () => {
         wrapper.update();
         const cardSideOne = findByTestAttr(wrapper, 'page-cards-edit__side-one');
 
-        expect(cardSideOne.text()).toBe(sideOne);
+        expect(cardSideOne.prop('value')).toBe(sideOne);
       });
 
       it('should display the card side two', async () => {
@@ -125,7 +131,7 @@ describe('Page Cards Edit', () => {
         wrapper.update();
         const cardSideTwo = findByTestAttr(wrapper, 'page-cards-edit__side-two');
 
-        expect(cardSideTwo.text()).toBe(sideTwo);
+        expect(cardSideTwo.prop('value')).toBe(sideTwo);
       });
 
       it('should display the card side three', async () => {
@@ -137,7 +143,7 @@ describe('Page Cards Edit', () => {
         wrapper.update();
         const cardSideThree = findByTestAttr(wrapper, 'page-cards-edit__side-three');
 
-        expect(cardSideThree.text()).toBe(sideThree);
+        expect(cardSideThree.prop('value')).toBe(sideThree);
       });
 
       it('should display the card side four', async () => {
@@ -149,8 +155,129 @@ describe('Page Cards Edit', () => {
         wrapper.update();
         const cardSideFour = findByTestAttr(wrapper, 'page-cards-edit__side-four');
 
-        expect(cardSideFour.text()).toBe(sideFour);
+        expect(cardSideFour.prop('value')).toBe(sideFour);
       });
+    });
+
+    describe('Update props onChange to reflect new value', () => {
+      it('should display the changed card title', async () => {
+        const title = 'Changes';
+        const card = cardMock();
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        wrapper.find('input').at(0).simulate('change', { target: { value: title } });
+
+        expect(wrapper.find('input').at(0).prop('value')).toBe(title);
+      });
+
+      it('should display the changed card type', async () => {
+        const type = 'Circumstance';
+        const card = cardMock();
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        wrapper.find('select').at(0).simulate('change', { target: { value: type } });
+
+        expect(wrapper.find('select').at(0).prop('value')).toBe(type);
+      });
+
+      it('should display the changed value of card side one', async () => {
+        const sideOne = 'Career shift';
+        const card = cardMock();
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        wrapper.find('input').at(1).simulate('change', { target: { value: sideOne } });
+
+        expect(wrapper.find('input').at(1).prop('value')).toBe(sideOne);
+      });
+
+      it('should display the changed value of card side two', async () => {
+        const sideTwo = 'Move across country';
+        const card = cardMock();
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        wrapper.find('input').at(2).simulate('change', { target: { value: sideTwo } });
+
+        expect(wrapper.find('input').at(2).prop('value')).toBe(sideTwo);
+      });
+
+      it('should display the changed value of card side three', async () => {
+        const sideThree = 'A new relationship';
+        const card = cardMock();
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        wrapper.find('input').at(3).simulate('change', { target: { value: sideThree } });
+
+        expect(wrapper.find('input').at(3).prop('value')).toBe(sideThree);
+      });
+
+      it('should display the changed value of card side four', async () => {
+        const sideFour = 'Zombie Apocalypse';
+        const card = cardMock();
+
+        const { wrapper } = await setup(card);
+        wrapper.update();
+        wrapper.find('input').at(4).simulate('change', { target: { value: sideFour } });
+
+        expect(wrapper.find('input').at(4).prop('value')).toBe(sideFour);
+      });
+    });
+  });
+
+  describe('Update card form', () => {
+    xit('should send the filled in inputs to firebase to update card', async () => {
+      jest.clearAllMocks();
+      const user = { uid: 'thisisme' };
+      const card = cardMock();
+      const spyPreventDefault = jest.fn();
+
+      // const cardTitle = card.cardTitle;
+      // const type = card.type;
+      // const userId = user.uid;
+      // const side1 = card.side1;
+      // const side2 = card.side2;
+      // const side3 = card.side3;
+      // const side4 = card.side4;
+
+      const updatedCard = {
+        cardTitle: card.cardTitle,
+        // type,
+        // createdBy: userId,
+        // side1,
+        // side2,
+        // side3,
+        // side4,
+      };
+
+      // const spySet = jest.fn();
+      // spySet.mockReturnValue(() => new Promise((resolve) => resolve()));
+
+      const spyDoc = jest.fn();
+      // spyDoc.mockReturnValue({
+      //   get: spySet,
+      // });
+
+      const spyCollection = firebase.db.collection;
+      spyCollection.mockReturnValue({
+        doc: spyDoc,
+      });
+
+      const { wrapper } = await setup(user, card);
+      wrapper.update();
+
+      // const titleInput = findByTestAttr(wrapper, 'page-cards-edit__title');
+      // const mockTitleInput = { target: { value: card.cardTitle } };
+      // titleInput.simulate('change', mockTitleInput);
+      //
+      // const formSubmit = findByTestAttr(wrapper, 'save-card');
+      // formSubmit.simulate('submit');
+      await wrapper.find('form').simulate('submit', { preventDefault: spyPreventDefault });
+
+      expect(spyCollection).toHaveBeenCalled();
     });
   });
 });
