@@ -120,6 +120,7 @@ function PageCardsEdit() {
             value={card.cardTitle}
             onChange={(e) => handleChangeName(e)}
           />
+          <br />
           <select
             data-test="page-cards-edit__type"
             value={card.type}
@@ -130,36 +131,31 @@ function PageCardsEdit() {
             <option value="conflict">Conflict</option>
             <option value="circumstance">Circumstance</option>
           </select>
-          <ol>
-            <li>
-              <input
-                data-test="page-cards-edit__side-one"
-                value={card.side1}
-                onChange={handleChangeSideOne}
-              />
-            </li>
-            <li>
-              <input
-                data-test="page-cards-edit__side-two"
-                value={card.side2}
-                onChange={handleChangeSideTwo}
-              />
-            </li>
-            <li>
-              <input
-                data-test="page-cards-edit__side-three"
-                value={card.side3}
-                onChange={handleChangeSideThree}
-              />
-            </li>
-            <li>
-              <input
-                data-test="page-cards-edit__side-four"
-                value={card.side4}
-                onChange={handleChangeSideFour}
-              />
-            </li>
-          </ol>
+          <br />
+          <input
+            data-test="page-cards-edit__side-one"
+            value={card.side1}
+            onChange={handleChangeSideOne}
+          />
+          <br />
+          <input
+            data-test="page-cards-edit__side-two"
+            value={card.side2}
+            onChange={handleChangeSideTwo}
+          />
+          <br />
+          <input
+            data-test="page-cards-edit__side-three"
+            value={card.side3}
+            onChange={handleChangeSideThree}
+          />
+          <br />
+          <input
+            data-test="page-cards-edit__side-four"
+            value={card.side4}
+            onChange={handleChangeSideFour}
+          />
+          <br />
           <button type="submit">
             update
           </button>

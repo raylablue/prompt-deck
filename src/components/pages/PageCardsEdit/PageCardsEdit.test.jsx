@@ -12,8 +12,18 @@ import PageCardsEdit from './PageCardsEdit';
 import configureMockStore from "redux-mock-store";
 import {Provider} from "react-redux";
 
+const defaultArgs = {
+  card: {},
+  user: {},
+};
+
 describe('Page Cards Edit', () => {
-  const setup = async (card, user) => {
+  const setup = async (args = {}) => {
+    const { card, user } = {
+      ...defaultArgs,
+      ...args,
+    }
+
     const mockStore = configureMockStore([]);
     const store = mockStore({ user });
 
@@ -75,7 +85,7 @@ describe('Page Cards Edit', () => {
 
     it('should render the card', async () => {
       const card = cardMock;
-      const { wrapper } = await setup(card);
+      const { wrapper } = await setup({ card });
       wrapper.update();
       const cardEl = findByTestAttr(wrapper, 'page-card-edit__card');
 
@@ -83,7 +93,8 @@ describe('Page Cards Edit', () => {
     });
 
     it('should default to 0', async () => {
-      const { wrapper } = await setup();
+      const card = null;
+      const { wrapper } = await setup({ card });
       wrapper.update();
       const cardEl = findByTestAttr(wrapper, 'page-card-edit__card');
 
@@ -96,7 +107,7 @@ describe('Page Cards Edit', () => {
         const card = cardMock();
         card.cardTitle = title;
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         const cardTitleEl = findByTestAttr(wrapper, 'page-cards-edit__title');
 
@@ -108,7 +119,7 @@ describe('Page Cards Edit', () => {
         const card = cardMock();
         card.type = type;
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         const cardType = findByTestAttr(wrapper, 'page-cards-edit__type');
 
@@ -120,7 +131,7 @@ describe('Page Cards Edit', () => {
         const card = cardMock();
         card.side1 = sideOne;
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         const cardSideOne = findByTestAttr(wrapper, 'page-cards-edit__side-one');
 
@@ -132,7 +143,7 @@ describe('Page Cards Edit', () => {
         const card = cardMock();
         card.side2 = sideTwo;
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         const cardSideTwo = findByTestAttr(wrapper, 'page-cards-edit__side-two');
 
@@ -144,7 +155,7 @@ describe('Page Cards Edit', () => {
         const card = cardMock();
         card.side3 = sideThree;
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         const cardSideThree = findByTestAttr(wrapper, 'page-cards-edit__side-three');
 
@@ -156,7 +167,7 @@ describe('Page Cards Edit', () => {
         const card = cardMock();
         card.side4 = sideFour;
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         const cardSideFour = findByTestAttr(wrapper, 'page-cards-edit__side-four');
 
@@ -169,7 +180,7 @@ describe('Page Cards Edit', () => {
         const title = 'Changes';
         const card = cardMock();
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         wrapper.find('input').at(0).simulate('change', { target: { value: title } });
 
@@ -180,7 +191,7 @@ describe('Page Cards Edit', () => {
         const type = 'Circumstance';
         const card = cardMock();
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         wrapper.find('select').at(0).simulate('change', { target: { value: type } });
 
@@ -191,7 +202,7 @@ describe('Page Cards Edit', () => {
         const sideOne = 'Career shift';
         const card = cardMock();
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         wrapper.find('input').at(1).simulate('change', { target: { value: sideOne } });
 
@@ -202,7 +213,7 @@ describe('Page Cards Edit', () => {
         const sideTwo = 'Move across country';
         const card = cardMock();
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         wrapper.find('input').at(2).simulate('change', { target: { value: sideTwo } });
 
@@ -213,7 +224,7 @@ describe('Page Cards Edit', () => {
         const sideThree = 'A new relationship';
         const card = cardMock();
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         wrapper.find('input').at(3).simulate('change', { target: { value: sideThree } });
 
@@ -224,7 +235,7 @@ describe('Page Cards Edit', () => {
         const sideFour = 'Zombie Apocalypse';
         const card = cardMock();
 
-        const { wrapper } = await setup(card);
+        const { wrapper } = await setup({ card });
         wrapper.update();
         wrapper.find('input').at(4).simulate('change', { target: { value: sideFour } });
 
@@ -242,14 +253,14 @@ describe('Page Cards Edit', () => {
       const updateCard = {
         cardTitle: card.cardTitle,
         type: card.type,
-        // createdBy: user.uid,
+        createdBy: card.createdBy,
         side1: card.side1,
         side2: card.side2,
         side3: card.side3,
         side4: card.side4,
       };
 
-      const { wrapper, spySet } = await setup(user, card);
+      const { wrapper, spySet } = await setup({ user, card });
       wrapper.update();
 
       const cardTitle = findByTestAttr(wrapper, 'page-cards-edit__title');

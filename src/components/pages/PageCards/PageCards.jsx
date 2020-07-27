@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import TemplateDefault from '../../Templates/TemplateDefault';
@@ -11,21 +11,24 @@ function PageCards() {
   const userId = user.uid;
 
   // eslint-disable-next-line consistent-return
-  const populateCards = async () => {
-    const cardRefs = await firebase.db
-      .collection('cards')
-      .where('createdBy', '==', userId)
-      .get();
+  const populateCards = useCallback(
+    async () => {
+      const cardRefs = await firebase.db
+        .collection('cards')
+        .where('createdBy', '==', userId)
+        .get();
 
-    const transformedCards = cardRefs
-      .docs
-      .map((card) => ({
-        id: card.id,
-        ...card.data(),
-      }));
+      const transformedCards = cardRefs
+        .docs
+        .map((card) => ({
+          id: card.id,
+          ...card.data(),
+        }));
 
-    setCards(transformedCards);
-  };
+      setCards(transformedCards);
+    },
+    [userId],
+  );
 
   const handleDelete = async (e, index) => {
     e.preventDefault();
@@ -39,7 +42,7 @@ function PageCards() {
 
   useEffect(() => {
     populateCards();
-  }, [userId]);
+  }, [userId, populateCards]);
 
   return (
     <TemplateDefault>
