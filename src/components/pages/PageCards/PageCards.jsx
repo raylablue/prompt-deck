@@ -49,7 +49,7 @@ function PageCards() {
       <div>
         <CreateCardsBtn content="+" />
       </div>
-      <div data-test="page-cards">
+      <div data-test="page-cards" className="row">
         { cards.length <= 0
           ? (
             <div data-test="page-cards__alt-message">
@@ -58,31 +58,33 @@ function PageCards() {
             </div>
           )
           : cards.map((card, index) => (
-            <div
-              key={card.id}
-              data-test="page-cards__card"
-              className="card m-4"
-            >
-              <h1 data-test="page-cards__title">{card.cardTitle}</h1>
-              <h2 data-test="page-cards__type">{card.type}</h2>
-              <ol>
-                <li data-test="page-cards__side-one">{card.side1}</li>
-                <li data-test="page-cards__side-two">{card.side2}</li>
-                <li data-test="page-cards__side-three">{card.side3}</li>
-                <li data-test="page-cards__side-four">{card.side4}</li>
-              </ol>
-              <button type="button">
-                <Link to={`/cards-edit/${card.id}`}>
-                  Edit
-                </Link>
-              </button>
-              <button
-                data-test="page-cards__delete-card"
-                type="button"
-                onClick={(e) => handleDelete(e, index)}
+            <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3">
+              <div
+                key={card.id}
+                data-test="page-cards__card"
+                className="card m-4"
               >
-                Delete
-              </button>
+                <h1 data-test="page-cards__title">{card.cardTitle}</h1>
+                <h2 data-test="page-cards__type">{card.type}</h2>
+                <ol>
+                  <li data-test="page-cards__side-one">{card.side1}</li>
+                  <li data-test="page-cards__side-two">{card.side2}</li>
+                  <li data-test="page-cards__side-three">{card.side3}</li>
+                  <li data-test="page-cards__side-four">{card.side4}</li>
+                </ol>
+                <button type="button">
+                  <Link to={`/cards-edit/${card.id}`}>
+                    Edit
+                  </Link>
+                </button>
+                <button
+                  data-test="page-cards__delete-card"
+                  type="button"
+                  onClick={(e) => handleDelete(e, index)}
+                >
+                  Delete
+                </button>
+              </div>
             </div>
           ))}
       </div>

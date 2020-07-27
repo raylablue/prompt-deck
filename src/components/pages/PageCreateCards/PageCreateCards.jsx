@@ -31,47 +31,53 @@ function PageCreateCards() {
     <TemplateDefault>
       <div
         data-test="page-create-cards"
+        className="row"
       >
-        <h1>Create Cards Page</h1>
-        <form onSubmit={async (evt) => {
-          evt.preventDefault();
-          setCardName('');
-          await handleCreateCard();
-        }}
+        <h1 className="col-12">Create Cards Page</h1>
+        <form
+          className="card p-3"
+          onSubmit={async (evt) => {
+            evt.preventDefault();
+            setCardName('');
+            await handleCreateCard();
+          }}
         >
+          <div className="col-sm-6 col-md-12">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label>
+              Name: &nbsp;
+              <input
+                data-test="card-name"
+                onChange={(event) => {
+                  setCardName(event.target.value);
+                }}
+                value={cardName}
+                type="text"
+                placeholder="card name"
+                autoComplete="off"
+              />
+            </label>
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label>
+              Type: &nbsp;
+              <select
+                data-test="type-value"
+                onChange={(event) => {
+                  setTypeValue(event.target.value);
+                }}
+                value={typeValue}
+              >
+                <option value="">--Please choose a type--</option>
+                <option value="character">Character</option>
+                <option value="conflict">Conflict</option>
+                <option value="circumstance">Circumstance</option>
+              </select>
+            </label>
+          </div>
           {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label>
-            Name: &nbsp;
-            <input
-              data-test="card-name"
-              onChange={(event) => {
-                setCardName(event.target.value);
-              }}
-              value={cardName}
-              type="text"
-              placeholder="card name"
-              autoComplete="off"
-            />
-          </label>
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label>
-            Type: &nbsp;
-            <select
-              data-test="type-value"
-              onChange={(event) => {
-                setTypeValue(event.target.value);
-              }}
-              value={typeValue}
-            >
-              <option value="">--Please choose a type--</option>
-              <option value="character">Character</option>
-              <option value="conflict">Conflict</option>
-              <option value="circumstance">Circumstance</option>
-            </select>
-          </label>
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label>
+          <label className="col-6 col-sm-8">
             Sides: &nbsp;
+            <br />
             <input
               data-test="side-input-one"
               onChange={(event) => {
@@ -116,9 +122,10 @@ function PageCreateCards() {
               autoComplete="off"
             />
           </label>
+          <br />
           <button
             data-test="save-card"
-            className="button"
+            className="button mx-3"
             type="submit"
           >
             Submit

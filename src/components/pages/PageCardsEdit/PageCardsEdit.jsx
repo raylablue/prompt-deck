@@ -106,58 +106,81 @@ function PageCardsEdit() {
   }
 
   return (
-    <TemplateDefault data-test="page-cards-edit">
+    <TemplateDefault
+      data-test="page-cards-edit"
+      className="row"
+    >
       <div
         data-test="page-card-edit__card"
-        className="card"
       >
+        <h1 className="col-12">
+          Edit &nbsp;
+          <strong>
+            {card.cardTitle}
+          </strong>
+          &nbsp; Card
+        </h1>
         <form
           data-test="page-cards-edit__submit"
+          className="card p-3"
           onSubmit={handleSubmit}
         >
-          <input
-            data-test="page-cards-edit__title"
-            value={card.cardTitle}
-            onChange={(e) => handleChangeName(e)}
-          />
+          <div className="col-sm-6 col-md-8">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label>
+              Name: &nbsp;
+              <input
+                data-test="page-cards-edit__title"
+                value={card.cardTitle}
+                onChange={(e) => handleChangeName(e)}
+              />
+            </label>
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label>
+              Type: &nbsp;
+              <select
+                data-test="page-cards-edit__type"
+                value={card.type}
+                onChange={handleChangeType}
+              >
+                <option value="">--Please choose a type--</option>
+                <option value="character">Character</option>
+                <option value="conflict">Conflict</option>
+                <option value="circumstance">Circumstance</option>
+              </select>
+            </label>
+          </div>
+          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+          <label className="col-6 col-sm-6">
+            Sides: &nbsp;
+            <br />
+            <input
+              data-test="page-cards-edit__side-one"
+              value={card.side1}
+              onChange={handleChangeSideOne}
+            />
+            <input
+              data-test="page-cards-edit__side-two"
+              value={card.side2}
+              onChange={handleChangeSideTwo}
+            />
+            <input
+              data-test="page-cards-edit__side-three"
+              value={card.side3}
+              onChange={handleChangeSideThree}
+            />
+            <input
+              data-test="page-cards-edit__side-four"
+              value={card.side4}
+              onChange={handleChangeSideFour}
+            />
+          </label>
           <br />
-          <select
-            data-test="page-cards-edit__type"
-            value={card.type}
-            onChange={handleChangeType}
+          <button
+            type="submit"
+            className="mx-3"
           >
-            <option value="">--Please choose a type--</option>
-            <option value="character">Character</option>
-            <option value="conflict">Conflict</option>
-            <option value="circumstance">Circumstance</option>
-          </select>
-          <br />
-          <input
-            data-test="page-cards-edit__side-one"
-            value={card.side1}
-            onChange={handleChangeSideOne}
-          />
-          <br />
-          <input
-            data-test="page-cards-edit__side-two"
-            value={card.side2}
-            onChange={handleChangeSideTwo}
-          />
-          <br />
-          <input
-            data-test="page-cards-edit__side-three"
-            value={card.side3}
-            onChange={handleChangeSideThree}
-          />
-          <br />
-          <input
-            data-test="page-cards-edit__side-four"
-            value={card.side4}
-            onChange={handleChangeSideFour}
-          />
-          <br />
-          <button type="submit">
-            update
+            Update
           </button>
         </form>
       </div>
