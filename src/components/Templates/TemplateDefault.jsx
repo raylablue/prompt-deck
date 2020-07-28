@@ -14,7 +14,7 @@ const TemplateDefault = ({ children }) => {
           <Header />
           <Dashboard />
           <div
-            className="container t-template-default__content p-0 py-5"
+            className="container-fluid t-template-default__content p-0 py-5"
           >
             {children}
           </div>
@@ -32,7 +32,7 @@ const TemplateDefault = ({ children }) => {
       >
         <Header />
 
-        <div className="container t-template-default__content p-0 py-5">
+        <div className="container-fluid t-template-default__content p-0 py-5">
           {children}
         </div>
       </div>

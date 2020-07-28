@@ -36,7 +36,7 @@ function Header() {
   return (
     <nav
       data-test="organism-header"
-      className="navbar navbar-expand-lg o-nav-bar__filmstrip px-2"
+      className="navbar navbar-expand-md bg-primary px-2"
     >
       <NavLink
         to="/"

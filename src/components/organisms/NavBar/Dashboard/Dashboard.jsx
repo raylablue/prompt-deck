@@ -5,7 +5,7 @@ function Dashboard() {
   return (
     <nav
       data-test="dashboard-render"
-      className="navbar navbar-expand-lg px-2"
+      className="navbar navbar-expand bg-secondary px-2 justify-content-center"
     >
       <div>
         <ul className="navbar-nav mr-auto o-nav-bar__nav-width pl-1">

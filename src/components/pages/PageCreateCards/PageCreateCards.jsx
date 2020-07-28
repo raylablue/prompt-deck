@@ -28,23 +28,23 @@ function PageCreateCards() {
   }
 
   return (
-    <TemplateDefault>
-      <div
-        data-test="page-create-cards"
-        className="row"
-      >
-        <h1 className="col-12">Create Cards Page</h1>
+    <TemplateDefault
+      data-test="page-create-cards"
+      className="row"
+    >
+      <div>
+        <h1 className="col-12 mx-3">Create Cards Page</h1>
         <form
-          className="card p-3"
+          className="card bg-secondary p-3"
           onSubmit={async (evt) => {
             evt.preventDefault();
             setCardName('');
             await handleCreateCard();
           }}
         >
-          <div className="col-sm-6 col-md-12">
+          <div className="form-group col-sm-6 col-md-12">
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label>
+            <label className="pr-4">
               Name: &nbsp;
               <input
                 data-test="card-name"
@@ -74,58 +74,59 @@ function PageCreateCards() {
               </select>
             </label>
           </div>
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label className="col-6 col-sm-8">
-            Sides: &nbsp;
-            <br />
-            <input
-              data-test="side-input-one"
-              onChange={(event) => {
-                setSideOne(event.target.value);
-              }}
-              value={sideOne}
-              type="text"
-              placeholder="side one"
-              autoComplete="off"
-            />
+          <div className="form-group">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label className="col-sm-4 col-md-6 col-lg-8 col-xl-12">
+              Sides: &nbsp;
+              <br />
+              <input
+                data-test="side-input-one"
+                onChange={(event) => {
+                  setSideOne(event.target.value);
+                }}
+                value={sideOne}
+                type="text"
+                placeholder="side one"
+                autoComplete="off"
+              />
 
-            <input
-              data-test="side-input-two"
-              onChange={(event) => {
-                setSideTwo(event.target.value);
-              }}
-              value={sideTwo}
-              type="text"
-              placeholder="side two"
-              autoComplete="off"
-            />
+              <input
+                data-test="side-input-two"
+                onChange={(event) => {
+                  setSideTwo(event.target.value);
+                }}
+                value={sideTwo}
+                type="text"
+                placeholder="side two"
+                autoComplete="off"
+              />
 
-            <input
-              data-test="side-input-three"
-              onChange={(event) => {
-                setSideThree(event.target.value);
-              }}
-              value={sideThree}
-              type="text"
-              placeholder="side three"
-              autoComplete="off"
-            />
+              <input
+                data-test="side-input-three"
+                onChange={(event) => {
+                  setSideThree(event.target.value);
+                }}
+                value={sideThree}
+                type="text"
+                placeholder="side three"
+                autoComplete="off"
+              />
 
-            <input
-              data-test="side-input-four"
-              onChange={(event) => {
-                setSideFour(event.target.value);
-              }}
-              value={sideFour}
-              type="text"
-              placeholder="side four"
-              autoComplete="off"
-            />
-          </label>
-          <br />
+              <input
+                data-test="side-input-four"
+                onChange={(event) => {
+                  setSideFour(event.target.value);
+                }}
+                value={sideFour}
+                type="text"
+                placeholder="side four"
+                autoComplete="off"
+              />
+            </label>
+          </div>
           <button
             data-test="save-card"
-            className="button mx-3"
+            className="button btn-outline-success mx-3"
             type="submit"
           >
             Submit

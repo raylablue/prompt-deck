@@ -113,7 +113,7 @@ function PageCardsEdit() {
       <div
         data-test="page-card-edit__card"
       >
-        <h1 className="col-12">
+        <h1 className="col-12 mx-3">
           Edit &nbsp;
           <strong>
             {card.cardTitle}
@@ -122,17 +122,18 @@ function PageCardsEdit() {
         </h1>
         <form
           data-test="page-cards-edit__submit"
-          className="card p-3"
+          className="card bg-secondary p-3"
           onSubmit={handleSubmit}
         >
-          <div className="col-sm-6 col-md-8">
+          <div className="form-group col-sm-6 col-md-8">
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label>
+            <label className="pr-4">
               Name: &nbsp;
               <input
                 data-test="page-cards-edit__title"
                 value={card.cardTitle}
                 onChange={(e) => handleChangeName(e)}
+                className="container"
               />
             </label>
             {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
@@ -142,6 +143,7 @@ function PageCardsEdit() {
                 data-test="page-cards-edit__type"
                 value={card.type}
                 onChange={handleChangeType}
+                className="container"
               >
                 <option value="">--Please choose a type--</option>
                 <option value="character">Character</option>
@@ -150,35 +152,36 @@ function PageCardsEdit() {
               </select>
             </label>
           </div>
-          {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-          <label className="col-6 col-sm-6">
-            Sides: &nbsp;
-            <br />
-            <input
-              data-test="page-cards-edit__side-one"
-              value={card.side1}
-              onChange={handleChangeSideOne}
-            />
-            <input
-              data-test="page-cards-edit__side-two"
-              value={card.side2}
-              onChange={handleChangeSideTwo}
-            />
-            <input
-              data-test="page-cards-edit__side-three"
-              value={card.side3}
-              onChange={handleChangeSideThree}
-            />
-            <input
-              data-test="page-cards-edit__side-four"
-              value={card.side4}
-              onChange={handleChangeSideFour}
-            />
-          </label>
-          <br />
+          <div className="form-group d-sm-inline-block">
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label className="col-sm-4 col-md-6 col-lg-18 col-xl-12">
+              Sides: &nbsp;
+              <br />
+              <input
+                data-test="page-cards-edit__side-one"
+                value={card.side1}
+                onChange={handleChangeSideOne}
+              />
+              <input
+                data-test="page-cards-edit__side-two"
+                value={card.side2}
+                onChange={handleChangeSideTwo}
+              />
+              <input
+                data-test="page-cards-edit__side-three"
+                value={card.side3}
+                onChange={handleChangeSideThree}
+              />
+              <input
+                data-test="page-cards-edit__side-four"
+                value={card.side4}
+                onChange={handleChangeSideFour}
+              />
+            </label>
+          </div>
           <button
             type="submit"
-            className="mx-3"
+            className="btn-outline-success mx-3"
           >
             Update
           </button>

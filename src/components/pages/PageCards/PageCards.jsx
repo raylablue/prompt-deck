@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import CreateCardsBtn from '../../molecules/CreateCardsBtn';
@@ -9,6 +9,7 @@ function PageCards() {
   const [cards, setCards] = useState([]);
   const user = useSelector((state) => state.user);
   const userId = user.uid;
+  const history = useHistory();
 
   // eslint-disable-next-line consistent-return
   const populateCards = useCallback(
@@ -46,13 +47,13 @@ function PageCards() {
 
   return (
     <TemplateDefault>
-      <div>
-        <CreateCardsBtn content="+" />
+      <div className="p-4">
+        <CreateCardsBtn content="+ Create New Card" />
       </div>
       <div data-test="page-cards" className="row">
         { cards.length <= 0
           ? (
-            <div data-test="page-cards__alt-message">
+            <div data-test="page-cards__alt-message" className="p-5">
               <h1>You don&apos;t have any cards yet</h1>
               <CreateCardsBtn content="Create a Card" />
             </div>
@@ -62,23 +63,39 @@ function PageCards() {
               <div
                 key={card.id}
                 data-test="page-cards__card"
-                className="card m-4"
+                className="card bg-secondary m-4"
               >
-                <h1 data-test="page-cards__title">{card.cardTitle}</h1>
-                <h2 data-test="page-cards__type">{card.type}</h2>
+                <h1
+                  data-test="page-cards__title"
+                  className="px-3"
+                >
+                  {card.cardTitle}
+                </h1>
+                <h2
+                  data-test="page-cards__type"
+                  className="px-3"
+                >
+                  {card.type}
+                </h2>
                 <ol>
                   <li data-test="page-cards__side-one">{card.side1}</li>
                   <li data-test="page-cards__side-two">{card.side2}</li>
                   <li data-test="page-cards__side-three">{card.side3}</li>
                   <li data-test="page-cards__side-four">{card.side4}</li>
                 </ol>
-                <button type="button">
-                  <Link to={`/cards-edit/${card.id}`}>
-                    Edit
-                  </Link>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    history.push(`/cards-edit/${card.id}`);
+                  }}
+                >
+                  Edit
                 </button>
                 <button
                   data-test="page-cards__delete-card"
+                  className="btn-warning"
                   type="button"
                   onClick={(e) => handleDelete(e, index)}
                 >

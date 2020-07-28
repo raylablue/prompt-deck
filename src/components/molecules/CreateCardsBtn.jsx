@@ -3,7 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 function CreateCardsBtn({ content }) {
   return (
-    <button type="button">
+    <button
+      type="button"
+      className="btn-primary"
+    >
       <NavLink
         to="/create-cards"
         className="nav-link"
