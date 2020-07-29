@@ -1,5 +1,6 @@
-## [PromptDeck](http://localhost:3000)
-This project utilizes the Firebase and Redux to view, create, and generate writing prompts.
+## [PromptDeck](https://prompt-deck-6e03d.web.app/cards)
+This project utilizes the Firebase and Redux to view, create, and generate writing prompts. Current project can be
+viewed at the link [PromptDeck](https://prompt-deck-6e03d.web.app/cards). Hosted by Firebase.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), 
 using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
