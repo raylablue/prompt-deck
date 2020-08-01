@@ -33,7 +33,7 @@ function PageCreateCards() {
       className="row"
     >
       <div>
-        <h1 className="col-12 mx-3">Create Cards Page</h1>
+        <h1>Create Cards Page</h1>
         <form
           className="card bg-secondary p-3"
           onSubmit={async (evt) => {

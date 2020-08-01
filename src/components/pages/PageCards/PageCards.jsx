@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import CreateCardsBtn from '../../molecules/CreateCardsBtn';
+import './PageCards.scss';
+import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
 
 function PageCards() {
   const [cards, setCards] = useState([]);
@@ -47,61 +49,52 @@ function PageCards() {
 
   return (
     <TemplateDefault>
-      <div className="p-4">
         <CreateCardsBtn content="+ Create New Card" />
-      </div>
       <div data-test="page-cards" className="row">
         { cards.length <= 0
           ? (
-            <div data-test="page-cards__alt-message" className="p-5">
+            <div data-test="page-cards__alt-message" className="container">
               <h1>You don&apos;t have any cards yet</h1>
               <CreateCardsBtn content="Create a Card" />
             </div>
           )
           : cards.map((card, index) => (
-            <div className="col-sm-12 col-md-6 col-lg-4 col-xl-3">
-              <div
-                key={card.id}
-                data-test="page-cards__card"
-                className="card bg-secondary m-4"
+            <div
+              className="col-6 col-sm-5 col-md-4 col-lg-3"
+              key={card.id}
+              data-test="page-cards__card"
+            >
+              <h2
+                data-test="page-cards__type"
+                className="px-3"
               >
-                <h1
-                  data-test="page-cards__title"
-                  className="px-3"
-                >
-                  {card.cardTitle}
-                </h1>
-                <h2
-                  data-test="page-cards__type"
-                  className="px-3"
-                >
-                  {card.type}
-                </h2>
-                <ol>
-                  <li data-test="page-cards__side-one">{card.side1}</li>
-                  <li data-test="page-cards__side-two">{card.side2}</li>
-                  <li data-test="page-cards__side-three">{card.side3}</li>
-                  <li data-test="page-cards__side-four">{card.side4}</li>
-                </ol>
-                <button
-                  type="button"
-                  className="btn-primary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    history.push(`/cards-edit/${card.id}`);
-                  }}
-                >
-                  Edit
-                </button>
-                <button
-                  data-test="page-cards__delete-card"
-                  className="btn-warning"
-                  type="button"
-                  onClick={(e) => handleDelete(e, index)}
-                >
-                  Delete
-                </button>
-              </div>
+                {card.type}
+              </h2>
+              <CardsDisplay card={card} />
+              <h3
+                data-test="page-cards__title"
+                className="px-3 text-secondary"
+              >
+                {card.cardTitle}
+              </h3>
+              <button
+                type="button"
+                className="btn-primary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  history.push(`/cards-edit/${card.id}`);
+                }}
+              >
+                Edit
+              </button>
+              <button
+                data-test="page-cards__delete-card"
+                className="btn-warning"
+                type="button"
+                onClick={(e) => handleDelete(e, index)}
+              >
+                Delete
+              </button>
             </div>
           ))}
       </div>

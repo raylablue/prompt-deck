@@ -14,7 +14,7 @@ const TemplateDefault = ({ children }) => {
           <Header />
           <Dashboard />
           <div
-            className="container-fluid t-template-default__content p-0 py-5"
+            className="container t-template-default__content"
           >
             {children}
           </div>

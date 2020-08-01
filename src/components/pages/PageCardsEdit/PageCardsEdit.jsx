@@ -113,7 +113,7 @@ function PageCardsEdit() {
       <div
         data-test="page-card-edit__card"
       >
-        <h1 className="col-12 mx-3">
+        <h1>
           Edit &nbsp;
           <strong>
             {card.cardTitle}

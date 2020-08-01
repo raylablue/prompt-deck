@@ -33,7 +33,6 @@ function Dashboard() {
         </ul>
       </div>
     </nav>
-
   );
 }
 
