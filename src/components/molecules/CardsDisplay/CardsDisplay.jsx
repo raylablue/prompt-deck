@@ -3,7 +3,7 @@ import './CardsDisplay.scss';
 
 const CardsDisplay = ({ card }) => {
   return (
-    <div className="m-cards-display__card">
+    <div className="m-cards-display__card border bg-light">
       <div
         data-test="page-cards__side-one"
         className="m-cards-display__side-one px-2"

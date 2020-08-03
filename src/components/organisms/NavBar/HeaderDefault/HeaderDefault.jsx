@@ -6,7 +6,7 @@ import UserAuthBtn from '../UserAuthBtn/UserAuthBtn';
 import NavLinkCollection from '../NavLinkCollection';
 import navLinks from '../nav-links';
 
-function Header() {
+function HeaderDefault() {
   const [collapse, setCollapse] = useState(true);
   const [toggleClass, setToggleClass] = useState('');
   const [navClass, setNavClass] = useState('');
@@ -64,9 +64,26 @@ function Header() {
           data-test="this-a-div"
           className={`${navClass} navbar-collapse`}
         >
-          <NavLinkCollection
-            links={navLinks}
-          />
+          <ul className="navbar-nav mr-auto o-nav-bar__nav-width pl-1">
+            <li className="o-nav-bar__nav-item">
+              <NavLink
+                to="/"
+                className="nav-link"
+                activeClassName="chosen"
+              >
+                Home
+              </NavLink>
+            </li>
+            <li className="o-nav-bar__nav-item">
+              <NavLink
+                to="/prompts"
+                className="nav-link"
+                activeClassName="chosen"
+              >
+                Prompts
+              </NavLink>
+            </li>
+          </ul>
           <UserAuthBtn />
         </div>
       </div>
@@ -74,4 +91,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default HeaderDefault;

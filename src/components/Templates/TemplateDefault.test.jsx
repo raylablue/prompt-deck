@@ -11,7 +11,7 @@ const defaultProps = {
   children: 'test string',
 };
 
-describe('Template of Header and Footer', () => {
+describe('Template of HeaderDefault and Footer', () => {
   const setup = (user, newProps = {}) => {
     const props = {
       ...defaultProps,

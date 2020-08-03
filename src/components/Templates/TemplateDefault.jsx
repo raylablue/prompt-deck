@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import Header from '../organisms/NavBar/Header/Header';
-import Dashboard from '../organisms/NavBar/Dashboard/Dashboard';
+import HeaderUser from '../organisms/NavBar/HeaderUser/HeaderUser';
+import HeaderDefault from '../organisms/NavBar/HeaderDefault/HeaderDefault';
 
 const TemplateDefault = ({ children }) => {
   const user = useSelector((state) => state.user);
@@ -11,8 +11,7 @@ const TemplateDefault = ({ children }) => {
     return (
       <>
         <div data-test="dashboard">
-          <Header />
-          <Dashboard />
+          <HeaderUser />
           <div
             className="container t-template-default__content"
           >
@@ -30,9 +29,9 @@ const TemplateDefault = ({ children }) => {
         data-test="default"
         className="content"
       >
-        <Header />
+        <HeaderDefault />
 
-        <div className="container-fluid t-template-default__content p-0 py-5">
+        <div className="container t-template-default__content">
           {children}
         </div>
       </div>

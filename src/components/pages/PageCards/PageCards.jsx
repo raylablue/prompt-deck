@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import CreateCardsBtn from '../../molecules/CreateCardsBtn';
-import './PageCards.scss';
 import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
 
 function PageCards() {
@@ -60,7 +59,7 @@ function PageCards() {
           )
           : cards.map((card, index) => (
             <div
-              className="col-6 col-sm-5 col-md-4 col-lg-3"
+              className="col-12 col-sm-5 col-md-4 col-lg-3"
               key={card.id}
               data-test="page-cards__card"
             >

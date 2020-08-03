@@ -1,26 +1,32 @@
 import '../../../../tests/firebase-mocks';
-import '../../../../tests/redux-mock';
 import React from 'react';
 import { mount } from 'enzyme';
-import { MemoryRouter } from 'react-router';
+import Dashboard from './HeaderUser';
 import { findByTestAttr } from '../../../../tests/testUtils';
-import Header from './Header';
+import {MemoryRouter} from "react-router";
+import {Provider} from "react-redux";
+import configureMockStore from "redux-mock-store";
 
-describe('Header', () => {
-  const setup = () => {
+describe('HeaderUser, sub-header', () => {
+  const setup = (user) => {
+    const mockStore = configureMockStore([]);
+    const store = mockStore({ user });
+
     const wrapper = mount(
-      <MemoryRouter>
-        <Header />
-      </MemoryRouter>,
+      <Provider store={store}>
+        <MemoryRouter>
+          <Dashboard />
+        </MemoryRouter>
+      </Provider>,
     );
 
     return { wrapper };
   };
 
-  it('renders without error', () => {
+  it('should render without error', () => {
     const { wrapper } = setup();
-    const component = findByTestAttr(wrapper, 'organism-header');
-    expect(component.length).toBe(1);
+    const dashboardRender = findByTestAttr(wrapper, 'organism-header-user');
+    expect(dashboardRender.length).toBe(1);
   });
 
   it('should render nav div without error', () => {
@@ -35,7 +41,7 @@ describe('Header', () => {
     expect(component.length).toBe(1);
   });
 
-  it('should invoke dropdown button when clicked', () => {
+  it('should invoke dropdown when clicked', () => {
     const { wrapper } = setup();
 
     findByTestAttr(wrapper, 'dropdown').simulate('click');
