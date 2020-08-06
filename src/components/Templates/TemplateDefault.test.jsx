@@ -36,14 +36,14 @@ describe('Template of HeaderDefault and Footer', () => {
   it('should render dashboard when there is a user', () => {
     const user = {};
     const { wrapper } = setup(user);
-    const dashboard = findByTestAttr(wrapper, 'dashboard');
+    const dashboard = findByTestAttr(wrapper, 't-template-default__header-user');
     expect(dashboard.length).toBe(1);
   });
 
   it('should not render dashboard when there is no user', () => {
     const user = null;
     const { wrapper } = setup(user);
-    const templateDefault = findByTestAttr(wrapper, 'default');
+    const templateDefault = findByTestAttr(wrapper, 't-template-default__header-default');
     expect(templateDefault.length).toBe(1);
   });
 

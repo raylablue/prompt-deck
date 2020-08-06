@@ -6,6 +6,8 @@ import 'bootstrap/scss/bootstrap.scss';
 import App from './app/App';
 import storeInit from './redux/store';
 
+/* istanbul ignore file */
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={storeInit()}>

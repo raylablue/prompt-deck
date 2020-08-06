@@ -74,7 +74,7 @@ describe('PageCards Component', () => {
     expect(component.length).toBe(1);
   });
 
-  describe('firebase collection get cards', () => {
+  describe('Getting cards', () => {
     it('should call the collection with the expected arguments', async () => {
       const { spyCollection } = await setup();
 
@@ -117,13 +117,12 @@ describe('PageCards Component', () => {
       const { wrapper } = await setup({ cards });
       wrapper.update();
       const deleteBtn = findByTestAttr(wrapper, 'page-cards__delete-card');
-      // deleteBtn.simulate('click', { preventDefault() {} });
 
       expect(deleteBtn.length).toBe(1);
     });
 
     describe('Firebase call to delete by ID when clicked', () => {
-      it('should call the collection with the expected id to delete', async () => {
+      it('should delete by ID when clicked', async () => {
         const { spyCollection } = await setup();
 
         expect(spyCollection).toBeCalledWith('cards');
@@ -214,15 +213,4 @@ describe('PageCards Component', () => {
 
     expect(noCardsMessage.length).not.toBe(0);
   });
-
-  // it('should display an error message if an error returns from firebase', async () => {
-  //   const errMsg = 'error has happened';
-  //
-  //   const { spyGet, wrapper } = await setup();
-  //   spyGet.mockReturnValue(Promise.reject(errMsg));
-  //   wrapper.update();
-  //   const catchErr = findByTestAttr(wrapper, 'page-cards__catch-err');
-  //
-  //   expect(catchErr.length).not.toBe(0);
-  // });
 });

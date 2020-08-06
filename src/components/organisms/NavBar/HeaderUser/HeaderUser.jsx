@@ -35,8 +35,8 @@ function HeaderUser() {
 
   return (
     <nav
-      data-test="organism-header-user"
-      className="navbar navbar-expand-md bg-primary px-2"
+      data-test="o-header-user"
+      className="navbar navbar-expand-md bg-secondary px-2"
     >
       <div className="container">
         <NavLink
@@ -49,7 +49,7 @@ function HeaderUser() {
           />
         </NavLink>
         <button
-          data-test="dropdown"
+          data-test="o-header-user__dropdown"
           className={`${toggleClass} navbar-toggler p-1`}
           type="button"
           onClick={toggleClick}
@@ -61,7 +61,7 @@ function HeaderUser() {
         </button>
 
         <div
-          data-test="this-a-div"
+          data-test="o-header-user__collapse-menu"
           className={`${navClass} navbar-collapse`}
         >
           <NavLinkCollection

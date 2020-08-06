@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook, faBars } from '@fortawesome/free-solid-svg-icons';
 import UserAuthBtn from '../UserAuthBtn/UserAuthBtn';
-import NavLinkCollection from '../NavLinkCollection';
-import navLinks from '../nav-links';
 
 function HeaderDefault() {
   const [collapse, setCollapse] = useState(true);
@@ -35,8 +33,8 @@ function HeaderDefault() {
 
   return (
     <nav
-      data-test="organism-header"
-      className="navbar navbar-expand-md bg-primary px-2"
+      data-test="o-header-default"
+      className="navbar navbar-expand-md bg-secondary px-2"
     >
       <div className="container">
         <NavLink
@@ -49,7 +47,7 @@ function HeaderDefault() {
           />
         </NavLink>
         <button
-          data-test="dropdown"
+          data-test="o-header-detault__dropdown"
           className={`${toggleClass} navbar-toggler p-1`}
           type="button"
           onClick={toggleClick}
@@ -61,7 +59,7 @@ function HeaderDefault() {
         </button>
 
         <div
-          data-test="this-a-div"
+          data-test="o-header-default__collapse-menu"
           className={`${navClass} navbar-collapse`}
         >
           <ul className="navbar-nav mr-auto o-nav-bar__nav-width pl-1">

@@ -19,27 +19,27 @@ describe('HeaderDefault', () => {
 
   it('renders without error', () => {
     const { wrapper } = setup();
-    const component = findByTestAttr(wrapper, 'organism-header');
+    const component = findByTestAttr(wrapper, 'o-header-default');
     expect(component.length).toBe(1);
   });
 
   it('should render nav div without error', () => {
     const { wrapper } = setup();
-    const component = findByTestAttr(wrapper, 'this-a-div');
+    const component = findByTestAttr(wrapper, 'o-header-default__collapse-menu');
     expect(component.length).toBe(1);
   });
 
   it('should render toggle nav button', () => {
     const { wrapper } = setup();
-    const component = findByTestAttr(wrapper, 'dropdown');
+    const component = findByTestAttr(wrapper, 'o-header-detault__dropdown');
     expect(component.length).toBe(1);
   });
 
   it('should invoke dropdown button when clicked', () => {
     const { wrapper } = setup();
 
-    findByTestAttr(wrapper, 'dropdown').simulate('click');
-    const dropdown = findByTestAttr(wrapper, 'dropdown');
+    findByTestAttr(wrapper, 'o-header-detault__dropdown').simulate('click');
+    const dropdown = findByTestAttr(wrapper, 'o-header-detault__dropdown');
 
     expect(dropdown.hasClass('collapsed')).toBe(false);
   });
@@ -47,9 +47,10 @@ describe('HeaderDefault', () => {
   it('should collapse dropdown button when clicked again', () => {
     const { wrapper } = setup();
 
-    const component = findByTestAttr(wrapper, 'dropdown');
+    const component = findByTestAttr(wrapper, 'o-header-detault__dropdown');
     component.simulate('click');
     component.simulate('click');
+    wrapper.update();
 
     expect(component.hasClass('collapsed')).toBe(true);
   });

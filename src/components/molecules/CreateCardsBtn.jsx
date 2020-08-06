@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function CreateCardsBtn({ content }) {
+function CreateCardsBtn({ children }) {
   return (
     <button
       type="button"
@@ -12,10 +13,14 @@ function CreateCardsBtn({ content }) {
         className="nav-link"
         activeClassName="chosen"
       >
-        {content}
+        {children}
       </NavLink>
     </button>
   );
 }
+
+CreateCardsBtn.propTypes = {
+  children: PropTypes.element.isRequired,
+};
 
 export default CreateCardsBtn;

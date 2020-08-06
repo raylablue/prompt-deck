@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './CardsDisplay.scss';
 
 const CardsDisplay = ({ card }) => {
@@ -30,6 +31,15 @@ const CardsDisplay = ({ card }) => {
       </div>
     </div>
   );
-}
+};
 
+CardsDisplay.propTypes = {
+  // eslint-disable-next-line react/require-default-props
+  card: PropTypes.shape({
+    side1: PropTypes.string.isRequired,
+    side2: PropTypes.string.isRequired,
+    side3: PropTypes.string.isRequired,
+    side4: PropTypes.string.isRequired,
+  }),
+};
 export default CardsDisplay;

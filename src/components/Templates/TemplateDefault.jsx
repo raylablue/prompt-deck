@@ -1,41 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { If, Else } from 'react-if';
 import HeaderUser from '../organisms/NavBar/HeaderUser/HeaderUser';
 import HeaderDefault from '../organisms/NavBar/HeaderDefault/HeaderDefault';
 
 const TemplateDefault = ({ children }) => {
   const user = useSelector((state) => state.user);
 
-  if (user) {
-    return (
-      <>
-        <div data-test="dashboard">
-          <HeaderUser />
-          <div
-            className="container t-template-default__content"
-          >
-            {children}
-          </div>
-        </div>
-        {/* Footer goes here */}
-      </>
-    );
-  }
-
   return (
     <>
+      <If condition={user}>
+        <HeaderUser data-test="t-template-default__header-user" />
+        <Else>
+          <HeaderDefault data-test="t-template-default__header-default" />
+        </Else>
+      </If>
       <div
-        data-test="default"
-        className="content"
+        className="container t-template-default__content"
       >
-        <HeaderDefault />
-
-        <div className="container t-template-default__content">
-          {children}
-        </div>
+        {children}
       </div>
-
+      {/* Footer goes here */}
     </>
   );
 };

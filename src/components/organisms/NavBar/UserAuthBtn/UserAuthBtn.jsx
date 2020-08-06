@@ -8,7 +8,7 @@ function UserAuthBtn() {
   const history = useHistory();
   const user = useSelector((state) => state.user);
 
-  const loginBtn = useCallback(
+  const updateLoginBtn = useCallback(
     () => {
       if (user) {
         setUserLogin(<span data-test="text-logout">logout</span>);
@@ -25,12 +25,12 @@ function UserAuthBtn() {
       return firebase.logout();
     }
 
-    return loginBtn();
+    return updateLoginBtn();
   };
 
   useEffect(() => {
-    loginBtn();
-  }, [user, loginBtn]);
+    updateLoginBtn();
+  }, [user, updateLoginBtn]);
 
   return (
     <button
