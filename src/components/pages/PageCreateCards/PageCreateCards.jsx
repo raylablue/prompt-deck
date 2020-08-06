@@ -43,8 +43,7 @@ function PageCreateCards() {
           }}
         >
           <div className="form-group col-sm-6 col-md-12">
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label className="pr-4">
+            <label className="pr-4" htmlFor="title">
               Name: &nbsp;
               <input
                 data-test="card-name"
@@ -57,8 +56,7 @@ function PageCreateCards() {
                 autoComplete="off"
               />
             </label>
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label>
+            <label htmlFor="type">
               Type: &nbsp;
               <select
                 data-test="type-value"
@@ -75,8 +73,10 @@ function PageCreateCards() {
             </label>
           </div>
           <div className="form-group">
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-            <label className="col-sm-4 col-md-6 col-lg-8 col-xl-12">
+            <label
+              className="col-sm-4 col-md-6 col-lg-8 col-xl-12"
+              htmlFor="sides"
+            >
               Sides: &nbsp;
               <br />
               <input

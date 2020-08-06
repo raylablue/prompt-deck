@@ -1,4 +1,4 @@
-import '../../tests/firebase-mocks';
+import '../../tests/mocks/firebase-mocks';
 import React from 'react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';

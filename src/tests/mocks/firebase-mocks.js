@@ -1,4 +1,4 @@
-jest.mock('../firebase/firebase', () => ({
+jest.mock('../../firebase/firebase', () => ({
   ui: {
     start: jest.fn(),
   },

@@ -142,22 +142,22 @@ function PageCardsEdit() {
               onSubmit={handleSubmit}
             >
               <div className="form-group col-sm-6 col-md-8">
-                <label className="pr-4">
+                <label className="pr-4" htmlFor="title">
                   Name: &nbsp;
                   <input
                     data-test="page-cards-edit__title"
                     value={card.cardTitle}
                     onChange={(e) => handleChangeName(e)}
-                    className="container"
+                    className="form-control"
                   />
                 </label>
-                <label>
+                <label htmlFor="type">
                   Type: &nbsp;
                   <select
                     data-test="page-cards-edit__type"
                     value={card.type}
                     onChange={handleChangeType}
-                    className="container"
+                    className="form-control"
                   >
                     <option value="">--Please choose a type--</option>
                     <option value="character">Character</option>
@@ -166,31 +166,47 @@ function PageCardsEdit() {
                   </select>
                 </label>
               </div>
-              <div className="form-group d-sm-inline-block">
-                <label className="col-sm-4 col-md-6 col-lg-18 col-xl-12">
-                  Sides: &nbsp;
-                  <br />
-                  <input
-                    data-test="page-cards-edit__side-one"
-                    value={card.side1}
-                    onChange={handleChangeSideOne}
-                  />
-                  <input
-                    data-test="page-cards-edit__side-two"
-                    value={card.side2}
-                    onChange={handleChangeSideTwo}
-                  />
-                  <input
-                    data-test="page-cards-edit__side-three"
-                    value={card.side3}
-                    onChange={handleChangeSideThree}
-                  />
-                  <input
-                    data-test="page-cards-edit__side-four"
-                    value={card.side4}
-                    onChange={handleChangeSideFour}
-                  />
-                </label>
+              <div
+                className="form-group col-10 col-sm-12 col-md-8 col-lg-18 col-xl-12"
+              >
+                <div>
+                  <label htmlFor="sideOne">
+                    Side Input One: &nbsp;
+                    <input
+                      data-test="page-cards-edit__side-one"
+                      value={card.side1}
+                      onChange={handleChangeSideOne}
+                      className="form-control"
+                    />
+                  </label>
+                  <label htmlFor="sideTwo">
+                    Side Input Two: &nbsp;
+                    <input
+                      data-test="page-cards-edit__side-two"
+                      value={card.side2}
+                      onChange={handleChangeSideTwo}
+                      className="form-control"
+                    />
+                  </label>
+                  <label htmlFor="sideThree">
+                    Side Input Three: &nbsp;
+                    <input
+                      data-test="page-cards-edit__side-three"
+                      value={card.side3}
+                      onChange={handleChangeSideThree}
+                      className="form-control"
+                    />
+                  </label>
+                  <label htmlFor="sideFour">
+                    Side Input Four: &nbsp;
+                    <input
+                      data-test="page-cards-edit__side-four"
+                      value={card.side4}
+                      onChange={handleChangeSideFour}
+                      className="form-control"
+                    />
+                  </label>
+                </div>
               </div>
               <button
                 type="submit"

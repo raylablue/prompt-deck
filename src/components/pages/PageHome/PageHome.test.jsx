@@ -1,4 +1,4 @@
-import '../../../tests/firebase-mocks';
+import '../../../tests/mocks/firebase-mocks';
 import React from 'react';
 import { shallow } from 'enzyme';
 import { findByTestAttr } from '../../../tests/testUtils';

@@ -1,4 +1,4 @@
-import '../../../tests/firebase-mocks';
+import '../../../tests/mocks/firebase-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';

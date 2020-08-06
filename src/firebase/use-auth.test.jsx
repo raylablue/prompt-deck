@@ -1,7 +1,7 @@
-import '../tests/firebase-mocks';
-import '../tests/redux-mock';
+import '../tests/mocks/firebase-mocks';
+import '../tests/mocks/redux-mock';
 import React from 'react';
-import localStorage from '../tests/mock-local-storage';
+import localStorage from '../tests/mocks/mock-local-storage';
 import storeInit from '../redux/store';
 
 describe('user authentication', () => {

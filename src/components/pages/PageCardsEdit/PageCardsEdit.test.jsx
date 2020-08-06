@@ -1,16 +1,16 @@
-import '../../../tests/template-default-mocks';
-import '../../../tests/firebase-mocks';
-import '../../../tests/router-mocks';
+import '../../../tests/mocks/template-default-mocks';
+import '../../../tests/mocks/firebase-mocks';
+import '../../../tests/mocks/router-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
 import { useParams } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
+import configureMockStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 import firebase from '../../../firebase/firebase';
 import { findByTestAttr } from '../../../tests/testUtils';
 import { cardMock } from '../../../utils/mocks';
 import PageCardsEdit from './PageCardsEdit';
-import configureMockStore from "redux-mock-store";
-import {Provider} from "react-redux";
 
 const defaultArgs = {
   card: {},
@@ -22,7 +22,7 @@ describe('Page Cards Edit', () => {
     const { card, user } = {
       ...defaultArgs,
       ...args,
-    }
+    };
 
     const mockStore = configureMockStore([]);
     const store = mockStore({ user });

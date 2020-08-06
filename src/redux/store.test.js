@@ -1,5 +1,5 @@
 import storeInit from './store';
-import localStorage from '../tests/mock-local-storage';
+import localStorage from '../tests/mocks/mock-local-storage';
 
 describe('redux store', () => {
   it('should return user from store if localStorage has a user', () => {

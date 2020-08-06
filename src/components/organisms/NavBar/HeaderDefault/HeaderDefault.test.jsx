@@ -1,5 +1,5 @@
-import '../../../../tests/firebase-mocks';
-import '../../../../tests/redux-mock';
+import '../../../../tests/mocks/firebase-mocks';
+import '../../../../tests/mocks/redux-mock';
 import React from 'react';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router';
