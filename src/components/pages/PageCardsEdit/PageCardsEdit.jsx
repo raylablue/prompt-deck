@@ -109,17 +109,10 @@ function PageCardsEdit() {
     getData();
   }, [getData]);
 
-  if (!card) {
-    return (
-      <TemplateDefault data-test="page-cards-edit">
-        <p>loading...</p>
-      </TemplateDefault>
-    );
-  }
 
   return (
     <TemplateDefault
-      data-test="page-cards-edit"
+      data-test="p-cards-edit"
       className="row"
     >
       <If condition={!card}>
@@ -127,7 +120,7 @@ function PageCardsEdit() {
 
         <Else>
           <div
-            data-test="page-card-edit__card"
+            data-test="p-card-edit__card"
           >
             <h1>
               Edit &nbsp;
@@ -137,80 +130,103 @@ function PageCardsEdit() {
               &nbsp; Card
             </h1>
             <form
-              data-test="page-cards-edit__submit"
+              data-test="p-cards-edit__submit"
               className="card bg-secondary p-3"
               onSubmit={handleSubmit}
             >
-              <div className="form-group col-sm-6 col-md-8">
-                <label className="pr-4" htmlFor="title">
+              <div className="form-group">
+                <label htmlFor="title">
                   Name: &nbsp;
-                  <input
-                    data-test="page-cards-edit__title"
-                    value={card.cardTitle}
-                    onChange={(e) => handleChangeName(e)}
-                    className="form-control"
-                  />
                 </label>
+                <input
+                  data-test="p-cards-edit__title"
+                  value={card.cardTitle}
+                  onChange={(e) => handleChangeName(e)}
+                  className="form-control"
+                  id="title"
+                  type="text"
+                />
                 <label htmlFor="type">
                   Type: &nbsp;
-                  <select
-                    data-test="page-cards-edit__type"
-                    value={card.type}
-                    onChange={handleChangeType}
-                    className="form-control"
-                  >
-                    <option value="">--Please choose a type--</option>
-                    <option value="character">Character</option>
-                    <option value="conflict">Conflict</option>
-                    <option value="circumstance">Circumstance</option>
-                  </select>
                 </label>
+                <select
+                  data-test="p-cards-edit__type"
+                  value={card.type}
+                  onChange={handleChangeType}
+                  className="form-control"
+                  id="type"
+                  type="text"
+                >
+                  <option value="">--Please choose a type--</option>
+                  <option value="character">Character</option>
+                  <option value="conflict">Conflict</option>
+                  <option value="circumstance">Circumstance</option>
+                </select>
               </div>
               <div
-                className="form-group col-10 col-sm-12 col-md-8 col-lg-18 col-xl-12"
+                className="form-group"
               >
-                <div>
-                  <label htmlFor="sideOne">
+
+                <div className="form-group">
+                  <label htmlFor="side-one">
                     Side Input One: &nbsp;
-                    <input
-                      data-test="page-cards-edit__side-one"
-                      value={card.side1}
-                      onChange={handleChangeSideOne}
-                      className="form-control"
-                    />
                   </label>
-                  <label htmlFor="sideTwo">
-                    Side Input Two: &nbsp;
-                    <input
-                      data-test="page-cards-edit__side-two"
-                      value={card.side2}
-                      onChange={handleChangeSideTwo}
-                      className="form-control"
-                    />
-                  </label>
-                  <label htmlFor="sideThree">
-                    Side Input Three: &nbsp;
-                    <input
-                      data-test="page-cards-edit__side-three"
-                      value={card.side3}
-                      onChange={handleChangeSideThree}
-                      className="form-control"
-                    />
-                  </label>
-                  <label htmlFor="sideFour">
-                    Side Input Four: &nbsp;
-                    <input
-                      data-test="page-cards-edit__side-four"
-                      value={card.side4}
-                      onChange={handleChangeSideFour}
-                      className="form-control"
-                    />
-                  </label>
+                  <input
+                    data-test="p-cards-edit__side-one"
+                    value={card.side1}
+                    onChange={handleChangeSideOne}
+                    className="form-control"
+                    id="side-one"
+                    type="text"
+                  />
                 </div>
+
+                <div className="form-group">
+                  <label htmlFor="side-two">
+                    Side Input Two: &nbsp;
+                  </label>
+                  <input
+                    data-test="p-cards-edit__side-two"
+                    value={card.side2}
+                    onChange={handleChangeSideTwo}
+                    className="form-control"
+                    id="side-tow"
+                    type="text"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="side-three">
+                    Side Input Three: &nbsp;
+                  </label>
+                  <input
+                    data-test="p-cards-edit__side-three"
+                    value={card.side3}
+                    onChange={handleChangeSideThree}
+                    className="form-control"
+                    id="side-three"
+                    type="text"
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="side-four">
+                    Side Input Four: &nbsp;
+                  </label>
+                  <input
+                    data-test="p-cards-edit__side-four"
+                    value={card.side4}
+                    onChange={handleChangeSideFour}
+                    className="form-control"
+                    id="side-four"
+                    type="text"
+                  />
+                </div>
+
               </div>
               <button
                 type="submit"
-                className="btn-outline-success mx-3"
+                className="btn btn-outline-success"
               >
                 Update
               </button>
