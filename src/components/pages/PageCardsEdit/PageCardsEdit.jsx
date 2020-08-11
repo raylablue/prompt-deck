@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { If, Else } from 'react-if';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
@@ -9,8 +8,6 @@ import CardForm from '../../organisms/CardForm/CardForm';
 
 function PageCardsEdit() {
   const { id } = useParams();
-  const user = useSelector((state) => state.user);
-
   const [initialCard, setInitialCard] = useState({});
 
   const getData = useCallback(
@@ -27,25 +24,15 @@ function PageCardsEdit() {
   );
 
   const handleSubmit = useCallback(
-    async (e) => {
+    async (e, updateCard) => {
       e.preventDefault();
-
-      const updateCard = {
-        cardTitle: initialCard.cardTitle,
-        type: initialCard.type,
-        createdBy: user.uid,
-        side1: initialCard.side1,
-        side2: initialCard.side2,
-        side3: initialCard.side3,
-        side4: initialCard.side4,
-      };
 
       await firebase.db
         .collection('cards')
         .doc(id)
         .set(updateCard);
     },
-    [initialCard, user, id],
+    [id],
   );
 
   useEffect(() => {
