@@ -10,10 +10,10 @@ const TemplateDefault = ({ children }) => {
 
   return (
     <>
-      <If condition={user}>
-        <HeaderUser data-test="t-template-default__header-user" />
+      <If condition={!user}>
+        <HeaderDefault data-test="t-template-default__header-default" />
         <Else>
-          <HeaderDefault data-test="t-template-default__header-default" />
+          <HeaderUser data-test="t-template-default__header-user" />
         </Else>
       </If>
       <div
@@ -28,7 +28,8 @@ const TemplateDefault = ({ children }) => {
 
 
 TemplateDefault.propTypes = {
-  children: PropTypes.node.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  children: PropTypes.node,
 };
 
 export default TemplateDefault;

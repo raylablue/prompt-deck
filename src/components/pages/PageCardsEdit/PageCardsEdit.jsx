@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { If, Else } from 'react-if';
+import { If, Else, Then } from 'react-if';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
@@ -23,10 +23,8 @@ function PageCardsEdit() {
     [id],
   );
 
-  const handleSubmit = useCallback(
-    async (e, updateCard) => {
-      e.preventDefault();
-
+  const handleUpdate = useCallback(
+    async (updateCard) => {
       await firebase.db
         .collection('cards')
         .doc(id)
@@ -45,13 +43,13 @@ function PageCardsEdit() {
       data-test="p-cards-edit"
       className="row"
     >
-      <If condition={!initialCard}>
-        <LoadingAnim />
+      <If condition={!initialCard.cardTitle}>
+        <Then>
+          <LoadingAnim />
+        </Then>
 
         <Else>
-          <div
-            data-test="p-card-edit__card"
-          >
+          <div data-test="p-card-edit__card">
             <h1>
               Edit &nbsp;
               <strong>
@@ -61,7 +59,8 @@ function PageCardsEdit() {
             </h1>
             <CardForm
               initialCard={initialCard}
-              handleSubmit={handleSubmit}
+              handleSubmit={handleUpdate}
+              content="Update"
             />
           </div>
         </Else>

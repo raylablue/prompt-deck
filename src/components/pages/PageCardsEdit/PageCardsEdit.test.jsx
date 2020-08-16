@@ -101,7 +101,7 @@ describe('Page Cards Edit', () => {
       expect(cardEl.length).toBe(0);
     });
 
-    xdescribe('Displaying Card Props', () => {
+    describe('Displaying Card Props', () => {
       it('should display the card title', async () => {
         const title = 'these are my things';
         const card = cardMock();
@@ -109,7 +109,7 @@ describe('Page Cards Edit', () => {
 
         const { wrapper } = await setup({ card });
         wrapper.update();
-        const cardTitleEl = findByTestAttr(wrapper, 'p-cards-edit__title');
+        const cardTitleEl = findByTestAttr(wrapper, 'o-card-form__title');
 
         expect(cardTitleEl.prop('value')).toBe(title);
       });
@@ -121,7 +121,7 @@ describe('Page Cards Edit', () => {
 
         const { wrapper } = await setup({ card });
         wrapper.update();
-        const cardType = findByTestAttr(wrapper, 'p-cards-edit__type');
+        const cardType = findByTestAttr(wrapper, 'o-card-form__type');
 
         expect(cardType.prop('value')).toBe(type);
       });
@@ -133,7 +133,7 @@ describe('Page Cards Edit', () => {
 
         const { wrapper } = await setup({ card });
         wrapper.update();
-        const cardSideOne = findByTestAttr(wrapper, 'p-cards-edit__side-one');
+        const cardSideOne = findByTestAttr(wrapper, 'o-card-form__side-one');
 
         expect(cardSideOne.prop('value')).toBe(sideOne);
       });
@@ -145,7 +145,7 @@ describe('Page Cards Edit', () => {
 
         const { wrapper } = await setup({ card });
         wrapper.update();
-        const cardSideTwo = findByTestAttr(wrapper, 'p-cards-edit__side-two');
+        const cardSideTwo = findByTestAttr(wrapper, 'o-card-form__side-two');
 
         expect(cardSideTwo.prop('value')).toBe(sideTwo);
       });
@@ -157,7 +157,7 @@ describe('Page Cards Edit', () => {
 
         const { wrapper } = await setup({ card });
         wrapper.update();
-        const cardSideThree = findByTestAttr(wrapper, 'p-cards-edit__side-three');
+        const cardSideThree = findByTestAttr(wrapper, 'o-card-form__side-three');
 
         expect(cardSideThree.prop('value')).toBe(sideThree);
       });
@@ -169,13 +169,13 @@ describe('Page Cards Edit', () => {
 
         const { wrapper } = await setup({ card });
         wrapper.update();
-        const cardSideFour = findByTestAttr(wrapper, 'p-cards-edit__side-four');
+        const cardSideFour = findByTestAttr(wrapper, 'o-card-form__side-four');
 
         expect(cardSideFour.prop('value')).toBe(sideFour);
       });
     });
 
-    xdescribe('Update props onChange to reflect new value', () => {
+    describe('Update props onChange to reflect new value', () => {
       it('should display the changed card title', async () => {
         const title = 'Changes';
         const card = cardMock();
@@ -244,16 +244,16 @@ describe('Page Cards Edit', () => {
     });
   });
 
-  xdescribe('Update card form', () => {
+  describe('Update card form', () => {
     it('should send the filled in inputs to firebase to update card', async () => {
       const user = { uid: '1234' };
       const spyPreventDefault = jest.fn();
-      const card = {};
+      const card = cardMock();
 
       const cardTitle = 'Awesome Quests';
       const type = 'Circumstance';
       const side1 = 'Go fetch my favourite spoon';
-      const side2 = 'Villiager needs 5 pieces of wood';
+      const side2 = 'Villager needs 5 pieces of wood';
       const side3 = 'How many licks does it take to get to the center of a tootsie pop';
       const side4 = 'Say hi to everyone in town';
 
@@ -270,31 +270,31 @@ describe('Page Cards Edit', () => {
       const { wrapper, spySet } = await setup({ user, card });
       wrapper.update();
 
-      const cardTitleEl = findByTestAttr(wrapper, 'p-cards-edit__title');
+      const cardTitleEl = findByTestAttr(wrapper, 'o-card-form__title');
       const mockTitleInput = { target: { value: cardTitle } };
       cardTitleEl.simulate('change', mockTitleInput);
 
-      const typeSelection = findByTestAttr(wrapper, 'p-cards-edit__type');
+      const typeSelection = findByTestAttr(wrapper, 'o-card-form__type');
       const mockTypeSelection = { target: { value: type } };
       typeSelection.simulate('change', mockTypeSelection);
 
-      const sideInputOne = findByTestAttr(wrapper, 'p-cards-edit__side-one');
+      const sideInputOne = findByTestAttr(wrapper, 'o-card-form__side-one');
       const mockSideInputOne = { target: { value: side1 } };
       sideInputOne.simulate('change', mockSideInputOne);
 
-      const sideInputTwo = findByTestAttr(wrapper, 'p-cards-edit__side-two');
+      const sideInputTwo = findByTestAttr(wrapper, 'o-card-form__side-two');
       const mockSideInputTwo = { target: { value: side2 } };
       sideInputTwo.simulate('change', mockSideInputTwo);
 
-      const sideInputThree = findByTestAttr(wrapper, 'p-cards-edit__side-three');
+      const sideInputThree = findByTestAttr(wrapper, 'o-card-form__side-three');
       const mockSideInputThree = { target: { value: side3 } };
       sideInputThree.simulate('change', mockSideInputThree);
 
-      const sideInputFour = findByTestAttr(wrapper, 'p-cards-edit__side-four');
+      const sideInputFour = findByTestAttr(wrapper, 'o-card-form__side-four');
       const mockSideInputFour = { target: { value: side4 } };
       sideInputFour.simulate('change', mockSideInputFour);
 
-      const submitForm = findByTestAttr(wrapper, 'p-cards-edit__submit');
+      const submitForm = findByTestAttr(wrapper, 'o-card-form__submit');
       await submitForm.simulate('submit', { preventDefault: spyPreventDefault });
 
       expect(spySet).toHaveBeenCalledWith(updateCard);

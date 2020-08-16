@@ -2,21 +2,11 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-function CardForm({ initialCard, handleSubmit }) {
+function CardForm({ initialCard, handleSubmit, content }) {
   const user = useSelector((state) => state.user);
-
-  const [card, setCard] = useState({});
-  const [bool, setBool] = useState(false);
-
-  const updateCard = {
-    cardTitle: card.cardTitle,
-    type: card.type,
-    createdBy: user.uid,
-    side1: card.side1,
-    side2: card.side2,
-    side3: card.side3,
-    side4: card.side4,
-  };
+  const [card, setCard] = useState({
+    ...initialCard,
+  });
 
   function changeCard(key, value) {
     const newCard = { ...card };
@@ -25,46 +15,48 @@ function CardForm({ initialCard, handleSubmit }) {
   }
 
   useEffect(() => {
-    if (bool === false) {
-      setCard(initialCard);
-      if (card.cardTitle) {
-        setBool(true);
-      }
-    }
-  }, [card, bool, initialCard]);
+    setCard({
+      ...card,
+      createdBy: user.uid,
+    });
+  }, [user]);
 
   return (
     <form
-      data-test="p-cards-edit__submit"
+      data-test="o-card-form__submit"
       className="card bg-secondary p-3"
-      onSubmit={(e) => handleSubmit(e, updateCard)}
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit(card);
+      }}
     >
       <div className="form-group">
         <label htmlFor="title">
           Name: &nbsp;
         </label>
         <input
-          data-test="p-cards-edit__title"
+          data-test="o-card-form__title"
           value={card.cardTitle}
           onChange={(e) => {
             changeCard('cardTitle', e.target.value);
           }}
           className="form-control"
           id="title"
-          type="text"
+          required="required"
         />
         <label htmlFor="type">
           Type: &nbsp;
         </label>
         <select
-          data-test="p-cards-edit__type"
-          value={initialCard.type}
+          data-test="o-card-form__type"
+          value={card.type}
           onChange={(e) => {
             changeCard('type', e.target.value);
           }}
           className="form-control"
           id="type"
           type="text"
+          required="required"
         >
           <option value="">--Please choose a type--</option>
           <option value="character">Character</option>
@@ -81,7 +73,7 @@ function CardForm({ initialCard, handleSubmit }) {
             Side Input One: &nbsp;
           </label>
           <input
-            data-test="p-cards-edit__side-one"
+            data-test="o-card-form__side-one"
             value={card.side1}
             onChange={(e) => {
               changeCard('side1', e.target.value);
@@ -89,6 +81,7 @@ function CardForm({ initialCard, handleSubmit }) {
             className="form-control"
             id="side-one"
             type="text"
+            required="required"
           />
         </div>
 
@@ -97,7 +90,7 @@ function CardForm({ initialCard, handleSubmit }) {
             Side Input Two: &nbsp;
           </label>
           <input
-            data-test="p-cards-edit__side-two"
+            data-test="o-card-form__side-two"
             value={card.side2}
             onChange={(e) => {
               changeCard('side2', e.target.value);
@@ -105,6 +98,7 @@ function CardForm({ initialCard, handleSubmit }) {
             className="form-control"
             id="side-tow"
             type="text"
+            required="required"
           />
         </div>
 
@@ -113,7 +107,7 @@ function CardForm({ initialCard, handleSubmit }) {
             Side Input Three: &nbsp;
           </label>
           <input
-            data-test="p-cards-edit__side-three"
+            data-test="o-card-form__side-three"
             value={card.side3}
             onChange={(e) => {
               changeCard('side3', e.target.value);
@@ -121,6 +115,7 @@ function CardForm({ initialCard, handleSubmit }) {
             className="form-control"
             id="side-three"
             type="text"
+            required="required"
           />
         </div>
 
@@ -129,7 +124,7 @@ function CardForm({ initialCard, handleSubmit }) {
             Side Input Four: &nbsp;
           </label>
           <input
-            data-test="p-cards-edit__side-four"
+            data-test="o-card-form__side-four"
             value={card.side4}
             onChange={(e) => {
               changeCard('side4', e.target.value);
@@ -137,6 +132,7 @@ function CardForm({ initialCard, handleSubmit }) {
             className="form-control"
             id="side-four"
             type="text"
+            required="required"
           />
         </div>
 
@@ -145,7 +141,7 @@ function CardForm({ initialCard, handleSubmit }) {
         type="submit"
         className="btn btn-outline-success"
       >
-        Update
+        {content}
       </button>
     </form>
   );
@@ -154,14 +150,15 @@ function CardForm({ initialCard, handleSubmit }) {
 CardForm.propTypes = {
   // eslint-disable-next-line react/require-default-props
   initialCard: PropTypes.shape({
-    cardTitle: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    side1: PropTypes.string.isRequired,
-    side2: PropTypes.string.isRequired,
-    side3: PropTypes.string.isRequired,
-    side4: PropTypes.string.isRequired,
+    cardTitle: PropTypes.string,
+    type: PropTypes.string,
+    side1: PropTypes.string,
+    side2: PropTypes.string,
+    side3: PropTypes.string,
+    side4: PropTypes.string,
   }),
   handleSubmit: PropTypes.func.isRequired,
+  content: PropTypes.string.isRequired,
 };
 
 export default CardForm;
