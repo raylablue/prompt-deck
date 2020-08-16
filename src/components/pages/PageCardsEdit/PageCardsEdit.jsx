@@ -45,7 +45,9 @@ function PageCardsEdit() {
     >
       <If condition={!initialCard.cardTitle}>
         <Then>
-          <LoadingAnim />
+          {() => (
+            <LoadingAnim />
+          )}
         </Then>
 
         <Else>

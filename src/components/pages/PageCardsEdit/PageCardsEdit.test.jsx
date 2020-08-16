@@ -92,10 +92,10 @@ describe('Page Cards Edit', () => {
       expect(cardEl.length).toBe(1);
     });
 
-    xit('should default to 0', async () => {
-      const card = null;
-      const { wrapper } = await setup({ card });
+    it('should default to 0', async () => {
+      const { wrapper } = await setup();
       wrapper.update();
+      wrapper.debug();
       const cardEl = findByTestAttr(wrapper, 'p-card-edit__card');
 
       expect(cardEl.length).toBe(0);
