@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { If, Else } from 'react-if';
+import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 
 function CardForm({ initialCard, handleSubmit, content }) {
   const user = useSelector((state) => state.user);
+  const types = useSelector((state) => state.types);
+
   const [card, setCard] = useState({
     ...initialCard,
   });
@@ -55,13 +59,11 @@ function CardForm({ initialCard, handleSubmit, content }) {
           }}
           className="form-control"
           id="type"
-          type="text"
           required="required"
         >
-          <option value="">--Please choose a type--</option>
-          <option value="character">Character</option>
-          <option value="conflict">Conflict</option>
-          <option value="circumstance">Circumstance</option>
+          {types.map((category) => (
+            <option value={category.name}>{category.name}</option>
+          ))}
         </select>
       </div>
       <div
@@ -151,7 +153,9 @@ CardForm.propTypes = {
   // eslint-disable-next-line react/require-default-props
   initialCard: PropTypes.shape({
     cardTitle: PropTypes.string,
-    type: PropTypes.string,
+    type: PropTypes.shape({
+      name: PropTypes.string,
+    }),
     side1: PropTypes.string,
     side2: PropTypes.string,
     side3: PropTypes.string,
