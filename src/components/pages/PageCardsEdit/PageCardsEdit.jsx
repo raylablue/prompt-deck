@@ -10,7 +10,7 @@ function PageCardsEdit() {
   const { id } = useParams();
   const [initialCard, setInitialCard] = useState({});
 
-  const getData = useCallback(
+  const populateData = useCallback(
     async () => {
       const response = await firebase.db
         .collection('cards')
@@ -34,8 +34,8 @@ function PageCardsEdit() {
   );
 
   useEffect(() => {
-    getData();
-  }, [getData]);
+    populateData();
+  }, [populateData]);
 
 
   return (

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { If, Else } from 'react-if';
-import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 
 function CardForm({ initialCard, handleSubmit, content }) {
   const user = useSelector((state) => state.user);
@@ -23,6 +21,8 @@ function CardForm({ initialCard, handleSubmit, content }) {
       ...card,
       createdBy: user.uid,
     });
+    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return (
@@ -62,7 +62,12 @@ function CardForm({ initialCard, handleSubmit, content }) {
           required="required"
         >
           {types.map((category) => (
-            <option value={category.name}>{category.name}</option>
+            <option
+              key={category.id}
+              value={category.name}
+            >
+              {category.name}
+            </option>
           ))}
         </select>
       </div>
@@ -153,9 +158,7 @@ CardForm.propTypes = {
   // eslint-disable-next-line react/require-default-props
   initialCard: PropTypes.shape({
     cardTitle: PropTypes.string,
-    type: PropTypes.shape({
-      name: PropTypes.string,
-    }),
+    type: PropTypes.string,
     side1: PropTypes.string,
     side2: PropTypes.string,
     side3: PropTypes.string,

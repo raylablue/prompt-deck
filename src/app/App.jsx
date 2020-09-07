@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {
   BrowserRouter,
   Route,
@@ -20,23 +20,27 @@ function App() {
   useAuth();
   const dispatch = useDispatch();
 
-  const getTypes = async () => {
-    const response = await firebase.db
-      .collection('types')
-      .get();
+  const populateTypes = useCallback(
+    async () => {
+      const response = await firebase.db
+        .collection('types')
+        .get();
 
-    const typeData = response
-      .docs
-      .map((type) => ({
-        ...type.data(),
-      }));
+      const typeData = response
+        .docs
+        .map((type) => ({
+          id: type.id,
+          ...type.data(),
+        }));
 
-    dispatch(setTypesAction(typeData));
-  };
+      dispatch(setTypesAction(typeData));
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
-    getTypes();
-  }, []);
+    populateTypes();
+  }, [populateTypes]);
 
   return (
     <div

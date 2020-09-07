@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { If, Else } from 'react-if';
 import uiConfig from '../../../firebase/uiConfig';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
@@ -13,9 +14,10 @@ function PageSignIn() {
     }
   }, [user]);
 
-  if (user) {
-    return (
-      <TemplateDefault>
+  return (
+    <TemplateDefault>
+      <If condition={user}>
+
         <div
           data-test="already-signed-in-message"
         >
@@ -26,19 +28,19 @@ function PageSignIn() {
             you can sign back in again.
           </p>
         </div>
-      </TemplateDefault>
-    );
-  }
 
-  return (
-    <TemplateDefault>
-      <div
-        data-test="signin-widget"
-        className="container"
-      >
-        <h1>Sign In</h1>
-        <div id="firebase-sign-in" />
-      </div>
+        <Else>
+          <div
+            data-test="signin-widget"
+            className="container"
+          >
+            <h1>Sign In</h1>
+            <div id="firebase-sign-in" />
+          </div>
+        </Else>
+
+      </If>
+
     </TemplateDefault>
   );
 }
