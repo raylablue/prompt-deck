@@ -15,17 +15,18 @@ import PageCardsEdit from './PageCardsEdit';
 const defaultArgs = {
   card: {},
   user: {},
+  types: [],
 };
 
 describe('Page Cards Edit', () => {
   const setup = async (args = {}) => {
-    const { card, user } = {
+    const { card, user, types } = {
       ...defaultArgs,
       ...args,
     };
 
     const mockStore = configureMockStore([]);
-    const store = mockStore({ user });
+    const store = mockStore({ user, types });
 
     const spySet = jest.fn();
     spySet.mockReturnValue(() => new Promise((resolve) => resolve()));
@@ -70,7 +71,8 @@ describe('Page Cards Edit', () => {
 
   describe('firebase calls getData', () => {
     it('should call collection with the expected arguments', async () => {
-      const { spyCollection } = await setup();
+      const types = [{ name: 'TestType' }];
+      const { spyCollection } = await setup({ types });
       expect(spyCollection).toBeCalledWith('cards');
     });
 
@@ -85,6 +87,7 @@ describe('Page Cards Edit', () => {
 
     it('should render the card', async () => {
       const card = cardMock;
+
       const { wrapper } = await setup({ card });
       wrapper.update();
       const cardEl = findByTestAttr(wrapper, 'p-card-edit__card');
@@ -249,9 +252,10 @@ describe('Page Cards Edit', () => {
       const user = { uid: '1234' };
       const spyPreventDefault = jest.fn();
       const card = cardMock();
+      const types = [{ name: 'TestType' }];
 
       const cardTitle = 'Awesome Quests';
-      const type = 'Circumstance';
+      const type = types[0].name;
       const side1 = 'Go fetch my favourite spoon';
       const side2 = 'Villager needs 5 pieces of wood';
       const side3 = 'How many licks does it take to get to the center of a tootsie pop';
@@ -267,7 +271,7 @@ describe('Page Cards Edit', () => {
         side4,
       };
 
-      const { wrapper, spySet } = await setup({ user, card });
+      const { wrapper, spySet } = await setup({ user, card, types });
       wrapper.update();
 
       const cardTitleEl = findByTestAttr(wrapper, 'o-card-form__title');

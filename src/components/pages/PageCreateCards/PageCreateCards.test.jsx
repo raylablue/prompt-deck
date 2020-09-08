@@ -10,9 +10,9 @@ import { findByTestAttr } from '../../../tests/testUtils';
 import PageCreateCards from './PageCreateCards';
 
 describe('Create cards page', () => {
-  const setup = (user, type) => {
+  const setup = (user, types) => {
     const mockStore = configureMockStore([]);
-    const store = mockStore({ user, type });
+    const store = mockStore({ user, types });
 
     const wrapper = mount(
       <Provider store={store}>
@@ -26,7 +26,9 @@ describe('Create cards page', () => {
 
   it('renders without error', () => {
     const user = { uid: '1234' };
-    const { wrapper } = setup(user);
+    const types = [{ name: 'TestType' }];
+
+    const { wrapper } = setup(user, types);
     const component = findByTestAttr(wrapper, 'page-create-cards');
     expect(component.length).toBe(1);
   });
@@ -34,7 +36,7 @@ describe('Create cards page', () => {
   describe('Create card form', () => {
     it('should send the filled in inputs to firebase', async () => {
       const user = { uid: '1234' };
-      const type = { character: 'typeValue' };
+      const types = [{ name: 'TestType' }];
       // mock firestore data model and spyOn adding to the cards collection
       const spyAdd = jest.fn();
       spyAdd.mockReturnValue(() => new Promise((resolve) => resolve()));
@@ -45,7 +47,7 @@ describe('Create cards page', () => {
       });
       const cardTitle = 'Sample title';
       const userId = '1234';
-      const character = 'typeValue';
+      const type = types[0].name;
       const side1 = 'first side text';
       const side2 = 'second side text';
       const side3 = 'third side text';
@@ -54,7 +56,7 @@ describe('Create cards page', () => {
       // data model sent to firestore
       const updateCard = {
         cardTitle,
-        type: character,
+        type,
         createdBy: userId,
         side1,
         side2,
@@ -63,7 +65,7 @@ describe('Create cards page', () => {
       };
 
       // INPUTS WITH ENZYME
-      const { wrapper } = setup(user, type);
+      const { wrapper } = setup(user, types);
 
       // Card Title Input
       const nameInput = findByTestAttr(wrapper, 'o-card-form__title');
@@ -74,7 +76,7 @@ describe('Create cards page', () => {
       // Card Type Selection
       const typeSelection = findByTestAttr(wrapper, 'o-card-form__type');
 
-      const mockTypeSelection = { target: { value: 'typeValue' } };
+      const mockTypeSelection = { target: { value: types[0].name } };
       typeSelection.simulate('change', mockTypeSelection);
 
       // Side input (1/4)
