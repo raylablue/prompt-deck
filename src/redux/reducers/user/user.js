@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux';
-import { SET_USER } from './actions';
+import { SET_USER } from '../../actions/set-user/set-user.action';
 
 function user(state = null, action) {
   switch (action.type) {
@@ -11,8 +10,4 @@ function user(state = null, action) {
   }
 }
 
-const reducers = combineReducers({
-  user,
-});
-
-export default reducers;
+export default user;

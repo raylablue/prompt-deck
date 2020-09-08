@@ -4,6 +4,8 @@ import * as firebaseui from 'firebaseui';
 import 'firebase/firestore';
 import firebaseConfig from './config';
 
+/* istanbul ignore file */
+
 class Firebase {
   constructor() {
     app.initializeApp(firebaseConfig);
