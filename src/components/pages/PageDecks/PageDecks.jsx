@@ -1,8 +1,12 @@
 import React from 'react';
+import TemplateDefault from '../../Templates/TemplateDefault';
 
 function PageDecks() {
   return (
-    <div>page decks</div>
+    <TemplateDefault data-test="page-decks">
+      <h1>Decks</h1>
+      <p>placeholder deck blurb.</p>
+    </TemplateDefault>
   );
 }
 
