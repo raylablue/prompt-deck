@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   BrowserRouter,
   Route,
@@ -14,6 +14,9 @@ import PageCardsEdit from '../components/pages/PageCardsEdit/PageCardsEdit';
 import PageCreateCards from '../components/pages/PageCreateCards/PageCreateCards';
 import firebase from '../firebase/firebase';
 import { setTypesAction } from '../redux/actions/set-types/set-types.action';
+import PageDecks from "../components/pages/PageDecks/PageDecks";
+import PageCreateDecks from "../components/pages/PageCreateDecks/PageCreateDecks";
+import PageDecksEdit from "../components/pages/PageDecksEdit/PageDecksEdit";
 /* istanbul ignore file */
 
 function App() {
@@ -62,6 +65,18 @@ function App() {
 
           <Route path="/create-cards">
             <PageCreateCards />
+          </Route>
+
+          <Route path="/decks">
+            <PageDecks />
+          </Route>
+
+          <Route path="/decks-edit/:id">
+            <PageDecksEdit />
+          </Route>
+
+          <Route path="/create-decks">
+            <PageCreateDecks />
           </Route>
 
           <Route path="/">

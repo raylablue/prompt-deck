@@ -12,6 +12,7 @@ function PageCreateCards() {
     try {
       await firebase.db.collection('cards').add(newCard);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err);
     }
   }

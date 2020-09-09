@@ -9,7 +9,7 @@ const navLinks = [
   },
   {
     name: 'Decks',
-    linkto: '/create-decks',
+    linkto: '/decks',
   },
   {
     name: 'Cards',

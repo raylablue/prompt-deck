@@ -20,6 +20,7 @@ function CreateCardsBtn({ children }) {
 }
 
 CreateCardsBtn.propTypes = {
+  // eslint-disable-next-line react/forbid-prop-types
   children: PropTypes.any.isRequired,
 };
 
