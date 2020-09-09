@@ -14,9 +14,10 @@ import PageCardsEdit from '../components/pages/PageCardsEdit/PageCardsEdit';
 import PageCreateCards from '../components/pages/PageCreateCards/PageCreateCards';
 import firebase from '../firebase/firebase';
 import { setTypesAction } from '../redux/actions/set-types/set-types.action';
-import PageDecks from "../components/pages/PageDecks/PageDecks";
-import PageCreateDecks from "../components/pages/PageCreateDecks/PageCreateDecks";
-import PageDecksEdit from "../components/pages/PageDecksEdit/PageDecksEdit";
+import PageDecks from '../components/pages/PageDecks/PageDecks';
+import PageCreateDecks from '../components/pages/PageCreateDecks/PageCreateDecks';
+import PageDecksEdit from '../components/pages/PageDecksEdit/PageDecksEdit';
+import PagePrompts from '../components/pages/PagePropmts/PagePropmts';
 /* istanbul ignore file */
 
 function App() {
@@ -53,6 +54,10 @@ function App() {
         <Switch>
           <Route path="/signin">
             <PageSignIn />
+          </Route>
+
+          <Route path="/prompts">
+            <PagePrompts />
           </Route>
 
           <Route path="/cards">
