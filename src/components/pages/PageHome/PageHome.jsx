@@ -3,15 +3,11 @@ import TemplateDefault from '../../Templates/TemplateDefault';
 
 function PageHome() {
   return (
-    <TemplateDefault>
-      <div
-        data-test="page-home"
-      >
-        <h1>Home Page</h1>
-        <p>This is the home page of the web app. Everyone can view this.</p>
-      </div>
+    <TemplateDefault data-test="page-home">
+      <h1>Home</h1>
+      <p>home page things will go here</p>
     </TemplateDefault>
   );
-}
+};
 
 export default PageHome;
