@@ -1,34 +1,94 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
 import { useSelector } from 'react-redux';
+import MultiSelect from 'react-multi-select-component';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 
 function PageCreateDecks() {
   const user = useSelector((state) => state.user);
+  const type = useSelector((state) => state.types);
 
-  const [characters, setCharacters] = useState([]);
+  const [bool, setBool] = useState(false);
+  const [characterOptions, setCharacterOptions] = useState([]);
+  const [selectedCharacterIds, setSelectedCharacterIds] = useState([]);
+  const [circumstanceOptions, setCircumstanceOptions] = useState([]);
+  const [selectedCircumstanceIds, setSelectedCircumstanceIds] = useState([]);
+  const [conflictOptions, setConflictOptions] = useState([]);
+  const [selectedConflictIds, setSelectedConflictIds] = useState([]);
   const [deck, setDeck] = useState({});
 
   const populateCharacters = useCallback(
     async () => {
+      const characterRefs = await firebase.db
+        .collection('cards')
+        .where('createdBy', '==', user.uid)
+        .where('type', '==', 'haracter')
+        .get();
+
+      const newCharacterOptions = characterRefs
+        .docs
+        .map((card) => {
+          const cardData = {
+            id: card.id,
+            ...card.data(),
+          };
+          return { label: cardData.cardTitle, value: cardData.id };
+        });
+
+      setCharacterOptions(newCharacterOptions);
+      setBool(true);
+    },
+    [user.uid, type],
+  );
+
+  const populateCircumstances = useCallback(
+    async () => {
       const cardRefs = await firebase.db
         .collection('cards')
         .where('createdBy', '==', user.uid)
-        .where('type', '==', 'Character')
+        .where('type', '==', 'Circumstance')
         .get();
 
-      const transformedCards = cardRefs
+      const newCircumstanceOptions = cardRefs
         .docs
-        .map((card) => ({
-          id: card.id,
-          ...card.data(),
-        }));
+        .map((card) => {
+          const cardData = {
+            id: card.id,
+            ...card.data(),
+          };
+          return { label: cardData.cardTitle, value: cardData.id };
+        });
 
-      setCharacters(transformedCards);
+      setCircumstanceOptions(newCircumstanceOptions);
+      setBool(true);
     },
-    [],
+    [user.uid],
+  );
+
+  const populateConflicts = useCallback(
+    async () => {
+      const cardRefs = await firebase.db
+        .collection('cards')
+        .where('createdBy', '==', user.uid)
+        .where('type', '==', 'Conflict')
+        .get();
+
+      const newConflictOptions = cardRefs
+        .docs
+        .map((card) => {
+          const cardData = {
+            id: card.id,
+            ...card.data(),
+          };
+          return { label: cardData.cardTitle, value: cardData.id };
+        });
+
+      setConflictOptions(newConflictOptions);
+      setBool(true);
+    },
+    [user.uid],
   );
 
   function changeDeck(key, value) {
@@ -38,8 +98,33 @@ function PageCreateDecks() {
   }
 
   async function handleCreateCard() {
+    const newDeck = {
+      name: deck.name,
+      description: deck.description,
+      characterCards: selectedCharacterIds((cardId) => (
+        {
+          cardRef: firebase.db.collection('cards').doc(cardId.value),
+          quantity: 1,
+        }
+      )),
+      circumstanceCards: selectedCircumstanceIds.map((cardId) => (
+        {
+          cardRef: firebase.db.collection('cards').doc(cardId.value),
+          quantity: 1,
+        }
+      )),
+      conflictCards: selectedConflictIds.map((cardId) => (
+        {
+          cardRef: firebase.db.collection('cards').doc(cardId.value),
+          quantity: 1,
+        }
+      )),
+      visibility: 'public',
+    };
+
     try {
-      await firebase.db.collection('decks').add(deck);
+      console.log(newDeck);
+      await firebase.db.collection('decks').add(newDeck);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(err);
@@ -48,12 +133,14 @@ function PageCreateDecks() {
 
   useEffect(() => {
     populateCharacters();
-  }, []);
+    populateCircumstances();
+    populateConflicts();
+  }, [populateCharacters, populateCircumstances, populateConflicts]);
 
   return (
-    <TemplateDefault>
+    <TemplateDefault data-test="p-create-decks">
       <h1>Create A Deck</h1>
-      <If condition={characters === []}>
+      <If condition={!bool}>
         <LoadingAnim />
 
         <Else>
@@ -95,25 +182,30 @@ function PageCreateDecks() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="characters">Example multiple select</label>
-              <select
-                multiple
-                value={deck.characters}
-                onChange={(e) => {
-                  changeDeck('characters', e.target.value);
-                }}
-                className="form-control"
-                id="characters"
-              >
-                {characters.map((card) => (
-                  <option
-                    key={card.id}
-                    value={card.cardTitle}
-                  >
-                    {card.cardTitle}
-                  </option>
-                ))}
-              </select>
+              <label htmlFor="characters">Characters</label>
+              <MultiSelect
+                options={characterOptions}
+                value={selectedCharacterIds}
+                onChange={setSelectedCharacterIds}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="circumstances">Circumstances</label>
+              <MultiSelect
+                options={circumstanceOptions}
+                value={selectedCircumstanceIds}
+                onChange={setSelectedCircumstanceIds}
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="conflicts">Conflicts</label>
+              <MultiSelect
+                options={conflictOptions}
+                value={selectedConflictIds}
+                onChange={setSelectedConflictIds}
+              />
             </div>
 
             <button
