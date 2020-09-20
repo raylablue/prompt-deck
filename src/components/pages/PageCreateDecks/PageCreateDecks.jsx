@@ -8,7 +8,6 @@ import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 
 function PageCreateDecks() {
   const user = useSelector((state) => state.user);
-  const type = useSelector((state) => state.types);
 
   const [bool, setBool] = useState(false);
   const [characterOptions, setCharacterOptions] = useState([]);
@@ -21,13 +20,13 @@ function PageCreateDecks() {
 
   const populateCharacters = useCallback(
     async () => {
-      const characterRefs = await firebase.db
+      const cardRefs = await firebase.db
         .collection('cards')
         .where('createdBy', '==', user.uid)
-        .where('type', '==', 'haracter')
+        // .where('type', '==', 'Character')
         .get();
 
-      const newCharacterOptions = characterRefs
+      const newCharacterOptions = cardRefs
         .docs
         .map((card) => {
           const cardData = {
@@ -40,7 +39,7 @@ function PageCreateDecks() {
       setCharacterOptions(newCharacterOptions);
       setBool(true);
     },
-    [user.uid, type],
+    [user.uid],
   );
 
   const populateCircumstances = useCallback(
@@ -101,7 +100,7 @@ function PageCreateDecks() {
     const newDeck = {
       name: deck.name,
       description: deck.description,
-      characterCards: selectedCharacterIds((cardId) => (
+      characterCards: selectedCharacterIds.map((cardId) => (
         {
           cardRef: firebase.db.collection('cards').doc(cardId.value),
           quantity: 1,
@@ -123,7 +122,6 @@ function PageCreateDecks() {
     };
 
     try {
-      console.log(newDeck);
       await firebase.db.collection('decks').add(newDeck);
     } catch (err) {
       // eslint-disable-next-line no-console

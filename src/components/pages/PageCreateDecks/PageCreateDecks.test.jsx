@@ -3,16 +3,19 @@ import React from 'react';
 import { mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router';
 import PageCreateDecks from './PageCreateDecks';
 import { findByTestAttr } from '../../../tests/testUtils';
-import {MemoryRouter} from "react-router";
+import firebase from '../../../firebase/firebase';
+import {v4} from "uuid";
+import {cardMock} from "../../../utils/mocks";
 
 const defaultArgs = {
   user: {},
+  decks: [],
 };
 
 describe('PageCreateDecks', () => {
-
   const setup = (args = {}) => {
     const { user } = {
       ...defaultArgs,
@@ -36,5 +39,44 @@ describe('PageCreateDecks', () => {
     const { wrapper } = setup();
     const component = findByTestAttr(wrapper, 'p-create-decks');
     expect(component.length).toBe(1);
+  });
+
+  describe('Getting character cards', () => {
+    it('should call the collection with the expected arguments', async () => {
+      const spyCollection = jest.spyOn(firebase.db, 'collection');
+
+      expect(spyCollection).toBeCalledWith('cards');
+    });
+
+    xit('should call first where with the expected arguments', async () => {
+      const user = { uid: '42' };
+
+      const spyWhere = jest.fn();
+
+      const spyCollection = jest.spyOn(firebase.db, 'collection');
+      spyCollection.mockReturnValue({
+        where: spyWhere,
+      });
+
+      await setup({ user });
+
+      expect(spyWhere).toBeCalledWith('createdBy', '==', user.uid);
+    });
+
+    xit('should call second where with the expected arguments', async () => {
+      const spyWhereType = jest.fn();
+
+      const spyWhere = jest.fn();
+      spyWhere.mockReturnValue({
+        where: spyWhereType,
+      });
+
+      const spyCollection = jest.spyOn(firebase.db, 'collection');
+      spyCollection.mockReturnValue({
+        where: spyWhere,
+      });
+
+      expect(spyWhere).toBeCalledWith('type', '==', 'Character');
+    });
   });
 });
