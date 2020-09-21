@@ -1,7 +1,7 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { If, Else } from 'react-if';
-import { useParams } from 'react-router-dom';
+import React, {useCallback, useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
+import {Else, If} from 'react-if';
+import {useParams} from 'react-router-dom';
 import MultiSelect from 'react-multi-select-component';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
@@ -11,7 +11,7 @@ function PageDecksEdit() {
   const { id } = useParams();
   const user = useSelector((state) => state.user);
 
-  const [bool, setBool] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [characterOptions, setCharacterOptions] = useState([]);
   const [selectedCharacterIds, setSelectedCharacterIds] = useState([]);
   const [circumstanceOptions, setCircumstanceOptions] = useState([]);
@@ -20,27 +20,12 @@ function PageDecksEdit() {
   const [selectedConflictIds, setSelectedConflictIds] = useState([]);
   const [deck, setDeck] = useState({});
 
-  const populateData = useCallback(
-    async () => {
-      const response = await firebase.db
-        .collection('decks')
-        .doc(id)
-        .get();
-
-      const deckData = response.data();
-      setDeck(deckData);
-      setSelectedCharacterIds(deckData.characterCards);
-      setSelectedCircumstanceIds(deckData.circumstanceCards);
-      setSelectedConflictIds(deckData.conflictCards);
-    },
-    [id],
-  );
   const populateCharacters = useCallback(
     async () => {
       const cardRefs = await firebase.db
         .collection('cards')
         .where('createdBy', '==', user.uid)
-        // .where('type', '==', 'Character')
+        .where('type', '==', 'Character')
         .get();
 
       const newCharacterOptions = cardRefs
@@ -54,7 +39,7 @@ function PageDecksEdit() {
         });
 
       setCharacterOptions(newCharacterOptions);
-      setBool(true);
+      return newCharacterOptions;
     },
     [user.uid],
   );
@@ -78,7 +63,8 @@ function PageDecksEdit() {
         });
 
       setCircumstanceOptions(newCircumstanceOptions);
-      setBool(true);
+      return newCircumstanceOptions;
+
     },
     [user.uid],
   );
@@ -102,9 +88,45 @@ function PageDecksEdit() {
         });
 
       setConflictOptions(newConflictOptions);
-      setBool(true);
+      return newConflictOptions;
     },
     [user.uid],
+  );
+
+  const populateData = useCallback(
+    async () => {
+      const characters = await populateCharacters();
+      const circumstances = await populateCircumstances();
+      const conflicts = await populateConflicts();
+
+      const response = await firebase.db
+        .collection('decks')
+        .doc(id)
+        .get();
+
+      const deckData = response.data();
+      setDeck(deckData);
+
+      const selectedCharacters = deckData.characterCards.map((card) => characters.find((character) => (
+          character.value === card.cardRef.id
+        )));
+      setSelectedCharacterIds(selectedCharacters || []);
+
+      const selectedCircumstances = deckData.circumstanceCards
+        .map((card) => circumstances.find((circumstance) => (
+          circumstance.value === card.cardRef.id
+        )));
+      setSelectedCircumstanceIds(selectedCircumstances || []);
+
+      const selectedConflicts = deckData.conflictCards
+        .map((card) => conflicts.find((conflict) => (
+          conflict.value === card.cardRef.id
+        )));
+      setSelectedConflictIds(selectedConflicts || []);
+
+      setIsLoading(true);
+    },
+    [id, populateCharacters, populateCircumstances, populateConflicts],
   );
 
   function changeDeck(key, value) {
@@ -113,23 +135,55 @@ function PageDecksEdit() {
     setDeck(newDeck);
   }
 
+  const handleUpdate = useCallback(
+    async () => {
+      const newDeck = {
+        name: deck.name,
+        description: deck.description,
+        characterCards: selectedCharacterIds.map((cardId) => (
+          {
+            cardRef: firebase.db.collection('cards').doc(cardId.value),
+            quantity: 1,
+          }
+        )),
+        circumstanceCards: selectedCircumstanceIds.map((cardId) => (
+          {
+            cardRef: firebase.db.collection('cards').doc(cardId.value),
+            quantity: 1,
+          }
+        )),
+        conflictCards: selectedConflictIds.map((cardId) => (
+          {
+            cardRef: firebase.db.collection('cards').doc(cardId.value),
+            quantity: 1,
+          }
+        )),
+        visibility: 'public',
+      };
+
+      await firebase.db
+        .collection('decks')
+        .doc(id)
+        .set(newDeck);
+    },
+    [id, deck, selectedCharacterIds, selectedCircumstanceIds, selectedConflictIds],
+  );
+
   useEffect(() => {
     populateData();
-    populateCharacters();
-    populateCircumstances();
-    populateConflicts();
-  }, [populateData, populateCharacters, populateCircumstances, populateConflicts]);
+  }, [populateData]);
 
   return (
     <TemplateDefault data-test="page-decks-edit">
       <h1>Edit Deck</h1>
-      <If condition={!bool}>
+      <If condition={!isLoading}>
         <LoadingAnim />
 
         <Else>
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              handleUpdate();
             }}
           >
             <div className="form-group">
@@ -193,7 +247,7 @@ function PageDecksEdit() {
               type="submit"
               className="btn btn-outline-success"
             >
-              Create
+              Update
             </button>
           </form>
         </Else>

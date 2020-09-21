@@ -23,7 +23,7 @@ function PageCreateDecks() {
       const cardRefs = await firebase.db
         .collection('cards')
         .where('createdBy', '==', user.uid)
-        // .where('type', '==', 'Character')
+        .where('type', '==', 'Character')
         .get();
 
       const newCharacterOptions = cardRefs
