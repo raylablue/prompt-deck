@@ -48,43 +48,44 @@ function PageDecks() {
       <h1>Your Decks</h1>
       <CreateDecksBtn>+ Create A Deck</CreateDecksBtn>
 
-      <If condition={!decks}>
-        <p>Make some decks!</p>
-        <CreateDecksBtn>Create Deck</CreateDecksBtn>
+      <div className="row">
+        <If condition={!decks}>
+          <p>Make some decks!</p>
+          <CreateDecksBtn>Create Deck</CreateDecksBtn>
 
-        <Else>
-          <p>placeholder deck blurb.</p>
-          {decks.map((deck, index) => (
-            <div
-              key={deck.id}
-              className="card"
-            >
-              <h2>{deck.name}</h2>
-              <p>{deck.description}</p>
-
-              <button
-                type="button"
-                className="btn-primary"
-                onClick={(e) => {
-                  e.preventDefault();
-                  history.push(`/decks-edit/${deck.id}`);
-                }}
+          <Else>
+            {decks.map((deck, index) => (
+              <div
+                className="card col-12 col-sm-5 col-md-4 col-lg-3"
+                key={deck.id}
               >
-                Edit
-              </button>
+                <h2>{deck.name}</h2>
+                <p>{deck.description}</p>
 
-              <button
-                className="btn-warning"
-                type="button"
-                onClick={(e) => handleDelete(e, index)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-        </Else>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    history.push(`/decks-edit/${deck.id}`);
+                  }}
+                >
+                  Edit
+                </button>
 
-      </If>
+                <button
+                  className="btn-warning"
+                  type="button"
+                  onClick={(e) => handleDelete(e, index)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </Else>
+
+        </If>
+      </div>
 
     </TemplateDefault>
   );

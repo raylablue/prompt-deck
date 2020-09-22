@@ -1,16 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { If, Else } from 'react-if';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import CreateCardsBtn from '../../molecules/CreateCardsBtn';
-import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
+import CardsMap from '../../organisms/CardsMap/CardsMap';
 
 function PageCards() {
   const [cards, setCards] = useState([]);
   const user = useSelector((state) => state.user);
-  const history = useHistory();
 
   const populateCards = useCallback(
     async () => {
@@ -52,7 +50,7 @@ function PageCards() {
       <CreateCardsBtn>+ Create A Card</CreateCardsBtn>
 
       <div data-test="page-cards" className="row">
-        <If condition={cards.length <= 0}>
+        <If condition={!cards}>
 
           <div data-test="page-cards__alt-message" className="container">
             <h2>You don&apos;t have any cards yet</h2>
@@ -60,47 +58,34 @@ function PageCards() {
           </div>
 
           <Else>
-            <div className="col-12">
-              <h2>Character Cards</h2>
-            </div>
+
+            <h2 className="col-12">Character Cards</h2>
             {cards.map((card, index) => (
               <If condition={card.type === 'Character'}>
-                <div
-                  className="col-12 col-sm-5 col-md-4 col-lg-3"
-                  key={card.id}
-                  data-test="page-cards__card"
-                >
+                <CardsMap
+                  card={card}
+                  handleDelete={(e) => handleDelete(e, index)}
+                />
+              </If>
+            ))}
 
-                  <h3
-                    data-test="page-cards__title"
-                    className="px-3 text-secondary"
-                  >
-                    {card.cardTitle}
-                  </h3>
+            <h2 className="col-12">Circumstance Cards</h2>
+            {cards.map((card, index) => (
+              <If condition={card.type === 'Circumstance'}>
+                <CardsMap
+                  card={card}
+                  handleDelete={(e) => handleDelete(e, index)}
+                />
+              </If>
+            ))}
 
-                  <CardsDisplay card={card} />
-
-                  <button
-                    type="button"
-                    className="btn-primary"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      history.push(`/cards-edit/${card.id}`);
-                    }}
-                  >
-                    Edit
-                  </button>
-
-                  <button
-                    data-test="page-cards__delete-card"
-                    className="btn-warning"
-                    type="button"
-                    onClick={(e) => handleDelete(e, index)}
-                  >
-                    Delete
-                  </button>
-
-                </div>
+            <h2 className="col-12">Conflict Cards</h2>
+            {cards.map((card, index) => (
+              <If condition={card.type === 'Conflict'}>
+                <CardsMap
+                  card={card}
+                  handleDelete={(e) => handleDelete(e, index)}
+                />
               </If>
             ))}
           </Else>
