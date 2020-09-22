@@ -4,18 +4,16 @@ import { mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router';
-import PageCreateDecks from './PageCreateDecks';
+import PageDecksCreate from './PageDecksCreate';
 import { findByTestAttr } from '../../../tests/testUtils';
 import firebase from '../../../firebase/firebase';
-import {v4} from "uuid";
-import {cardMock} from "../../../utils/mocks";
 
 const defaultArgs = {
   user: {},
   decks: [],
 };
 
-describe('PageCreateDecks', () => {
+describe('PageDecksCreate', () => {
   const setup = (args = {}) => {
     const { user } = {
       ...defaultArgs,
@@ -28,7 +26,7 @@ describe('PageCreateDecks', () => {
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <PageCreateDecks />
+          <PageDecksCreate />
         </MemoryRouter>
       </Provider>,
     );

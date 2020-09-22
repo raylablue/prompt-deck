@@ -9,7 +9,7 @@ function CreateDecksBtn({ children }) {
       className="btn-primary"
     >
       <NavLink
-        to="/create-decks"
+        to="/decks-create"
         className="nav-link"
         activeClassName="chosen"
       >

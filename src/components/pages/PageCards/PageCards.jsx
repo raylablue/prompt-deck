@@ -60,50 +60,48 @@ function PageCards() {
           </div>
 
           <Else>
+            <div className="col-12">
+              <h2>Character Cards</h2>
+            </div>
             {cards.map((card, index) => (
-              <div
-                className="col-12 col-sm-5 col-md-4 col-lg-3"
-                key={card.id}
-                data-test="page-cards__card"
-              >
-
-                <h2
-                  data-test="page-cards__type"
-                  className="px-3"
+              <If condition={card.type === 'Character'}>
+                <div
+                  className="col-12 col-sm-5 col-md-4 col-lg-3"
+                  key={card.id}
+                  data-test="page-cards__card"
                 >
-                  {card.type}
-                </h2>
 
-                <CardsDisplay card={card} />
+                  <h3
+                    data-test="page-cards__title"
+                    className="px-3 text-secondary"
+                  >
+                    {card.cardTitle}
+                  </h3>
 
-                <h3
-                  data-test="page-cards__title"
-                  className="px-3 text-secondary"
-                >
-                  {card.cardTitle}
-                </h3>
+                  <CardsDisplay card={card} />
 
-                <button
-                  type="button"
-                  className="btn-primary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    history.push(`/cards-edit/${card.id}`);
-                  }}
-                >
-                  Edit
-                </button>
+                  <button
+                    type="button"
+                    className="btn-primary"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      history.push(`/cards-edit/${card.id}`);
+                    }}
+                  >
+                    Edit
+                  </button>
 
-                <button
-                  data-test="page-cards__delete-card"
-                  className="btn-warning"
-                  type="button"
-                  onClick={(e) => handleDelete(e, index)}
-                >
-                  Delete
-                </button>
+                  <button
+                    data-test="page-cards__delete-card"
+                    className="btn-warning"
+                    type="button"
+                    onClick={(e) => handleDelete(e, index)}
+                  >
+                    Delete
+                  </button>
 
-              </div>
+                </div>
+              </If>
             ))}
           </Else>
 

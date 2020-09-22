@@ -1,12 +1,14 @@
 import React from 'react';
 import { If, Else } from 'react-if';
+import { useHistory } from 'react-router';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import CardForm from '../../organisms/CardForm/CardForm';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 
-function PageCreateCards() {
+function PageCardsCreate() {
   const initialCard = {};
+  const history = useHistory();
 
   async function handleCreateCard(newCard) {
     try {
@@ -15,6 +17,7 @@ function PageCreateCards() {
       // eslint-disable-next-line no-console
       console.error(err);
     }
+    history.push('/cards');
   }
 
   return (
@@ -38,4 +41,4 @@ function PageCreateCards() {
   );
 }
 
-export default PageCreateCards;
+export default PageCardsCreate;

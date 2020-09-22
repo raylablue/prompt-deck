@@ -11,11 +11,11 @@ import PageSignIn from '../components/pages/PageSignIn/PageSignIn';
 import useAuth from '../firebase/useAuth';
 import PageCards from '../components/pages/PageCards/PageCards';
 import PageCardsEdit from '../components/pages/PageCardsEdit/PageCardsEdit';
-import PageCreateCards from '../components/pages/PageCreateCards/PageCreateCards';
+import PageCardsCreate from '../components/pages/PageCardsCreate/PageCardsCreate';
 import firebase from '../firebase/firebase';
 import { setTypesAction } from '../redux/actions/set-types/set-types.action';
 import PageDecks from '../components/pages/PageDecks/PageDecks';
-import PageCreateDecks from '../components/pages/PageCreateDecks/PageCreateDecks';
+import PageDecksCreate from '../components/pages/PageDecksCreate/PageDecksCreate';
 import PageDecksEdit from '../components/pages/PageDecksEdit/PageDecksEdit';
 import PagePrompts from '../components/pages/PagePropmts/PagePropmts';
 /* istanbul ignore file */
@@ -68,8 +68,8 @@ function App() {
             <PageCardsEdit />
           </Route>
 
-          <Route path="/create-cards">
-            <PageCreateCards />
+          <Route path="/cards-create">
+            <PageCardsCreate />
           </Route>
 
           <Route path="/decks">
@@ -80,8 +80,8 @@ function App() {
             <PageDecksEdit />
           </Route>
 
-          <Route path="/create-decks">
-            <PageCreateDecks />
+          <Route path="/decks-create">
+            <PageDecksCreate />
           </Route>
 
           <Route path="/">

@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {Else, If} from 'react-if';
-import {useParams} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import MultiSelect from 'react-multi-select-component';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
@@ -10,6 +10,7 @@ import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 function PageDecksEdit() {
   const { id } = useParams();
   const user = useSelector((state) => state.user);
+  const history = useHistory();
 
   const [isLoading, setIsLoading] = useState(false);
   const [characterOptions, setCharacterOptions] = useState([]);
@@ -64,7 +65,6 @@ function PageDecksEdit() {
 
       setCircumstanceOptions(newCircumstanceOptions);
       return newCircumstanceOptions;
-
     },
     [user.uid],
   );
@@ -107,7 +107,8 @@ function PageDecksEdit() {
       const deckData = response.data();
       setDeck(deckData);
 
-      const selectedCharacters = deckData.characterCards.map((card) => characters.find((character) => (
+      const selectedCharacters = deckData.characterCards
+        .map((card) => characters.find((character) => (
           character.value === card.cardRef.id
         )));
       setSelectedCharacterIds(selectedCharacters || []);
@@ -184,6 +185,7 @@ function PageDecksEdit() {
             onSubmit={(e) => {
               e.preventDefault();
               handleUpdate();
+              history.push('/decks');
             }}
           >
             <div className="form-group">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import { If, Else, Then } from 'react-if';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
@@ -8,6 +8,7 @@ import CardForm from '../../organisms/CardForm/CardForm';
 
 function PageCardsEdit() {
   const { id } = useParams();
+  const history = useHistory();
   const [initialCard, setInitialCard] = useState({});
 
   const populateData = useCallback(
@@ -29,8 +30,10 @@ function PageCardsEdit() {
         .collection('cards')
         .doc(id)
         .set(updateCard);
+
+      history.push('/cards');
     },
-    [id],
+    [id, history],
   );
 
   useEffect(() => {

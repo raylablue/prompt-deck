@@ -2,12 +2,14 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
 import { useSelector } from 'react-redux';
 import MultiSelect from 'react-multi-select-component';
+import { useHistory } from 'react-router';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 
-function PageCreateDecks() {
+function PageDecksCreate() {
   const user = useSelector((state) => state.user);
+  const history = useHistory();
 
   const [bool, setBool] = useState(false);
   const [characterOptions, setCharacterOptions] = useState([]);
@@ -145,7 +147,8 @@ function PageCreateDecks() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              handleCreateCard(deck);
+              handleCreateCard();
+              history.push('/decks');
             }}
           >
             <div className="form-group">
@@ -220,4 +223,4 @@ function PageCreateDecks() {
   );
 }
 
-export default PageCreateDecks;
+export default PageDecksCreate;

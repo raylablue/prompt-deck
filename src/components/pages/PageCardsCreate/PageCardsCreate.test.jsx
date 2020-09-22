@@ -7,7 +7,7 @@ import { MemoryRouter } from 'react-router';
 import configureMockStore from 'redux-mock-store';
 import firebase from '../../../firebase/firebase';
 import { findByTestAttr } from '../../../tests/testUtils';
-import PageCreateCards from './PageCreateCards';
+import PageCardsCreate from './PageCardsCreate';
 
 describe('Create cards page', () => {
   const setup = (user, types) => {
@@ -17,7 +17,7 @@ describe('Create cards page', () => {
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <PageCreateCards />
+          <PageCardsCreate />
         </MemoryRouter>
       </Provider>,
     );

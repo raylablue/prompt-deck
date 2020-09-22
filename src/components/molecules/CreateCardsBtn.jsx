@@ -9,7 +9,7 @@ function CreateCardsBtn({ children }) {
       className="btn-primary"
     >
       <NavLink
-        to="/create-cards"
+        to="/cards-create"
         className="nav-link"
         activeClassName="chosen"
       >
