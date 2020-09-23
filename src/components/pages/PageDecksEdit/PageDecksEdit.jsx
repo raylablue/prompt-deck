@@ -99,6 +99,10 @@ function PageDecksEdit() {
       const circumstances = await populateCircumstances();
       const conflicts = await populateConflicts();
 
+      Promise.all([characters, circumstances, conflicts]).then((values) => {
+        return values;
+      });
+
       const response = await firebase.db
         .collection('decks')
         .doc(id)
