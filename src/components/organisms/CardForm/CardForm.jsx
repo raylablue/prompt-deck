@@ -29,6 +29,7 @@ function CardForm({ initialCard, handleSubmit, content }) {
     <form
       data-test="o-card-form__submit"
       className="card bg-secondary p-3"
+      key={card.id}
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit(card);

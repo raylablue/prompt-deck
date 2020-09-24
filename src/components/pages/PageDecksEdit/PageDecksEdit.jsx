@@ -1,7 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
-import {Else, If} from 'react-if';
-import {useHistory, useParams} from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { Else, If } from 'react-if';
+import { useHistory, useParams } from 'react-router-dom';
 import MultiSelect from 'react-multi-select-component';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
@@ -99,9 +99,8 @@ function PageDecksEdit() {
       const circumstances = await populateCircumstances();
       const conflicts = await populateConflicts();
 
-      Promise.all([characters, circumstances, conflicts]).then((values) => {
-        return values;
-      });
+      Promise.all([characters, circumstances, conflicts])
+        .then((values) => values);
 
       const response = await firebase.db
         .collection('decks')

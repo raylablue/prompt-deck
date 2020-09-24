@@ -52,13 +52,12 @@ function PageCards() {
       <div data-test="page-cards" className="row">
         <If condition={!cards}>
 
-          <div data-test="page-cards__alt-message" className="container">
+          <div data-test="p-cards__alt-message" className="container">
             <h2>You don&apos;t have any cards yet</h2>
             <CreateCardsBtn>Create A Card</CreateCardsBtn>
           </div>
 
           <Else>
-
             <h2 className="col-12">Character Cards</h2>
             {cards.map((card, index) => (
               <If condition={card.type === 'Character'}>

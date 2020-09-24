@@ -8,6 +8,6 @@ function PageHome() {
       <p>home page things will go here</p>
     </TemplateDefault>
   );
-};
+}
 
 export default PageHome;

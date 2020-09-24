@@ -18,3 +18,12 @@ export const cardMock = () => {
     side4,
   };
 };
+
+export const deckMock = () => ({
+  name: 'My Deck',
+  description: 'This describes stuff',
+  visibility: 'public',
+  characterCards: [{ label: 'Character', value: 'CharacterIdPath' }],
+  circumstanceCards: [{ label: 'Circumstance', value: 'CircumstanceIdPath' }],
+  conflictCards: [{ label: 'Conflict', value: 'ConflictIdPath' }],
+});

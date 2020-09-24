@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import CreateDecksBtn from '../../molecules/CreateDecksBtn';
 
 function PageDecks() {
-  const [decks, setDecks] = useState([]);
+  const user = useSelector((state) => state.user);
   const history = useHistory();
+
+  const [decks, setDecks] = useState([]);
 
   const populateDecks = async () => {
     const deckRefs = await firebase.db
       .collection('decks')
+      .where('createdBy', '==', user.uid)
       .get();
 
     const transformedDecks = deckRefs
@@ -21,10 +25,6 @@ function PageDecks() {
         ...deck.data(),
       }));
 
-    // const response = await transformedDecks[0].testcard.get();
-    // const result = response.data();
-
-    console.log(transformedDecks);
     setDecks(transformedDecks);
   };
 
@@ -56,6 +56,7 @@ function PageDecks() {
           <Else>
             {decks.map((deck, index) => (
               <div
+                data-test="p-decks__deck"
                 className="card col-12 col-sm-5 col-md-4 col-lg-3"
                 key={deck.id}
               >

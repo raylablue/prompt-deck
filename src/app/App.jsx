@@ -17,7 +17,7 @@ import { setTypesAction } from '../redux/actions/set-types/set-types.action';
 import PageDecks from '../components/pages/PageDecks/PageDecks';
 import PageDecksCreate from '../components/pages/PageDecksCreate/PageDecksCreate';
 import PageDecksEdit from '../components/pages/PageDecksEdit/PageDecksEdit';
-import PagePrompts from '../components/pages/PagePropmts/PagePropmts';
+import PagePrompts from '../components/pages/PagePropmts/PagePrompts';
 /* istanbul ignore file */
 
 function App() {

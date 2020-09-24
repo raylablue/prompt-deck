@@ -8,6 +8,6 @@ function PagePrompts() {
       <p>should contain avalible decks to generate prompts from</p>
     </TemplateDefault>
   );
-};
+}
 
 export default PagePrompts;

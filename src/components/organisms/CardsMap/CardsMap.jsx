@@ -10,7 +10,7 @@ function CardsMap({ card, handleDelete }) {
     <div
       className="col-12 col-sm-5 col-md-4 col-lg-3"
       key={card.id}
-      data-test="page-cards__card"
+      data-test="p-cards__card"
     >
 
       <h3
