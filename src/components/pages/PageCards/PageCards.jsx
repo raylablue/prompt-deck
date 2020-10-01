@@ -62,6 +62,7 @@ function PageCards() {
             {cards.map((card, index) => (
               <If condition={card.type === 'Character'}>
                 <CardsMap
+                  key={card.id}
                   card={card}
                   handleDelete={(e) => handleDelete(e, index)}
                 />
@@ -72,6 +73,7 @@ function PageCards() {
             {cards.map((card, index) => (
               <If condition={card.type === 'Circumstance'}>
                 <CardsMap
+                  key={card.id}
                   card={card}
                   handleDelete={(e) => handleDelete(e, index)}
                 />
@@ -82,6 +84,7 @@ function PageCards() {
             {cards.map((card, index) => (
               <If condition={card.type === 'Conflict'}>
                 <CardsMap
+                  key={card.id}
                   card={card}
                   handleDelete={(e) => handleDelete(e, index)}
                 />

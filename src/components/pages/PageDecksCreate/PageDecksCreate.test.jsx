@@ -1,4 +1,5 @@
 import '../../../tests/mocks/firebase-mocks';
+import '../../../tests/mocks/template-default-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
