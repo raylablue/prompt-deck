@@ -40,7 +40,7 @@ function PageDecks() {
 
   useEffect(() => {
     populateDecks();
-  }, []);
+  }, [populateDecks]);
 
   return (
     <TemplateDefault data-test="page-decks">

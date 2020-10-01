@@ -6,6 +6,7 @@ import MultiSelect from 'react-multi-select-component';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
+import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 
 function PageDecksEdit() {
   const { id } = useParams();
@@ -21,76 +22,44 @@ function PageDecksEdit() {
   const [selectedConflictIds, setSelectedConflictIds] = useState([]);
   const [deck, setDeck] = useState({});
 
+  const getCardOptions = useCallback(async (cardType) => {
+    const conflictCards = await firebaseCollectionsHelper
+      .getAllCardsDataByType(cardType, user.uid);
+
+    return conflictCards.map((card) => ({
+      label: card.cardTitle,
+      value: card.id,
+    }));
+  }, [user.uid]);
+
   const populateCharacters = useCallback(
     async () => {
-      const cardRefs = await firebase.db
-        .collection('cards')
-        .where('createdBy', '==', user.uid)
-        .where('type', '==', 'Character')
-        .get();
-
-      const newCharacterOptions = cardRefs
-        .docs
-        .map((card) => {
-          const cardData = {
-            id: card.id,
-            ...card.data(),
-          };
-          return { label: cardData.cardTitle, value: cardData.id };
-        });
-
+      const newCharacterOptions = await getCardOptions('Character');
       setCharacterOptions(newCharacterOptions);
+
       return newCharacterOptions;
     },
-    [user.uid],
+    [getCardOptions],
   );
 
   const populateCircumstances = useCallback(
     async () => {
-      const cardRefs = await firebase.db
-        .collection('cards')
-        .where('createdBy', '==', user.uid)
-        .where('type', '==', 'Circumstance')
-        .get();
-
-      const newCircumstanceOptions = cardRefs
-        .docs
-        .map((card) => {
-          const cardData = {
-            id: card.id,
-            ...card.data(),
-          };
-          return { label: cardData.cardTitle, value: cardData.id };
-        });
-
+      const newCircumstanceOptions = await getCardOptions('Circumstance');
       setCircumstanceOptions(newCircumstanceOptions);
+
       return newCircumstanceOptions;
     },
-    [user.uid],
+    [getCardOptions],
   );
 
   const populateConflicts = useCallback(
     async () => {
-      const cardRefs = await firebase.db
-        .collection('cards')
-        .where('createdBy', '==', user.uid)
-        .where('type', '==', 'Conflict')
-        .get();
-
-      const newConflictOptions = cardRefs
-        .docs
-        .map((card) => {
-          const cardData = {
-            id: card.id,
-            ...card.data(),
-          };
-          return { label: cardData.cardTitle, value: cardData.id };
-        });
-
+      const newConflictOptions = await getCardOptions('Conflict');
       setConflictOptions(newConflictOptions);
+
       return newConflictOptions;
     },
-    [user.uid],
+    [getCardOptions],
   );
 
   const populateData = useCallback(
@@ -99,7 +68,7 @@ function PageDecksEdit() {
       const circumstances = await populateCircumstances();
       const conflicts = await populateConflicts();
 
-      Promise.all([characters, circumstances, conflicts])
+      await Promise.all([characters, circumstances, conflicts])
         .then((values) => values);
 
       const response = await firebase.db
@@ -196,6 +165,7 @@ function PageDecksEdit() {
                 Name: &nbsp;
               </label>
               <input
+                data-test="p-decks-edit__name"
                 value={deck.name}
                 onChange={(e) => {
                   changeDeck('name', e.target.value);

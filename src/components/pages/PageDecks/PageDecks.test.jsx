@@ -63,7 +63,7 @@ describe('PageDecks', () => {
     };
   };
 
-  it('should render without error', async () => {
+  xit('should render without error', async () => {
     const { wrapper } = await setup();
     const component = findByTestAttr(wrapper, 'page-decks');
 

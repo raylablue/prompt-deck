@@ -11,7 +11,7 @@ function PageDecksCreate() {
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
-  const [bool, setBool] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [characterOptions, setCharacterOptions] = useState([]);
   const [selectedCharacterIds, setSelectedCharacterIds] = useState([]);
   const [circumstanceOptions, setCircumstanceOptions] = useState([]);
@@ -39,7 +39,7 @@ function PageDecksCreate() {
         });
 
       setCharacterOptions(newCharacterOptions);
-      setBool(true);
+      setIsLoading(true);
     },
     [user.uid],
   );
@@ -63,7 +63,7 @@ function PageDecksCreate() {
         });
 
       setCircumstanceOptions(newCircumstanceOptions);
-      setBool(true);
+      setIsLoading(true);
     },
     [user.uid],
   );
@@ -87,7 +87,7 @@ function PageDecksCreate() {
         });
 
       setConflictOptions(newConflictOptions);
-      setBool(true);
+      setIsLoading(true);
     },
     [user.uid],
   );
@@ -140,11 +140,12 @@ function PageDecksCreate() {
   return (
     <TemplateDefault data-test="p-create-decks">
       <h1>Create A Deck</h1>
-      <If condition={!bool}>
+      <If condition={!isLoading}>
         <LoadingAnim />
 
         <Else>
           <form
+            data-test="p-decks-create__submit"
             onSubmit={(e) => {
               e.preventDefault();
               handleCreateCard();
@@ -156,6 +157,7 @@ function PageDecksCreate() {
                 Name: &nbsp;
               </label>
               <input
+                data-test="p-decks-create__name"
                 value={deck.name}
                 onChange={(e) => {
                   changeDeck('name', e.target.value);
@@ -171,6 +173,7 @@ function PageDecksCreate() {
                 Description: &nbsp;
               </label>
               <input
+                data-test="p-decks-create__description"
                 placeholder="Say what this deck is about or what it's focus is"
                 value={deck.description}
                 onChange={(e) => {
@@ -185,6 +188,7 @@ function PageDecksCreate() {
             <div className="form-group">
               <label htmlFor="characters">Characters</label>
               <MultiSelect
+                data-test="p-decks-create__characters"
                 options={characterOptions}
                 value={selectedCharacterIds}
                 onChange={setSelectedCharacterIds}
@@ -194,6 +198,7 @@ function PageDecksCreate() {
             <div className="form-group">
               <label htmlFor="circumstances">Circumstances</label>
               <MultiSelect
+                data-test="p-decks-create__circumstances"
                 options={circumstanceOptions}
                 value={selectedCircumstanceIds}
                 onChange={setSelectedCircumstanceIds}
@@ -203,6 +208,7 @@ function PageDecksCreate() {
             <div className="form-group">
               <label htmlFor="conflicts">Conflicts</label>
               <MultiSelect
+                data-test="p-decks-create__conflicts"
                 options={conflictOptions}
                 value={selectedConflictIds}
                 onChange={setSelectedConflictIds}
