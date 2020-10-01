@@ -9,7 +9,7 @@ import { act } from 'react-dom/test-utils';
 import PageDecksCreate from './PageDecksCreate';
 import { findByTestAttr } from '../../../tests/testUtils';
 import firebase from '../../../firebase/firebase';
-import {cardMock, deckMock} from '../../../utils/mocks';
+import { cardMock, deckMock } from '../../../utils/mocks';
 
 const defaultArgs = {
   user: {},

@@ -4,8 +4,21 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router';
+import { checkPropTypes } from 'prop-types';
 import TemplateDefault from './TemplateDefault';
-import { findByTestAttr, checkProps } from '../../tests/testUtils';
+import { findByTestAttr } from '../../tests/testUtils';
+
+
+export const checkProps = (component, conformingProps) => {
+  const propError = checkPropTypes(
+    // eslint-disable-next-line react/forbid-foreign-prop-types
+    component.propTypes,
+    conformingProps,
+    'prop',
+    component.name,
+  );
+  expect(propError).toBeUndefined();
+};
 
 const defaultProps = {
   children: 'test string',
