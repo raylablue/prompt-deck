@@ -18,7 +18,14 @@ function PageDecksCreate() {
   const [selectedCircumstanceIds, setSelectedCircumstanceIds] = useState([]);
   const [conflictOptions, setConflictOptions] = useState([]);
   const [selectedConflictIds, setSelectedConflictIds] = useState([]);
-  const [deck, setDeck] = useState({});
+  const [deck, setDeck] = useState({
+    name: '',
+    description: '',
+    visibility: '',
+    characterCards: [{}],
+    circumstanceCards: [{}],
+    conflictCards: [{}],
+  });
 
   const populateCharacters = useCallback(
     async () => {

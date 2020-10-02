@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { If, Else } from 'react-if';
@@ -7,7 +7,6 @@ import HeaderDefault from '../organisms/NavBar/HeaderDefault/HeaderDefault';
 
 const TemplateDefault = ({ children }) => {
   const user = useSelector((state) => state.user);
-  const [initialChildren, setInitialChildren] = useState({ ...children });
 
   return (
     <>

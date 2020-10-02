@@ -9,7 +9,6 @@ function CardsMap({ card, handleDelete }) {
   return (
     <div
       className="col-12 col-sm-5 col-md-4 col-lg-3"
-      key={card.id}
       data-test="p-cards__card"
     >
 
