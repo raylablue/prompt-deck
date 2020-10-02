@@ -14,25 +14,33 @@ function PageCardsEdit() {
 
   const populateData = useCallback(
     async () => {
-      const response = await firebase.db
-        .collection('cards')
-        .doc(id)
-        .get();
+      try {
+        const response = await firebase.db
+          .collection('cards')
+          .doc(id)
+          .get();
 
-      const cardData = response.data();
-      setInitialCard(cardData);
+        const cardData = response.data();
+        setInitialCard(cardData);
+      } catch (err) {
+        console.error(err);
+      }
     },
     [id],
   );
 
   const handleUpdate = useCallback(
     async (updateCard) => {
-      await firebase.db
-        .collection('cards')
-        .doc(id)
-        .set(updateCard);
+      try {
+        await firebase.db
+          .collection('cards')
+          .doc(id)
+          .set(updateCard);
 
-      history.push('/cards');
+        history.push('/cards');
+      } catch (err) {
+        console.error(err);
+      }
     },
     [id, history],
   );

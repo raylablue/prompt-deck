@@ -7,7 +7,15 @@ import CardForm from '../../organisms/CardForm/CardForm';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 
 function PageCardsCreate() {
-  const initialCard = {};
+  const initialCard = {
+    cardTitle: '',
+    createdBy: '',
+    type: '',
+    side1: '',
+    side2: '',
+    side3: '',
+    side4: '',
+  };
   const history = useHistory();
 
   async function handleCreateCard(newCard) {

@@ -10,7 +10,11 @@ function PageSignIn() {
 
   useEffect(() => {
     if (!user) {
-      firebase.ui.start('#firebase-sign-in', uiConfig);
+      try {
+        firebase.ui.start('#firebase-sign-in', uiConfig);
+      } catch (err) {
+        console.error(err);
+      }
     }
   }, [user]);
 

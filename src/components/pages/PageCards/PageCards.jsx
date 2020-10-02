@@ -12,19 +12,23 @@ function PageCards() {
 
   const populateCards = useCallback(
     async () => {
-      const cardRefs = await firebase.db
-        .collection('cards')
-        .where('createdBy', '==', user.uid)
-        .get();
+      try {
+        const cardRefs = await firebase.db
+          .collection('cards')
+          .where('createdBy', '==', user.uid)
+          .get();
 
-      const transformedCards = cardRefs
-        .docs
-        .map((card) => ({
-          id: card.id,
-          ...card.data(),
-        }));
+        const transformedCards = cardRefs
+          .docs
+          .map((card) => ({
+            id: card.id,
+            ...card.data(),
+          }));
 
-      setCards(transformedCards);
+        setCards(transformedCards);
+      } catch (err) {
+        console.error(err);
+      }
     },
     [user],
   );
@@ -32,9 +36,13 @@ function PageCards() {
   const handleDelete = async (e, index) => {
     e.preventDefault();
 
-    await firebase.db.collection('cards')
-      .doc(cards[index].id)
-      .delete();
+    try {
+      await firebase.db.collection('cards')
+        .doc(cards[index].id)
+        .delete();
+    } catch (err) {
+      console.error(err);
+    }
 
     populateCards();
   };

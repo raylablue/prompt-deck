@@ -29,72 +29,84 @@ function PageDecksCreate() {
 
   const populateCharacters = useCallback(
     async () => {
-      const cardRefs = await firebase.db
-        .collection('cards')
-        .where('createdBy', '==', user.uid)
-        .where('type', '==', 'Character')
-        .get();
+      try {
+        const cardRefs = await firebase.db
+          .collection('cards')
+          .where('createdBy', '==', user.uid)
+          .where('type', '==', 'Character')
+          .get();
 
-      const newCharacterOptions = cardRefs
-        .docs
-        .map((card) => {
-          const cardData = {
-            id: card.id,
-            ...card.data(),
-          };
-          return { label: cardData.cardTitle, value: cardData.id };
-        });
+        const newCharacterOptions = cardRefs
+          .docs
+          .map((card) => {
+            const cardData = {
+              id: card.id,
+              ...card.data(),
+            };
+            return { label: cardData.cardTitle, value: cardData.id };
+          });
 
-      setCharacterOptions(newCharacterOptions);
-      setIsLoading(true);
+        setCharacterOptions(newCharacterOptions);
+        setIsLoading(true);
+      } catch (err) {
+        console.error(err);
+      }
     },
     [user.uid],
   );
 
   const populateCircumstances = useCallback(
     async () => {
-      const cardRefs = await firebase.db
-        .collection('cards')
-        .where('createdBy', '==', user.uid)
-        .where('type', '==', 'Circumstance')
-        .get();
+      try {
+        const cardRefs = await firebase.db
+          .collection('cards')
+          .where('createdBy', '==', user.uid)
+          .where('type', '==', 'Circumstance')
+          .get();
 
-      const newCircumstanceOptions = cardRefs
-        .docs
-        .map((card) => {
-          const cardData = {
-            id: card.id,
-            ...card.data(),
-          };
-          return { label: cardData.cardTitle, value: cardData.id };
-        });
+        const newCircumstanceOptions = cardRefs
+          .docs
+          .map((card) => {
+            const cardData = {
+              id: card.id,
+              ...card.data(),
+            };
+            return { label: cardData.cardTitle, value: cardData.id };
+          });
 
-      setCircumstanceOptions(newCircumstanceOptions);
-      setIsLoading(true);
+        setCircumstanceOptions(newCircumstanceOptions);
+        setIsLoading(true);
+      } catch (err) {
+        console.error(err);
+      }
     },
     [user.uid],
   );
 
   const populateConflicts = useCallback(
     async () => {
-      const cardRefs = await firebase.db
-        .collection('cards')
-        .where('createdBy', '==', user.uid)
-        .where('type', '==', 'Conflict')
-        .get();
+      try {
+        const cardRefs = await firebase.db
+          .collection('cards')
+          .where('createdBy', '==', user.uid)
+          .where('type', '==', 'Conflict')
+          .get();
 
-      const newConflictOptions = cardRefs
-        .docs
-        .map((card) => {
-          const cardData = {
-            id: card.id,
-            ...card.data(),
-          };
-          return { label: cardData.cardTitle, value: cardData.id };
-        });
+        const newConflictOptions = cardRefs
+          .docs
+          .map((card) => {
+            const cardData = {
+              id: card.id,
+              ...card.data(),
+            };
+            return { label: cardData.cardTitle, value: cardData.id };
+          });
 
-      setConflictOptions(newConflictOptions);
-      setIsLoading(true);
+        setConflictOptions(newConflictOptions);
+        setIsLoading(true);
+      } catch (err) {
+        console.error(err);
+      }
     },
     [user.uid],
   );
