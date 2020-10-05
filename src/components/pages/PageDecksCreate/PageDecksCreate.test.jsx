@@ -125,11 +125,13 @@ describe('PageDecksCreate', () => {
       const characterCards = [];
       const circumstanceCards = [];
       const conflictCards = [];
+      const createdBy = user.uid;
 
       const newDeck = {
         name,
         description,
         visibility: 'public',
+        createdBy,
         characterCards,
         circumstanceCards,
         conflictCards,

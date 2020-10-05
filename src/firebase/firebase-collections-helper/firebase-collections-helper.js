@@ -1,13 +1,6 @@
 import firebase from '../firebase';
 
 const firebaseCollectionsHelper = {
-  // getAllCardsDataByType: (userId, cardType) => {
-  //   firebase.db
-  //     .collection('cards')
-  //     .where('createdBy', '==', userId)
-  //     .where('type', '==', cardType);
-  // },
-
   getAllCardsDataByType: async (userId, cardType) => {
     const cardRefs = await firebase.db
       .collection('cards')
@@ -26,6 +19,20 @@ const firebaseCollectionsHelper = {
   // getCardRef: (cardId) => {
   //   return firebase.db.collection('cards').doc(cardId.value);
   // },
+
+  getAllDecksByUserId: async (userId) => {
+    const deckRefs = await firebase.db
+      .collection('decks')
+      .where('createdBy', '==', userId)
+      .get();
+
+    return deckRefs
+      .docs
+      .map((deck) => ({
+        id: deck.id,
+        ...deck.data(),
+      }));
+  },
 };
 
 export default firebaseCollectionsHelper;

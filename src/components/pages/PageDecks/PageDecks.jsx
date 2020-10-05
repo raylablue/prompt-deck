@@ -1,31 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import CreateDecksBtn from '../../molecules/CreateDecksBtn';
+import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 
 function PageDecks() {
   const user = useSelector((state) => state.user);
   const history = useHistory();
   const [decks, setDecks] = useState([]);
 
-  const populateDecks = async () => {
-    const deckRefs = await firebase.db
-      .collection('decks')
-      .where('createdBy', '==', user.uid)
-      .get();
+  const populateDecks = useCallback(
+    async () => {
+      const userDecks = await firebaseCollectionsHelper
+        .getAllDecksByUserId(user.uid);
 
-    const transformedDecks = deckRefs
-      .docs
-      .map((deck) => ({
-        id: deck.id,
-        ...deck.data(),
-      }));
-
-    setDecks(transformedDecks);
-  };
+      setDecks(userDecks);
+    },
+    [user.uid],
+  );
 
   const handleDelete = async (e, index) => {
     e.preventDefault();
@@ -34,11 +29,11 @@ function PageDecks() {
       .doc(decks[index].id)
       .delete();
 
-    populateDecks();
+    await populateDecks();
   };
 
   useEffect(() => {
-    populateDecks();
+    populateDecks().then((r) => r);
   }, [populateDecks]);
 
   return (

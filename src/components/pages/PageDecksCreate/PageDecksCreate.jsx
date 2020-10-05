@@ -140,6 +140,7 @@ function PageDecksCreate() {
         }
       )),
       visibility: 'public',
+      createdBy: user.uid,
     };
 
     try {
