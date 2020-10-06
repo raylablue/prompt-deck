@@ -33,7 +33,7 @@ function PageDecks() {
   };
 
   useEffect(() => {
-    populateDecks().then((r) => r);
+    populateDecks();
   }, [populateDecks]);
 
   return (
@@ -49,11 +49,12 @@ function PageDecks() {
           <Else>
             {decks.map((deck, index) => (
               <div
+                key={deck.id}
                 data-test="p-decks__deck"
                 className="card col-12 col-sm-5 col-md-4 col-lg-3"
-                key={deck.id}
               >
                 <h2>{deck.name}</h2>
+                <h4>{deck.id}</h4>
                 <p>{deck.description}</p>
 
                 <button

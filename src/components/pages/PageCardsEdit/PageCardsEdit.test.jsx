@@ -263,6 +263,7 @@ describe('Page Cards Edit', () => {
       const side2 = 'Villager needs 5 pieces of wood';
       const side3 = 'How many licks does it take to get to the center of a tootsie pop';
       const side4 = 'Say hi to everyone in town';
+      const { id } = card;
 
       const updateCard = {
         cardTitle,
@@ -272,6 +273,7 @@ describe('Page Cards Edit', () => {
         side2,
         side3,
         side4,
+        id,
       };
 
       const { wrapper, spySet } = await setup({ user, card, types });
