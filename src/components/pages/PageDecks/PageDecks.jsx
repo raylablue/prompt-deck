@@ -54,7 +54,6 @@ function PageDecks() {
                 className="card col-12 col-sm-5 col-md-4 col-lg-3"
               >
                 <h2>{deck.name}</h2>
-                <h4>{deck.id}</h4>
                 <p>{deck.description}</p>
 
                 <button

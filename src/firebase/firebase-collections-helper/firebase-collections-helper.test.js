@@ -117,4 +117,55 @@ describe('firebase collections helper', () => {
       expect(spyWhere).toBeCalledWith(searchKey, searchOperator, userId);
     });
   });
+
+  describe('getDeckData method', () => {
+    const setup = async () => {
+      const deck = {};
+      const spyCollection = jest.spyOn(firebase.db, 'collection');
+
+      const spyGet = jest.fn();
+      spyGet.mockReturnValue(Promise.resolve({ data: () => deck }));
+
+      const spyDoc = jest.fn();
+      spyDoc.mockReturnValue({
+        get: spyGet,
+      });
+
+      spyCollection.mockReturnValue({
+        doc: spyDoc,
+      });
+
+      return {
+        spyCollection,
+        spyDoc,
+        spyGet,
+      };
+    };
+    it('should call the firebase collection decks', async () => {
+      const collection = 'decks';
+
+      const { spyCollection } = await setup();
+      await firebaseCollectionsHelper.getDeckData();
+
+      expect(spyCollection).toBeCalledWith(collection);
+    });
+
+    it('should call the firebase document by deckId', async () => {
+      const deckId = 'IisUserId';
+
+      const { spyDoc } = await setup();
+      await firebaseCollectionsHelper.getDeckData(deckId);
+
+      expect(spyDoc).toBeCalledWith(deckId);
+    });
+
+    it('should call firebase get', async () => {
+      const deckId = 'IisUserId';
+
+      const { spyGet } = await setup();
+      await firebaseCollectionsHelper.getDeckData(deckId);
+
+      expect(spyGet).toBeCalled();
+    });
+  });
 });

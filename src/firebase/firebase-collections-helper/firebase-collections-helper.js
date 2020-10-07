@@ -16,6 +16,22 @@ const firebaseCollectionsHelper = {
       }));
   },
 
+  getDeckData: async (deckId) => {
+    const response = await firebase.db
+      .collection('decks')
+      .doc(deckId)
+      .get();
+
+    return response.data();
+
+    // const response = await firebase.db
+    //   .collection('decks')
+    //   .doc(deckId)
+    //   .get();
+    //
+    // return response.data();
+  },
+
   // getCardRef: (cardId) => {
   //   return firebase.db.collection('cards').doc(cardId.value);
   // },
