@@ -6,7 +6,6 @@ import MultiSelect from 'react-multi-select-component';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
-import firebase from '../../../firebase/firebase';
 
 function PageDecksEdit() {
   const { id } = useParams();

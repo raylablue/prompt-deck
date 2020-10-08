@@ -8,7 +8,6 @@ import { Provider } from 'react-redux';
 import { act } from 'react-dom/test-utils';
 import PageDecksEdit from './PageDecksEdit';
 import { findByTestAttr } from '../../../tests/testUtils';
-import { cardMock, deckMock } from '../../../utils/mocks';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 
 const defaultArgs = {

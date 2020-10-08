@@ -2,7 +2,6 @@ import '../../tests/mocks/firebase-mocks';
 import { v4 } from 'uuid';
 import firebase from '../firebase';
 import firebaseCollectionsHelper from './firebase-collections-helper';
-import { deckMock } from "../../utils/mocks";
 
 describe('firebase collections helper', () => {
   describe('getAllCardsDataByType method', () => {
