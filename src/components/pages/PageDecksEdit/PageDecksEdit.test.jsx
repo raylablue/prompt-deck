@@ -15,11 +15,15 @@ const defaultArgs = {
   user: {},
   cards: [],
   deck: {},
+  cardId: '',
+  deckCardRef: '',
 };
 
 describe('PageDecksEdit', () => {
   const setup = async (args = {}) => {
-    const { user, cards, deck } = {
+    const {
+      user, cards, deck, cardId,
+    } = {
       ...defaultArgs,
       ...args,
     };
@@ -29,13 +33,22 @@ describe('PageDecksEdit', () => {
 
     const spyGetCardOptions = await jest
       .spyOn(firebaseCollectionsHelper, 'getAllCardsDataByType');
-
     spyGetCardOptions.mockReturnValue(Promise.resolve(cards));
 
     const spyPopulateData = await jest
       .spyOn(firebaseCollectionsHelper, 'getDeckData');
 
     spyPopulateData.mockReturnValue(Promise.resolve(deck));
+
+    const spyGetCardRef = jest
+      .spyOn(firebaseCollectionsHelper, 'getCardRef');
+
+    spyGetCardRef.mockReturnValue(Promise.resolve(cardId));
+
+    const spyHandleUpdate = jest
+      .spyOn(firebaseCollectionsHelper, 'updateDeck');
+
+    spyHandleUpdate.mockReturnValue(Promise.resolve(deck));
 
     let wrapper;
     await act(async () => {
@@ -52,11 +65,22 @@ describe('PageDecksEdit', () => {
       wrapper,
       spyGetCardOptions,
       spyPopulateData,
+      spyGetCardRef,
+      spyHandleUpdate,
     };
   };
 
   it('should render without error', async () => {
-    const { wrapper } = await setup();
+    const deck = {
+      characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
+      circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
+      conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
+    };
+    const deckCardRef = deck.cardRef;
+    const cards = [{ label: 'nameThings', value: 'asdfh12354' }];
+
+
+    const { wrapper } = await setup({ deck, cards, deckCardRef });
     const component = findByTestAttr(wrapper, 'p-decks-edit');
 
     expect(component.length).toBe(1);
@@ -64,9 +88,14 @@ describe('PageDecksEdit', () => {
 
   describe('getCardOptions function', () => {
     it('should call getCardOptions', async () => {
-      const cards = [cardMock()];
+      const cards = [{ label: 'nameThings', value: 'asdfh12354' }];
+      const deck = {
+        characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
+        circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
+        conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
+      };
 
-      const { spyGetCardOptions } = await setup({ cards });
+      const { spyGetCardOptions } = await setup({ cards, deck });
 
       expect(spyGetCardOptions).toBeCalled();
     });
@@ -74,33 +103,87 @@ describe('PageDecksEdit', () => {
 
   describe('populateData function', () => {
     it('should call populateData', async () => {
-      const deck = deckMock();
+      const deck = {
+        characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
+        circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
+        conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
+      };
+      const deckCardRef = deck.cardRef;
+      const cards = [{ label: 'nameThings', value: 'asdfh12354' }];
 
-      const { spyPopulateData } = await setup({ deck });
+      const { spyPopulateData } = await setup({ deck, cards, deckCardRef });
 
       expect(spyPopulateData).toBeCalled();
     });
 
-    it('should display the deck name', async () => {
-      const deck = deckMock();
+    it('should display the deck edit form fields', async () => {
+      const deck = {
+        characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
+        circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
+        conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
+      };
+      const deckCardRef = deck.cardRef;
+      const cards = [{ label: 'nameThings', value: 'asdfh12354' }];
 
-      const { wrapper } = await setup({ deck });
+      const { wrapper } = await setup({ deck, cards, deckCardRef });
       wrapper.update();
 
-      const deckName = findByTestAttr(wrapper, 'p-decks-edit__name');
+      const deckName = findByTestAttr(wrapper, 'p-decks-edit__form');
 
       expect(deckName.length).toBe(1);
     });
 
-    it('should display the deck desciption', async () => {
-      const deck = deckMock();
+    it('should display the loading spinner if no decks found', async () => {
+      const deck = {
+        characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
+        circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
+        conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
+      };
+      const deckCardRef = deck.cardRef;
+      const cards = [{ label: 'nameThings', value: 'asdfh12354' }];
 
-      const { wrapper } = await setup({ deck });
+      const { wrapper } = await setup({ deck, cards, deckCardRef });
       wrapper.update();
 
-      const deckDescription = findByTestAttr(wrapper, 'p-decks-edit__description');
+      const loadingState = findByTestAttr(wrapper, 'p-decks-edit__loading');
 
-      expect(deckDescription.length).toBe(1);
+      expect(loadingState.length).toBe(1);
+    });
+  });
+
+  describe('getCardRef to save card reference with cardId', () => {
+    xit('should call getCardRef', async () => {
+      const cardId = 'testIdString';
+      const deck = {
+        characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
+        circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
+        conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
+      };
+      const deckCardRef = deck.cardRef;
+      const cards = [{ label: 'nameThings', value: 'asdfh12354' }];
+
+      const { spyGetCardRef } = await setup({
+        cardId, cards, deck, deckCardRef,
+      });
+
+      expect(spyGetCardRef).toBeCalled();
+    });
+  });
+
+  describe('handleUpdate function', () => {
+    xit('should call handleUpdate', async () => {
+      // const deck = deckMock();
+      const deck = {
+        characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
+        circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
+        conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
+      };
+      const deckCardRef = deck.cardRef;
+      const cards = [{ label: 'nameThings', value: 'asdfh12354' }];
+
+      const { spyHandleUpdate } = await setup({ deck, cards, deckCardRef });
+
+      expect(spyHandleUpdate).toBeCalled();
     });
   });
 });

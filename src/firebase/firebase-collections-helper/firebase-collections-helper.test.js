@@ -2,6 +2,7 @@ import '../../tests/mocks/firebase-mocks';
 import { v4 } from 'uuid';
 import firebase from '../firebase';
 import firebaseCollectionsHelper from './firebase-collections-helper';
+import { deckMock } from "../../utils/mocks";
 
 describe('firebase collections helper', () => {
   describe('getAllCardsDataByType method', () => {
@@ -166,6 +167,94 @@ describe('firebase collections helper', () => {
       await firebaseCollectionsHelper.getDeckData(deckId);
 
       expect(spyGet).toBeCalled();
+    });
+  });
+
+  describe('getCardRef method', () => {
+    it('should call firebase collection cards', () => {
+      const collection = 'cards';
+      const cardId = { value: 'disCardIdString' };
+
+      const spyCollection = jest.spyOn(firebase.db, 'collection');
+
+      const spyDoc = jest.fn();
+      spyDoc.mockReturnValue(Promise.resolve(cardId.value));
+
+      spyCollection.mockReturnValue({
+        doc: spyDoc,
+      });
+      firebaseCollectionsHelper.getCardRef(cardId);
+
+      expect(spyCollection).toBeCalledWith(collection);
+    });
+
+    it('should call firebase document with the value of the cardId object', () => {
+      const cardId = { value: 'disCardIdString' };
+
+      const spyCollection = jest.spyOn(firebase.db, 'collection');
+
+      const spyDoc = jest.fn();
+
+      spyCollection.mockReturnValue({
+        doc: spyDoc,
+      });
+      firebaseCollectionsHelper.getCardRef(cardId);
+
+      expect(spyDoc).toBeCalledWith(cardId.value);
+    });
+  });
+
+  describe('updateDeck method', () => {
+    const setup = async () => {
+      const newDeck = {};
+
+      const spyCollection = jest.spyOn(firebase.db, 'collection');
+
+      const spySet = jest.fn();
+      spySet.mockReturnValue(Promise.resolve(newDeck));
+
+      const spyDoc = jest.fn();
+      spyDoc.mockReturnValue({
+        set: spySet,
+      });
+
+      spyCollection.mockReturnValue({
+        doc: spyDoc,
+      });
+
+      return {
+        spyCollection,
+        spyDoc,
+        spySet,
+      };
+    };
+
+    it('should call firebase collection decks', async () => {
+      const collection = 'decks';
+
+      const { spyCollection } = await setup();
+      await firebaseCollectionsHelper.updateDeck();
+
+      expect(spyCollection).toBeCalledWith(collection);
+    });
+
+    it('should call firebase by deckId', async () => {
+      const deckId = 'deckId123';
+
+      const { spyDoc } = await setup();
+      await firebaseCollectionsHelper.updateDeck(deckId);
+
+      expect(spyDoc).toBeCalledWith(deckId);
+    });
+
+    it('should update firebase with the values of newDeck', async () => {
+      const deckId = 'deckId123';
+      const newDeck = {};
+
+      const { spySet } = await setup();
+      await firebaseCollectionsHelper.updateDeck(deckId, newDeck);
+
+      expect(spySet).toBeCalledWith(newDeck);
     });
   });
 });

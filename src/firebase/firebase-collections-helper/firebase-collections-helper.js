@@ -23,18 +23,18 @@ const firebaseCollectionsHelper = {
       .get();
 
     return response.data();
-
-    // const response = await firebase.db
-    //   .collection('decks')
-    //   .doc(deckId)
-    //   .get();
-    //
-    // return response.data();
   },
 
-  // getCardRef: (cardId) => {
-  //   return firebase.db.collection('cards').doc(cardId.value);
-  // },
+  getCardRef: (cardId) => firebase.db
+    .collection('cards')
+    .doc(cardId.value),
+
+  updateDeck: async (deckId, newDeck) => {
+    await firebase.db
+      .collection('')
+      .doc(deckId)
+      .set(newDeck);
+  },
 
   getAllDecksByUserId: async (userId) => {
     const deckRefs = await firebase.db

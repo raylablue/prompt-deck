@@ -75,26 +75,25 @@ function PageDecksEdit() {
 
       const initialDeckData = await firebaseCollectionsHelper
         .getDeckData(id);
-
       setDeck(initialDeckData);
 
-      // const selectedCharacters = initialDeckData.characterCards
-      //   .map((card) => characters.find((character) => (
-      //     character.value === card.cardRef.id
-      //   )));
-      // setSelectedCharacterIds(selectedCharacters || []);
+      const selectedCharacters = initialDeckData.characterCards
+        .map((card) => characters.find((character) => (
+          character.value === card.cardRef.id
+        )));
+      setSelectedCharacterIds(selectedCharacters);
 
-      // const selectedCircumstances = initialDeckData.circumstanceCards
-      //   .map((card) => circumstances.find((circumstance) => (
-      //     circumstance.value === card.cardRef.id
-      //   )));
-      // setSelectedCircumstanceIds(selectedCircumstances || []);
-      //
-      // const selectedConflicts = initialDeckData.conflictCards
-      //   .map((card) => conflicts.find((conflict) => (
-      //     conflict.value === card.cardRef.id
-      //   )));
-      // setSelectedConflictIds(selectedConflicts || []);
+      const selectedCircumstances = initialDeckData.circumstanceCards
+        .map((card) => circumstances.find((circumstance) => (
+          circumstance.value === card.cardRef.id
+        )));
+      setSelectedCircumstanceIds(selectedCircumstances);
+
+      const selectedConflicts = initialDeckData.conflictCards
+        .map((card) => conflicts.find((conflict) => (
+          conflict.value === card.cardRef.id
+        )));
+      setSelectedConflictIds(selectedConflicts);
 
       setIsLoading(true);
     },
@@ -114,29 +113,26 @@ function PageDecksEdit() {
         description: deck.description,
         characterCards: selectedCharacterIds.map((cardId) => (
           {
-            cardRef: firebase.db.collection('cards').doc(cardId.value),
+            cardRef: firebaseCollectionsHelper.getCardRef(cardId),
             quantity: 1,
           }
         )),
         circumstanceCards: selectedCircumstanceIds.map((cardId) => (
           {
-            cardRef: firebase.db.collection('cards').doc(cardId.value),
+            cardRef: firebaseCollectionsHelper.getCardRef(cardId),
             quantity: 1,
           }
         )),
         conflictCards: selectedConflictIds.map((cardId) => (
           {
-            cardRef: firebase.db.collection('cards').doc(cardId.value),
+            cardRef: firebaseCollectionsHelper.getCardRef(cardId),
             quantity: 1,
           }
         )),
         visibility: 'public',
       };
 
-      await firebase.db
-        .collection('decks')
-        .doc(id)
-        .set(newDeck);
+      firebaseCollectionsHelper.updateDeck(id, newDeck);
     },
     [id, deck, selectedCharacterIds, selectedCircumstanceIds, selectedConflictIds],
   );
@@ -148,11 +144,15 @@ function PageDecksEdit() {
   return (
     <TemplateDefault data-test="p-decks-edit">
       <h1>Edit Deck</h1>
-      <If condition={!isLoading}>
+      <If
+        condition={!isLoading}
+        data-test="p-decks-edit__loading"
+      >
         <LoadingAnim />
 
         <Else>
           <form
+            data-test="p-decks-edit__form"
             onSubmit={(e) => {
               e.preventDefault();
               handleUpdate();
