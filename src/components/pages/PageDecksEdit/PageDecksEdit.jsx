@@ -108,29 +108,29 @@ function PageDecksEdit() {
   const handleUpdate = useCallback(
     async () => {
       const newDeck = {
+        ...deck,
         name: deck.name,
         description: deck.description,
         characterCards: selectedCharacterIds.map((cardId) => (
           {
-            cardRef: firebaseCollectionsHelper.getCardRef(cardId),
+            cardRef: firebaseCollectionsHelper.getCardRef(cardId.value),
             quantity: 1,
           }
         )),
         circumstanceCards: selectedCircumstanceIds.map((cardId) => (
           {
-            cardRef: firebaseCollectionsHelper.getCardRef(cardId),
+            cardRef: firebaseCollectionsHelper.getCardRef(cardId.value),
             quantity: 1,
           }
         )),
         conflictCards: selectedConflictIds.map((cardId) => (
           {
-            cardRef: firebaseCollectionsHelper.getCardRef(cardId),
+            cardRef: firebaseCollectionsHelper.getCardRef(cardId.value),
             quantity: 1,
           }
         )),
-        visibility: 'public',
       };
-
+      console.log('newDeck', newDeck, id);
       firebaseCollectionsHelper.updateDeck(id, newDeck);
     },
     [id, deck, selectedCharacterIds, selectedCircumstanceIds, selectedConflictIds],
