@@ -25,11 +25,9 @@ const firebaseCollectionsHelper = {
     return response.data();
   },
 
-  getCardRef: (cardId) => {
-    return firebase.db
-      .collection('cards')
-      .doc(cardId);
-  },
+  getCardRef: (cardId) => firebase.db
+    .collection('cards')
+    .doc(cardId),
 
   updateDeck: async (deckId, newDeck) => {
     await firebase.db

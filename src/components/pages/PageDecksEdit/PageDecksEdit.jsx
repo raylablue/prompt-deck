@@ -79,25 +79,22 @@ function PageDecksEdit() {
       const selectedCharacters = initialDeckData.characterCards
         .map((card) => characters.find((character) => (
           character.value === card.cardRef.id
-        ))).filter((i) => i);
-
-      // const selectedCharacters = initialDeckData.characterCards
-      //   .map((card) => characters.find((character) => (
-      //     character.value === card.cardRef.id
-      //   )));
+        )))
+        .filter((i) => i);
       setSelectedCharacterIds(selectedCharacters);
-      console.log('selected characters:', selectedCharacters);
 
       const selectedCircumstances = initialDeckData.circumstanceCards
         .map((card) => circumstances.find((circumstance) => (
           circumstance.value === card.cardRef.id
-        )));
+        )))
+        .filter((i) => i);
       setSelectedCircumstanceIds(selectedCircumstances);
 
       const selectedConflicts = initialDeckData.conflictCards
         .map((card) => conflicts.find((conflict) => (
           conflict.value === card.cardRef.id
-        )));
+        )))
+        .filter((i) => i);
       setSelectedConflictIds(selectedConflicts);
 
       setIsLoading(true);
