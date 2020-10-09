@@ -199,7 +199,7 @@ describe('firebase collections helper', () => {
       });
       firebaseCollectionsHelper.getCardRef(cardId);
 
-      expect(spyDoc).toBeCalledWith(cardId.value);
+      expect(spyDoc).toBeCalledWith(cardId);
     });
   });
 
