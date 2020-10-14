@@ -3,7 +3,7 @@ import TemplateDefault from '../../Templates/TemplateDefault';
 
 function PagePrompts() {
   return (
-    <TemplateDefault data-test="page-prompts">
+    <TemplateDefault data-test="p-prompts">
       <h1>Prompts</h1>
       <p>should contain available decks to generate prompts from</p>
     </TemplateDefault>

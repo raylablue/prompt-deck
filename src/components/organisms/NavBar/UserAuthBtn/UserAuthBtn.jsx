@@ -33,20 +33,12 @@ function UserAuthBtn() {
   }, [user, updateLoginBtn]);
 
   return (
-    <button
-      data-test="user-auth-btn"
-      className="btn btn-outline-primary"
-      type="button"
-      onClick={handleClick}
+    <a
+      href="/signin"
+      className="btn btn-outline-primary p-4 px-5 m-3"
     >
-      <NavLink
-        to="/signin"
-        className="nav-link"
-        activeClassName="chosen"
-      >
-        {userLogin}
-      </NavLink>
-    </button>
+      {userLogin}
+    </a>
   );
 }
 

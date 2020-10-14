@@ -3,7 +3,7 @@ import TemplateDefault from '../../Templates/TemplateDefault';
 
 function PageHome() {
   return (
-    <TemplateDefault data-test="page-home">
+    <TemplateDefault data-test="p-home">
       <h1>Home</h1>
       <p>home page things will go here</p>
     </TemplateDefault>

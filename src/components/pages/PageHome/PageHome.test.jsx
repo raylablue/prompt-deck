@@ -12,7 +12,7 @@ describe('Home page', () => {
 
   it('renders without error', () => {
     const { wrapper } = setup();
-    const component = findByTestAttr(wrapper, 'page-home');
+    const component = findByTestAttr(wrapper, 'p-home');
     expect(component.length).toBe(1);
   });
 });

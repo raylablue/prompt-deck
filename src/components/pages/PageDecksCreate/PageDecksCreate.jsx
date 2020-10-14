@@ -11,7 +11,7 @@ function PageDecksCreate() {
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [characterOptions, setCharacterOptions] = useState([]);
   const [selectedCharacterIds, setSelectedCharacterIds] = useState([]);
   const [circumstanceOptions, setCircumstanceOptions] = useState([]);
@@ -47,7 +47,6 @@ function PageDecksCreate() {
           });
 
         setCharacterOptions(newCharacterOptions);
-        setIsLoading(true);
       } catch (err) {
         console.error(err);
       }
@@ -75,7 +74,6 @@ function PageDecksCreate() {
           });
 
         setCircumstanceOptions(newCircumstanceOptions);
-        setIsLoading(true);
       } catch (err) {
         console.error(err);
       }
@@ -103,7 +101,6 @@ function PageDecksCreate() {
           });
 
         setConflictOptions(newConflictOptions);
-        setIsLoading(true);
       } catch (err) {
         console.error(err);
       }
@@ -152,15 +149,14 @@ function PageDecksCreate() {
   }
 
   useEffect(() => {
-    populateCharacters();
-    populateCircumstances();
-    populateConflicts();
+    Promise.all([populateCharacters(), populateCircumstances(), populateConflicts()])
+      .then((values) => values && setIsLoading(false));
   }, [populateCharacters, populateCircumstances, populateConflicts]);
 
   return (
     <TemplateDefault data-test="p-create-decks">
       <h1>Create A Deck</h1>
-      <If condition={!isLoading}>
+      <If condition={isLoading}>
         <LoadingAnim />
 
         <Else>

@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
-import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
@@ -9,7 +8,6 @@ import firebaseCollectionsHelper from '../../../firebase/firebase-collections-he
 
 function PageDecks() {
   const user = useSelector((state) => state.user);
-  const history = useHistory();
   const [decks, setDecks] = useState([]);
 
   const populateDecks = useCallback(
@@ -38,10 +36,10 @@ function PageDecks() {
 
   return (
     <TemplateDefault data-test="p-decks">
-      <h1>Your Decks</h1>
+      <h1 className="my-4">Your Decks</h1>
       <CreateDecksBtn>+ Create A Deck</CreateDecksBtn>
 
-      <div className="row">
+      <div className="row mt-4">
         <If condition={!decks}>
           <p>Make some decks!</p>
           <CreateDecksBtn>Create Deck</CreateDecksBtn>
@@ -56,16 +54,12 @@ function PageDecks() {
                 <h2>{deck.name}</h2>
                 <p>{deck.description}</p>
 
-                <button
-                  type="button"
-                  className="btn-primary"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    history.push(`/decks-edit/${deck.id}`);
-                  }}
+                <a
+                  href={`/decks-edit/${deck.id}`}
+                  className="btn-primary p-1 justify-content-center"
                 >
                   Edit
-                </button>
+                </a>
 
                 <button
                   className="btn-warning"

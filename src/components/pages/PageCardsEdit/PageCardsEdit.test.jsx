@@ -1,6 +1,5 @@
 import '../../../tests/mocks/template-default-mocks';
 import '../../../tests/mocks/firebase-mocks';
-// import '../../../tests/mocks/router-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
 import { useParams } from 'react-router-dom';

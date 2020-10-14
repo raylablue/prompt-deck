@@ -1,21 +1,14 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 function CreateCardsBtn({ children }) {
   return (
-    <button
-      type="button"
-      className="btn-primary"
+    <a
+      href="/cards-create"
+      className="btn-primary p-3 my-3"
     >
-      <NavLink
-        to="/cards-create"
-        className="nav-link"
-        activeClassName="chosen"
-      >
-        {children}
-      </NavLink>
-    </button>
+      {children}
+    </a>
   );
 }
 

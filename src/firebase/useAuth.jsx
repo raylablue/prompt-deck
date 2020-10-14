@@ -3,8 +3,6 @@ import * as firebase from 'firebase/app';
 import { useDispatch } from 'react-redux';
 import { setUserAction } from '../redux/actions/set-user/set-user.action';
 
-/* istanbul ignore file */
-
 export const USER_LOCAL_STORAGE_KEY = 'user';
 
 function useAuth() {

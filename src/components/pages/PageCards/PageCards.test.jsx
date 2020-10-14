@@ -70,7 +70,7 @@ describe('PageCards Component', () => {
 
   it('should render the component', async () => {
     const { wrapper } = await setup();
-    const component = findByTestAttr(wrapper, 'page-cards');
+    const component = findByTestAttr(wrapper, 'p-cards');
 
     expect(component.length).toBe(1);
   });
@@ -167,7 +167,7 @@ describe('PageCards Component', () => {
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const deleteBtn = findByTestAttr(wrapper, 'page-cards__delete-card');
+      const deleteBtn = findByTestAttr(wrapper, 'p-cards__delete-card');
 
       expect(deleteBtn.length).toBe(1);
     });
@@ -190,7 +190,7 @@ describe('PageCards Component', () => {
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const cardTitle = findByTestAttr(wrapper, 'page-cards__title');
+      const cardTitle = findByTestAttr(wrapper, 'p-cards__title');
 
       expect(cardTitle.text()).toBe(title);
     });
@@ -202,7 +202,7 @@ describe('PageCards Component', () => {
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const cardType = findByTestAttr(wrapper, 'page-cards__type');
+      const cardType = findByTestAttr(wrapper, 'p-cards__type');
 
       expect(cardType.text()).toBe(type);
     });

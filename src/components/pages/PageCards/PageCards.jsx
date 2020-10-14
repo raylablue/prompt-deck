@@ -54,10 +54,10 @@ function PageCards() {
   return (
     <TemplateDefault>
 
-      <h1>Your Cards</h1>
+      <h1 className="my-4">Your Cards</h1>
       <CreateCardsBtn>+ Create A Card</CreateCardsBtn>
 
-      <div data-test="page-cards" className="row">
+      <div data-test="p-cards" className="row mt-4">
         <If condition={!cards}>
 
           <div data-test="p-cards__alt-message" className="container">

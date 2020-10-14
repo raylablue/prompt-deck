@@ -12,7 +12,7 @@ function PageDecksEdit() {
   const user = useSelector((state) => state.user);
   const history = useHistory();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [characterOptions, setCharacterOptions] = useState([]);
   const [selectedCharacterIds, setSelectedCharacterIds] = useState([]);
   const [circumstanceOptions, setCircumstanceOptions] = useState([]);
@@ -97,7 +97,7 @@ function PageDecksEdit() {
         .filter((i) => i);
       setSelectedConflictIds(selectedConflicts);
 
-      setIsLoading(true);
+      setIsLoading(false);
     },
     [id, populateCharacters, populateCircumstances, populateConflicts],
   );
@@ -147,7 +147,7 @@ function PageDecksEdit() {
     <TemplateDefault data-test="p-decks-edit">
       <h1>Edit Deck</h1>
       <If
-        condition={!isLoading}
+        condition={isLoading}
         data-test="p-decks-edit__loading"
       >
         <LoadingAnim />

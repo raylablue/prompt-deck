@@ -44,6 +44,7 @@ module.exports = {
           '**/*.test.js',
           '**/*.test.jsx',
           'src/tests/**/*.js',
+          'src/tests/**/*.jsx',
           'src/setupTests.js',
         ],
         plugins: ['jest'],
