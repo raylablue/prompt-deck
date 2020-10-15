@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import firebase from '../../../../firebase/firebase';
 
@@ -34,8 +34,10 @@ function UserAuthBtn() {
 
   return (
     <a
+      data-test="user-auth-btn"
       href="/signin"
       className="btn btn-outline-primary p-4 px-5 m-3"
+      onClick={handleClick}
     >
       {userLogin}
     </a>

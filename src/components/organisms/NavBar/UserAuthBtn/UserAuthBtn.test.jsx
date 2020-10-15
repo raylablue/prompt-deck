@@ -48,9 +48,7 @@ describe('User auth button', () => {
       const user = {};
       const { wrapper } = setup(user);
       const buttonText = findByTestAttr(wrapper, 'text-logout');
-      console.log('begin click');
       findByTestAttr(wrapper, 'user-auth-btn').simulate('click');
-      console.log('end click');
 
       expect(buttonText.length).toBe(1);
     });
@@ -59,9 +57,7 @@ describe('User auth button', () => {
       const user = null;
       const { wrapper } = setup(user);
       const buttonText = findByTestAttr(wrapper, 'text-signin');
-      console.log('begin click');
       findByTestAttr(wrapper, 'user-auth-btn').simulate('click');
-      console.log('end click');
 
       expect(buttonText.length).toBe(1);
     });

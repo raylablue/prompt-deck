@@ -127,7 +127,7 @@ describe('PageDecksEdit', () => {
       const { wrapper } = await setup({ deck, cards, deckCardRef });
       wrapper.update();
 
-      const deckName = findByTestAttr(wrapper, 'p-decks-edit__form');
+      const deckName = findByTestAttr(wrapper, 'o-deck-form');
 
       expect(deckName.length).toBe(1);
     });

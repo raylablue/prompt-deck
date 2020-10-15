@@ -29,11 +29,11 @@ const firebaseCollectionsHelper = {
     .collection('cards')
     .doc(cardId),
 
-  updateDeck: async (deckId, newDeck) => {
+  updateDeck: async (deckId, deck) => {
     await firebase.db
       .collection('decks')
       .doc(deckId)
-      .set(newDeck);
+      .set(deck);
   },
 
   getAllDecksByUserId: async (userId) => {

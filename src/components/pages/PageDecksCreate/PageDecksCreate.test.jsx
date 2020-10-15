@@ -108,7 +108,7 @@ describe('PageDecksCreate', () => {
 
       const { wrapper } = await setup({ decks, cards });
       wrapper.update();
-      const nameInput = findByTestAttr(wrapper, 'p-decks-create__name');
+      const nameInput = findByTestAttr(wrapper, 'o-deck-form__name');
 
       expect(nameInput.length).toBe(1);
     });
@@ -130,7 +130,7 @@ describe('PageDecksCreate', () => {
       const newDeck = {
         name,
         description,
-        visibility: 'public',
+        visibility: 'private',
         createdBy,
         characterCards,
         circumstanceCards,
@@ -140,27 +140,27 @@ describe('PageDecksCreate', () => {
       const { wrapper, spyAdd } = await setup({ user, decks });
       wrapper.update();
 
-      const nameInput = findByTestAttr(wrapper, 'p-decks-create__name');
+      const nameInput = findByTestAttr(wrapper, 'o-deck-form__name');
       const mockNameInput = { target: { value: name } };
       nameInput.simulate('change', mockNameInput);
 
-      const descriptionInput = findByTestAttr(wrapper, 'p-decks-create__description');
+      const descriptionInput = findByTestAttr(wrapper, 'o-deck-form__description');
       const mockDescriptionInput = { target: { value: description } };
       descriptionInput.simulate('change', mockDescriptionInput);
 
-      const characterCardsInput = findByTestAttr(wrapper, 'p-decks-create__characters');
+      const characterCardsInput = findByTestAttr(wrapper, 'o-deck-form__characters');
       const mockCharacterCardsInput = { target: { value: characterCards } };
       characterCardsInput.simulate('change', mockCharacterCardsInput);
 
-      const circumstanceCardsInput = findByTestAttr(wrapper, 'p-decks-create__circumstances');
+      const circumstanceCardsInput = findByTestAttr(wrapper, 'o-deck-form__circumstances');
       const mockCircumstanceCardsInput = { target: { value: circumstanceCards } };
       circumstanceCardsInput.simulate('change', mockCircumstanceCardsInput);
 
-      const conflictCardsInput = findByTestAttr(wrapper, 'p-decks-create__conflicts');
+      const conflictCardsInput = findByTestAttr(wrapper, 'o-deck-form__conflicts');
       const mockConflictCardsInput = { target: { value: conflictCards } };
       conflictCardsInput.simulate('change', mockConflictCardsInput);
 
-      const submitForm = findByTestAttr(wrapper, 'p-decks-create__submit');
+      const submitForm = findByTestAttr(wrapper, 'o-deck-form__submit');
       await submitForm.simulate('submit', { preventDefault: spyPreventDefault });
 
       expect(spyAdd).toHaveBeenCalledWith(newDeck);
