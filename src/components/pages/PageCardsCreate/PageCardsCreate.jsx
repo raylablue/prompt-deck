@@ -1,6 +1,6 @@
 import React from 'react';
 import { If, Else } from 'react-if';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import CardForm from '../../organisms/CardForm/CardForm';

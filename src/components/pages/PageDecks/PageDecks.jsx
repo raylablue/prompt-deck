@@ -55,7 +55,7 @@ function PageDecks() {
                 <p>{deck.description}</p>
 
                 <a
-                  href={`/decks-edit/${deck.id}`}
+                  href={`/decks/${deck.id}`}
                   className="btn-primary p-1 justify-content-center"
                 >
                   Edit

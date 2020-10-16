@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function CreateCardsBtn({ children }) {
   return (
     <a
-      href="/cards-create"
+      href="/cards/create"
       className="btn-primary p-3 my-3"
     >
       {children}

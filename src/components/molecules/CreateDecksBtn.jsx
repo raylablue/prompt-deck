@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function CreateDecksBtn({ children }) {
   return (
     <a
-      href="/decks-create"
+      href="/decks/create"
       className="btn-primary p-3 my-3"
     >
       {children}

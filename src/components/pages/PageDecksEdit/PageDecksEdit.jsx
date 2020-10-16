@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';

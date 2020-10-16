@@ -19,7 +19,7 @@ function CardsMap({ card, handleDelete }) {
       <CardsDisplay card={card} />
 
       <a
-        href={`/cards-edit/${card.id}`}
+        href={`/cards/${card.id}`}
         className="btn-primary p-2 px-4 mr-2"
       >
         Edit

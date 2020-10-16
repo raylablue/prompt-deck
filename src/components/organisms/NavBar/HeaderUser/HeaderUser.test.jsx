@@ -1,7 +1,7 @@
 import '../../../../tests/mocks/firebase-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { findByTestAttr } from '../../../../tests/testUtils';

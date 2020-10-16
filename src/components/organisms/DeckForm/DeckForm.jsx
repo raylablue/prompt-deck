@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MultiSelect from 'react-multi-select-component';
-import { useHistory } from 'react-router';
+import { useHistory } from 'react-router-dom';
 
 function DeckForm({
   initialDeck,

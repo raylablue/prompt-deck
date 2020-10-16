@@ -2,7 +2,7 @@ import '../../../tests/mocks/firebase-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 import PageDecks from './PageDecks';

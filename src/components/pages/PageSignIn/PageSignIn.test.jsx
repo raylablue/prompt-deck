@@ -4,7 +4,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 import { mount } from 'enzyme';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import PageSignIn from './PageSignIn';
 import { findByTestAttr } from '../../../tests/testUtils';
 
