@@ -195,18 +195,6 @@ describe('PageCards Component', () => {
       expect(cardTitle.text()).toBe(title);
     });
 
-    xit('should show the card type', async () => {
-      const type = 'Variety';
-      const cards = [cardMock()];
-      cards[0].type = type;
-
-      const { wrapper } = await setup({ cards });
-      wrapper.update();
-      const cardType = findByTestAttr(wrapper, 'p-cards__type');
-
-      expect(cardType.text()).toBe(type);
-    });
-
     it('should show the card side one', async () => {
       const sideOne = 'Alpha';
       const cards = [cardMock()];
@@ -260,7 +248,7 @@ describe('PageCards Component', () => {
     });
   });
 
-  xit('should display alternate message when no cards are returned', async () => {
+  it('should display alternate message when no cards are returned', async () => {
     const cards = [];
 
     const { wrapper } = await setup({ cards });

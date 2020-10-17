@@ -149,40 +149,4 @@ describe('PageDecksEdit', () => {
       expect(loadingState.length).toBe(1);
     });
   });
-
-  describe('getCardRef to save card reference with cardId', () => {
-    xit('should call getCardRef', async () => {
-      const cardId = 'testIdString';
-      const deck = {
-        characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
-        circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
-        conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
-      };
-      const deckCardRef = deck.cardRef;
-      const cards = [{ label: 'nameThings', value: 'asdfh12354' }];
-
-      const { spyGetCardRef } = await setup({
-        cardId, cards, deck, deckCardRef,
-      });
-
-      expect(spyGetCardRef).toBeCalled();
-    });
-  });
-
-  describe('handleUpdate function', () => {
-    xit('should call handleUpdate', async () => {
-      // const deck = deckMock();
-      const deck = {
-        characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
-        circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
-        conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
-      };
-      const deckCardRef = deck.cardRef;
-      const cards = [{ label: 'nameThings', value: 'asdfh12354' }];
-
-      const { spyHandleUpdate } = await setup({ deck, cards, deckCardRef });
-
-      expect(spyHandleUpdate).toBeCalled();
-    });
-  });
 });

@@ -77,11 +77,10 @@ describe('Page Cards Edit', () => {
       expect(spyCollection).toBeCalledWith('cards');
     });
 
-    xit('should call document with the expected id', async () => {
-      const id = 'abc';
-      useParams.mockImplementation(() => ({ id }));
+    it('should call document with the expected id', async () => {
+      const { id } = cardMock().id;
 
-      const { spyDoc } = await setup();
+      const { spyDoc } = await setup({ id });
 
       expect(spyDoc).toBeCalledWith(id);
     });

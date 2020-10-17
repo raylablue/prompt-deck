@@ -58,7 +58,7 @@ function PageCards() {
       <CreateCardsBtn>+ Create A Card</CreateCardsBtn>
 
       <div data-test="p-cards" className="row mt-4">
-        <If condition={!cards}>
+        <If condition={cards.length <= 0}>
 
           <div data-test="p-cards__alt-message" className="container">
             <h2>You don&apos;t have any cards yet</h2>
