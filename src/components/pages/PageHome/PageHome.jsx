@@ -19,25 +19,37 @@ function PageHome() {
     // rather than re-calling firebase every time.
   // pass that state to CardsDisplay to display the new card
   return (
-    <TemplateDefault data-test="p-home">
+    <TemplateDefault
+      data-test="p-home"
+    >
       <h1>Home</h1>
       <h2>Prompt</h2>
 
-      <div data-test="p-home__prompt">
-        <CardsDisplay
-          data-test="p-home__character-card"
-          card={cardDefault}
-        />
+      <div
+        data-test="p-home__prompt"
+        className="row"
+      >
 
-        <CardsDisplay
-          data-test="p-home__circumstance-card"
-          card={cardDefault}
-        />
+        <div className="col-sm">
+          <CardsDisplay
+            data-test="p-home__character-card"
+            card={cardDefault}
+          />
+        </div>
 
-        <CardsDisplay
-          data-test="p-home__conflict-card"
-          card={cardDefault}
-        />
+        <div className="col-sm">
+          <CardsDisplay
+            data-test="p-home__circumstance-card"
+            card={cardDefault}
+          />
+        </div>
+
+        <div className="col-sm">
+          <CardsDisplay
+            data-test="p-home__conflict-card"
+            card={cardDefault}
+          />
+        </div>
       </div>
 
     </TemplateDefault>
