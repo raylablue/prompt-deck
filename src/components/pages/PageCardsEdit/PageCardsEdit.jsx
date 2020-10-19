@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { If, Else, Then } from 'react-if';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
@@ -8,29 +8,40 @@ import CardForm from '../../organisms/CardForm/CardForm';
 
 function PageCardsEdit() {
   const { id } = useParams();
+  const history = useHistory();
   const [initialCard, setInitialCard] = useState({});
 
   const populateData = useCallback(
     async () => {
-      const response = await firebase.db
-        .collection('cards')
-        .doc(id)
-        .get();
+      try {
+        const response = await firebase.db
+          .collection('cards')
+          .doc(id)
+          .get();
 
-      const cardData = response.data();
-      setInitialCard(cardData);
+        const cardData = response.data();
+        setInitialCard(cardData);
+      } catch (err) {
+        console.error(err);
+      }
     },
     [id],
   );
 
   const handleUpdate = useCallback(
     async (updateCard) => {
-      await firebase.db
-        .collection('cards')
-        .doc(id)
-        .set(updateCard);
+      try {
+        await firebase.db
+          .collection('cards')
+          .doc(id)
+          .set(updateCard);
+
+        history.push('/cards');
+      } catch (err) {
+        console.error(err);
+      }
     },
-    [id],
+    [id, history],
   );
 
   useEffect(() => {

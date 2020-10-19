@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function CreateCardsBtn({ children }) {
+function CreateDecksBtn({ children }) {
   return (
     <a
-      href="/cards/create"
+      href="/decks/create"
       className="btn-primary p-3 my-3"
     >
       {children}
@@ -12,9 +12,9 @@ function CreateCardsBtn({ children }) {
   );
 }
 
-CreateCardsBtn.propTypes = {
+CreateDecksBtn.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   children: PropTypes.any.isRequired,
 };
 
-export default CreateCardsBtn;
+export default CreateDecksBtn;

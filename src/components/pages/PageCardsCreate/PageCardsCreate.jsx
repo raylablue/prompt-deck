@@ -1,19 +1,31 @@
 import React from 'react';
 import { If, Else } from 'react-if';
+import { useHistory } from 'react-router-dom';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import CardForm from '../../organisms/CardForm/CardForm';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 
-function PageCreateCards() {
-  const initialCard = {};
+function PageCardsCreate() {
+  const initialCard = {
+    cardTitle: '',
+    createdBy: '',
+    type: '',
+    side1: '',
+    side2: '',
+    side3: '',
+    side4: '',
+  };
+  const history = useHistory();
 
   async function handleCreateCard(newCard) {
     try {
       await firebase.db.collection('cards').add(newCard);
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error(err);
     }
+    history.push('/cards');
   }
 
   return (
@@ -37,4 +49,4 @@ function PageCreateCards() {
   );
 }
 
-export default PageCreateCards;
+export default PageCardsCreate;

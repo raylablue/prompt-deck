@@ -61,9 +61,10 @@ function CardForm({ initialCard, handleSubmit, content }) {
           id="type"
           required="required"
         >
+          <option>--Select One--</option>
           {types.map((category) => (
             <option
-              key={category.id}
+              key={category.name}
               value={category.name}
             >
               {category.name}

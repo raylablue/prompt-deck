@@ -1,9 +1,8 @@
 import '../../../tests/mocks/template-default-mocks';
 import '../../../tests/mocks/firebase-mocks';
-import '../../../tests/mocks/router-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
-import { useParams } from 'react-router-dom';
+import { useParams, MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
@@ -49,7 +48,9 @@ describe('Page Cards Edit', () => {
     await act(async () => {
       wrapper = await mount(
         <Provider store={store}>
-          <PageCardsEdit />
+          <MemoryRouter>
+            <PageCardsEdit />
+          </MemoryRouter>
         </Provider>,
       );
     });
@@ -77,16 +78,15 @@ describe('Page Cards Edit', () => {
     });
 
     it('should call document with the expected id', async () => {
-      const id = 'abc';
-      useParams.mockImplementation(() => ({ id }));
+      const { id } = cardMock().id;
 
-      const { spyDoc } = await setup();
+      const { spyDoc } = await setup({ id });
 
       expect(spyDoc).toBeCalledWith(id);
     });
 
     it('should render the card', async () => {
-      const card = cardMock;
+      const card = cardMock();
 
       const { wrapper } = await setup({ card });
       wrapper.update();
@@ -260,6 +260,7 @@ describe('Page Cards Edit', () => {
       const side2 = 'Villager needs 5 pieces of wood';
       const side3 = 'How many licks does it take to get to the center of a tootsie pop';
       const side4 = 'Say hi to everyone in town';
+      const { id } = card;
 
       const updateCard = {
         cardTitle,
@@ -269,6 +270,7 @@ describe('Page Cards Edit', () => {
         side2,
         side3,
         side4,
+        id,
       };
 
       const { wrapper, spySet } = await setup({ user, card, types });

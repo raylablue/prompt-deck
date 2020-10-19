@@ -17,4 +17,12 @@ describe('user authentication', () => {
     expect(auth.getState().user)
       .toEqual(JSON.parse(user));
   });
+  it('should set user to null if there is already a user signed in', () => {
+    const user = { identifier: 'test@asdf.com', userId: '123abc' };
+    localStorage.setItem.mockReturnValue(user);
+
+    const auth = storeInit();
+
+    expect(auth.getState().user).toEqual(null);
+  });
 });

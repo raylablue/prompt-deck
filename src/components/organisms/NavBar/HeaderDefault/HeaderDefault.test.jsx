@@ -2,7 +2,7 @@ import '../../../../tests/mocks/firebase-mocks';
 import '../../../../tests/mocks/redux-mock';
 import React from 'react';
 import { mount } from 'enzyme';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import { findByTestAttr } from '../../../../tests/testUtils';
 import HeaderDefault from './HeaderDefault';
 

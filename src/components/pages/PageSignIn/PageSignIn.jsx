@@ -10,32 +10,35 @@ function PageSignIn() {
 
   useEffect(() => {
     if (!user) {
-      firebase.ui.start('#firebase-sign-in', uiConfig);
+      try {
+        firebase.ui.start('#firebase-sign-in', uiConfig);
+      } catch (err) {
+        console.error(err);
+      }
     }
   }, [user]);
 
   return (
     <TemplateDefault>
-      <If condition={user}>
-
+      <If condition={!user}>
         <div
-          data-test="already-signed-in-message"
+          data-test="signin-widget"
+          className="container"
         >
-          <h2>You are already signed in</h2>
-          <p>
-            thanks for setting up your account. Sadly not much
-            left to do here unless you would like to log out so
-            you can sign back in again.
-          </p>
+          <h1>Sign In</h1>
+          <div id="firebase-sign-in" />
         </div>
 
         <Else>
           <div
-            data-test="signin-widget"
-            className="container"
+            data-test="already-signed-in-message"
           >
-            <h1>Sign In</h1>
-            <div id="firebase-sign-in" />
+            <h2>You are already signed in</h2>
+            <p>
+              thanks for setting up your account. Sadly not much
+              left to do here unless you would like to log out so
+              you can sign back in again.
+            </p>
           </div>
         </Else>
 
