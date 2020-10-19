@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { v4 } from 'uuid';
 // eslint-disable-next-line import/prefer-default-export
 export const cardMock = () => {
   const cardTitle = 'Sample title';
@@ -16,5 +18,16 @@ export const cardMock = () => {
     side2,
     side3,
     side4,
+    id: v4(),
   };
 };
+
+export const deckMock = () => ({
+  name: 'My Deck',
+  description: 'This describes stuff',
+  visibility: 'public',
+  characterCards: [{ label: 'Character', value: 'CharacterIdPath' }],
+  circumstanceCards: [{ label: 'Circumstance', value: 'CircumstanceIdPath' }],
+  conflictCards: [{ label: 'Conflict', value: 'ConflictIdPath' }],
+  id: v4(),
+});

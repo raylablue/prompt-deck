@@ -2,7 +2,7 @@ import '../../../tests/mocks/firebase-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 import configureMockStore from 'redux-mock-store';
 import { v4 } from 'uuid';
 import { act } from 'react-dom/test-utils';
@@ -28,6 +28,7 @@ describe('PageCards Component', () => {
       user: {
         uid: userId,
       },
+      type: 'Character',
     });
 
     const spyCollection = jest.spyOn(firebase.db, 'collection');
@@ -69,7 +70,7 @@ describe('PageCards Component', () => {
 
   it('should render the component', async () => {
     const { wrapper } = await setup();
-    const component = findByTestAttr(wrapper, 'page-cards');
+    const component = findByTestAttr(wrapper, 'p-cards');
 
     expect(component.length).toBe(1);
   });
@@ -89,22 +90,71 @@ describe('PageCards Component', () => {
       expect(spyWhere).toBeCalledWith('createdBy', '==', userId);
     });
 
-    it('should display the returned card', async () => {
+    it('should display the returned character card', async () => {
       const cards = [cardMock()];
+      cards[0].type = 'Character';
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const card = findByTestAttr(wrapper, 'page-cards__card');
+      const card = findByTestAttr(wrapper, 'p-cards__card');
 
       expect(card.length).toBe(1);
     });
 
-    it('should display two returned cards', async () => {
+    it('should display two returned character cards', async () => {
       const cards = [cardMock(), cardMock()];
+      cards[0].type = 'Character';
+      cards[1].type = 'Character';
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const cardsEl = findByTestAttr(wrapper, 'page-cards__card');
+      const cardsEl = findByTestAttr(wrapper, 'p-cards__card');
+
+      expect(cardsEl.length).toBe(2);
+    });
+
+    it('should display the returned circumstance card', async () => {
+      const cards = [cardMock()];
+      cards[0].type = 'Circumstance';
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const card = findByTestAttr(wrapper, 'p-cards__card');
+
+      expect(card.length).toBe(1);
+    });
+
+    it('should display two returned circumstance cards', async () => {
+      const cards = [cardMock(), cardMock()];
+      cards[0].type = 'Circumstance';
+      cards[1].type = 'Circumstance';
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const cardsEl = findByTestAttr(wrapper, 'p-cards__card');
+
+      expect(cardsEl.length).toBe(2);
+    });
+
+    it('should display the returned conflict card', async () => {
+      const cards = [cardMock()];
+      cards[0].type = 'Conflict';
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const card = findByTestAttr(wrapper, 'p-cards__card');
+
+      expect(card.length).toBe(1);
+    });
+
+    it('should display two returned conflict cards', async () => {
+      const cards = [cardMock(), cardMock()];
+      cards[0].type = 'Conflict';
+      cards[1].type = 'Conflict';
+
+      const { wrapper } = await setup({ cards });
+      wrapper.update();
+      const cardsEl = findByTestAttr(wrapper, 'p-cards__card');
 
       expect(cardsEl.length).toBe(2);
     });
@@ -113,10 +163,11 @@ describe('PageCards Component', () => {
   describe('handle delete function', () => {
     it('should render the delete button when there are cards', async () => {
       const cards = [cardMock()];
+      cards[0].type = 'Character';
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const deleteBtn = findByTestAttr(wrapper, 'page-cards__delete-card');
+      const deleteBtn = findByTestAttr(wrapper, 'p-cards__delete-card');
 
       expect(deleteBtn.length).toBe(1);
     });
@@ -135,34 +186,24 @@ describe('PageCards Component', () => {
       const title = 'This is a Title';
       const cards = [cardMock()];
       cards[0].cardTitle = title;
+      cards[0].type = 'Character';
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const cardTitle = findByTestAttr(wrapper, 'page-cards__title');
+      const cardTitle = findByTestAttr(wrapper, 'p-cards__title');
 
       expect(cardTitle.text()).toBe(title);
-    });
-
-    it('should show the card type', async () => {
-      const type = 'Variety';
-      const cards = [cardMock()];
-      cards[0].type = type;
-
-      const { wrapper } = await setup({ cards });
-      wrapper.update();
-      const cardType = findByTestAttr(wrapper, 'page-cards__type');
-
-      expect(cardType.text()).toBe(type);
     });
 
     it('should show the card side one', async () => {
       const sideOne = 'Alpha';
       const cards = [cardMock()];
       cards[0].side1 = sideOne;
+      cards[0].type = 'Character';
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const cardSideOne = findByTestAttr(wrapper, 'page-cards__side-one');
+      const cardSideOne = findByTestAttr(wrapper, 'p-cards__side-one');
 
       expect(cardSideOne.text()).toBe(sideOne);
     });
@@ -171,10 +212,11 @@ describe('PageCards Component', () => {
       const sideTwo = 'Beta';
       const cards = [cardMock()];
       cards[0].side2 = sideTwo;
+      cards[0].type = 'Character';
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const cardSideTwo = findByTestAttr(wrapper, 'page-cards__side-two');
+      const cardSideTwo = findByTestAttr(wrapper, 'p-cards__side-two');
 
       expect(cardSideTwo.text()).toBe(sideTwo);
     });
@@ -183,10 +225,11 @@ describe('PageCards Component', () => {
       const sideThree = 'Gamma';
       const cards = [cardMock()];
       cards[0].side3 = sideThree;
+      cards[0].type = 'Character';
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const cardSideThree = findByTestAttr(wrapper, 'page-cards__side-three');
+      const cardSideThree = findByTestAttr(wrapper, 'p-cards__side-three');
 
       expect(cardSideThree.text()).toBe(sideThree);
     });
@@ -195,10 +238,11 @@ describe('PageCards Component', () => {
       const sideFour = 'Omega';
       const cards = [cardMock()];
       cards[0].side4 = sideFour;
+      cards[0].type = 'Character';
 
       const { wrapper } = await setup({ cards });
       wrapper.update();
-      const cardSideFour = findByTestAttr(wrapper, 'page-cards__side-four');
+      const cardSideFour = findByTestAttr(wrapper, 'p-cards__side-four');
 
       expect(cardSideFour.text()).toBe(sideFour);
     });
@@ -209,7 +253,7 @@ describe('PageCards Component', () => {
 
     const { wrapper } = await setup({ cards });
     wrapper.update();
-    const noCardsMessage = findByTestAttr(wrapper, 'page-cards__alt-message');
+    const noCardsMessage = findByTestAttr(wrapper, 'p-cards__alt-message');
 
     expect(noCardsMessage.length).not.toBe(0);
   });

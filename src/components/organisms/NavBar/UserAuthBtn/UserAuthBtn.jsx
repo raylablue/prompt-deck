@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import firebase from '../../../../firebase/firebase';
 
@@ -33,20 +33,14 @@ function UserAuthBtn() {
   }, [user, updateLoginBtn]);
 
   return (
-    <button
+    <a
       data-test="user-auth-btn"
-      className="btn btn-outline-primary"
-      type="button"
+      href="/signin"
+      className="btn btn-outline-primary p-4 px-5 m-3"
       onClick={handleClick}
     >
-      <NavLink
-        to="/signin"
-        className="nav-link"
-        activeClassName="chosen"
-      >
-        {userLogin}
-      </NavLink>
-    </button>
+      {userLogin}
+    </a>
   );
 }
 

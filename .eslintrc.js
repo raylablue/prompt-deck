@@ -29,6 +29,14 @@ module.exports = {
         "assert": "either",
         "depth": 3,
       }],
+      "no-console": "off",
+      "no-restricted-syntax": [
+        "error",
+        {
+          "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+          "message": "Unexpected property on console object was called"
+        }
+      ],
     },
     overrides: [
       {
@@ -36,6 +44,7 @@ module.exports = {
           '**/*.test.js',
           '**/*.test.jsx',
           'src/tests/**/*.js',
+          'src/tests/**/*.jsx',
           'src/setupTests.js',
         ],
         plugins: ['jest'],
