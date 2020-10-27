@@ -2,6 +2,7 @@ import '../../tests/mocks/firebase-mocks';
 import { v4 } from 'uuid';
 import firebase from '../firebase';
 import firebaseCollectionsHelper from './firebase-collections-helper';
+import { cardMock } from '../../utils/mocks';
 
 describe('firebase collections helper', () => {
   describe('getAllCardsDataByType method', () => {
@@ -118,13 +119,65 @@ describe('firebase collections helper', () => {
     });
   });
 
-  describe('getDeckData method', () => {
+  // describe('getDeckData method', () => {
+  //   const setup = async () => {
+  //     const deck = {};
+  //     const spyCollection = jest.spyOn(firebase.db, 'collection');
+  //
+  //     const spyGet = jest.fn();
+  //     spyGet.mockReturnValue(Promise.resolve({ data: () => deck }));
+  //
+  //     const spyDoc = jest.fn();
+  //     spyDoc.mockReturnValue({
+  //       get: spyGet,
+  //     });
+  //
+  //     spyCollection.mockReturnValue({
+  //       doc: spyDoc,
+  //     });
+  //
+  //     return {
+  //       spyCollection,
+  //       spyDoc,
+  //       spyGet,
+  //     };
+  //   };
+  //   it('should call the firebase collection decks', async () => {
+  //     const collection = 'decks';
+  //
+  //     const { spyCollection } = await setup();
+  //     await firebaseCollectionsHelper.getDeckData();
+  //
+  //     expect(spyCollection).toBeCalledWith(collection);
+  //   });
+  //
+  //   it('should call the firebase document by deckId', async () => {
+  //     const deckId = 'IisUserId';
+  //
+  //     const { spyDoc } = await setup();
+  //     await firebaseCollectionsHelper.getDeckData(deckId);
+  //
+  //     expect(spyDoc).toBeCalledWith(deckId);
+  //   });
+  //
+  //   it('should call firebase get', async () => {
+  //     const deckId = 'IisUserId';
+  //
+  //     const { spyGet } = await setup();
+  //     await firebaseCollectionsHelper.getDeckData(deckId);
+  //
+  //     expect(spyGet).toBeCalled();
+  //   });
+  // });
+
+  describe('getSelectedCardData method', () => {
     const setup = async () => {
-      const deck = {};
+      const card = cardMock();
+
       const spyCollection = jest.spyOn(firebase.db, 'collection');
 
       const spyGet = jest.fn();
-      spyGet.mockReturnValue(Promise.resolve({ data: () => deck }));
+      spyGet.mockReturnValue(Promise.resolve({ data: () => card }));
 
       const spyDoc = jest.fn();
       spyDoc.mockReturnValue({
@@ -138,35 +191,36 @@ describe('firebase collections helper', () => {
       return {
         spyCollection,
         spyDoc,
-        spyGet,
       };
     };
-    it('should call the firebase collection decks', async () => {
-      const collection = 'decks';
+
+    it('should call firebase collection cards', async () => {
+      const collection = 'cards';
+      const cardId = { value: 'disCardIdString' };
 
       const { spyCollection } = await setup();
-      await firebaseCollectionsHelper.getDeckData();
+      await firebaseCollectionsHelper.getSelectedCardData(cardId);
 
       expect(spyCollection).toBeCalledWith(collection);
     });
 
-    it('should call the firebase document by deckId', async () => {
-      const deckId = 'IisUserId';
+    it('should call firebase document with the value of the cardId object', async () => {
+      const cardId = { value: 'disCardIdString' };
 
       const { spyDoc } = await setup();
-      await firebaseCollectionsHelper.getDeckData(deckId);
+      await firebaseCollectionsHelper.getSelectedCardData(cardId);
 
-      expect(spyDoc).toBeCalledWith(deckId);
+      expect(spyDoc).toBeCalledWith(cardId);
     });
 
-    it('should call firebase get', async () => {
-      const deckId = 'IisUserId';
-
-      const { spyGet } = await setup();
-      await firebaseCollectionsHelper.getDeckData(deckId);
-
-      expect(spyGet).toBeCalled();
-    });
+    // it('should call firebase get', async () => {
+    //   const cardId = { value: 'disCardIdString' };
+    //
+    //   const { spyGet } = await setup();
+    //   await firebaseCollectionsHelper.getSelectedCardData(cardId);
+    //
+    //   expect(spyGet).toBeCalled();
+    // });
   });
 
   describe('getCardRef method', () => {

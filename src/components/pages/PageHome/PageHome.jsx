@@ -1,23 +1,74 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { If, Else } from 'react-if';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
+import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
+import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 
 function PageHome() {
-  const cardDefault = {
-    cardTitle: 'Card',
-    type: 'lol',
-    side1: 'this',
-    side2: 'is',
-    side3: 'a',
-    side4: 'test',
-  };
-  // firebase collections helper call to
-    // firebase.db.collection('decks').where("visibility", "==", "featured").get
-  // get the card data off of the deck by type
-  // randomly get one card from each category and set card or typeCard value to that
-    // this random getting should be a re-usable button call,
-    // rather than re-calling firebase every time.
-  // pass that state to CardsDisplay to display the new card
+  const [characterCard, setCharacterCard] = useState({});
+  const [circumstanceCard, setCircumstanceCard] = useState({});
+  const [conflictCard, setConflictCard] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  const cardData = useCallback(
+    async (cardId) => {
+      const response = await firebaseCollectionsHelper
+        .getSelectedCardData(cardId);
+
+      return response;
+    },
+    [],
+  );
+
+  const populateData = useCallback(
+    async () => {
+      const deckData = await firebaseCollectionsHelper
+        .getDeckDataByVisibilityFeatured();
+
+      const randomDeck = deckData[Math.floor(Math.random() * deckData.length)];
+
+      // CHARACTER CARDS
+      const characterCardIds = randomDeck.characterCards.map((card) => (card.cardRef.id));
+      const characterCardOptions = await Promise
+        .all(characterCardIds.map((cardId) => cardData(cardId)));
+
+      const randomCharacterCard = characterCardOptions[
+        Math.floor(Math.random() * characterCardOptions.length)
+      ];
+      setCharacterCard(randomCharacterCard);
+
+      // CIRCUMSTANCE CARDS
+      const circumstanceCardIds = randomDeck.circumstanceCards.map((card) => (card.cardRef.id));
+      const circumstanceCardOptions = await Promise
+        .all(circumstanceCardIds.map((cardId) => cardData(cardId)));
+
+      const randomCircumstanceCard = circumstanceCardOptions[
+        Math.floor(Math.random() * circumstanceCardOptions.length)
+      ];
+      setCircumstanceCard(randomCircumstanceCard);
+
+      // CONFLICT CARDS
+      const conflictCardIds = randomDeck.conflictCards.map((card) => (card.cardRef.id));
+      const conflictCardOptions = await Promise
+        .all(conflictCardIds.map((cardId) => cardData(cardId)));
+
+      const randomConflictCard = conflictCardOptions[
+        Math.floor(Math.random() * conflictCardOptions.length)
+      ];
+      setConflictCard(randomConflictCard);
+
+      setIsLoading(false);
+    },
+    [cardData],
+  );
+  // @TODO store (Redux) the featured deck data and the cards when app loads
+  // @TODO function to call store to randomly get card data & attach to re-shuffle button
+
+  useEffect(() => {
+    populateData();
+  }, [populateData]);
+
   return (
     <TemplateDefault
       data-test="p-home"
@@ -25,32 +76,38 @@ function PageHome() {
       <h1>Home</h1>
       <h2>Prompt</h2>
 
-      <div
-        data-test="p-home__prompt"
-        className="row"
-      >
+      <If condition={isLoading}>
+        <LoadingAnim />
 
-        <div className="col-sm">
-          <CardsDisplay
-            data-test="p-home__character-card"
-            card={cardDefault}
-          />
-        </div>
+        <Else>
+          <div
+            data-test="p-home__prompt"
+            className="row"
+          >
 
-        <div className="col-sm">
-          <CardsDisplay
-            data-test="p-home__circumstance-card"
-            card={cardDefault}
-          />
-        </div>
+            <div className="col-sm">
+              <CardsDisplay
+                data-test="p-home__character-card"
+                card={characterCard}
+              />
+            </div>
 
-        <div className="col-sm">
-          <CardsDisplay
-            data-test="p-home__conflict-card"
-            card={cardDefault}
-          />
-        </div>
-      </div>
+            <div className="col-sm">
+              <CardsDisplay
+                data-test="p-home__circumstance-card"
+                card={circumstanceCard}
+              />
+            </div>
+
+            <div className="col-sm">
+              <CardsDisplay
+                data-test="p-home__conflict-card"
+                card={conflictCard}
+              />
+            </div>
+          </div>
+        </Else>
+      </If>
 
     </TemplateDefault>
   );
