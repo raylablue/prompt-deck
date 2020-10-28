@@ -25,6 +25,19 @@ const firebaseCollectionsHelper = {
     return cardRef.data();
   },
 
+  getCardRef: (cardId) => firebase.db
+    .collection('cards')
+    .doc(cardId),
+
+  getCardData: async (cardId) => {
+    const response = await firebase.db
+      .collection('cards')
+      .doc(cardId)
+      .get();
+
+    return response.data();
+  },
+
   getDeckDataByVisibilityFeatured: async () => {
     const response = await firebase.db
       .collection('decks')
@@ -43,19 +56,6 @@ const firebaseCollectionsHelper = {
     const response = await firebase.db
       .collection('decks')
       .doc(deckId)
-      .get();
-
-    return response.data();
-  },
-
-  getCardRef: (cardId) => firebase.db
-    .collection('cards')
-    .doc(cardId),
-
-  getCardData: async (cardId) => {
-    const response = await firebase.db
-      .collection('cards')
-      .doc(cardId)
       .get();
 
     return response.data();

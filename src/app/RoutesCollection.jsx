@@ -9,6 +9,8 @@ import PageCardsCreate from '../components/pages/PageCardsCreate/PageCardsCreate
 import PageCardsEdit from '../components/pages/PageCardsEdit/PageCardsEdit';
 import PageCards from '../components/pages/PageCards/PageCards';
 
+/* istanbul ignore file */
+
 const Routes = [
   {
     path: '/signin',
