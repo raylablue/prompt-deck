@@ -71,7 +71,7 @@ describe('Home page', () => {
 
       const { wrapper } = await setup({ decks });
       wrapper.update();
-      const prompt = findByTestAttr(wrapper, 'p-home__prompt');
+      const prompt = findByTestAttr(wrapper, 'o-prompts-display__prompt');
       expect(prompt.length).toBe(1);
     });
 
@@ -80,7 +80,7 @@ describe('Home page', () => {
 
       const { wrapper } = await setup({ decks });
       wrapper.update();
-      const characterCard = findByTestAttr(wrapper, 'p-home__character-card');
+      const characterCard = findByTestAttr(wrapper, 'o-prompts-display__character-card');
       expect(characterCard.length).toBe(1);
     });
 
@@ -89,7 +89,7 @@ describe('Home page', () => {
 
       const { wrapper } = await setup({ decks });
       wrapper.update();
-      const circumstanceCard = findByTestAttr(wrapper, 'p-home__circumstance-card');
+      const circumstanceCard = findByTestAttr(wrapper, 'o-prompts-display__circumstance-card');
       expect(circumstanceCard.length).toBe(1);
     });
 
@@ -98,7 +98,7 @@ describe('Home page', () => {
 
       const { wrapper } = await setup({ decks });
       wrapper.update();
-      const conflictCard = findByTestAttr(wrapper, 'p-home__conflict-card');
+      const conflictCard = findByTestAttr(wrapper, 'o-prompts-display__conflict-card');
       expect(conflictCard.length).toBe(1);
     });
   });

@@ -1,10 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
 import TemplateDefault from '../../Templates/TemplateDefault';
-import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
-import PromptsDisplay from "../../organisms/PromptsDisplay/PromptsDisplay";
+import PromptsDisplay from '../../organisms/PromptsDisplay/PromptsDisplay';
 
 function PageHome() {
   const [characterCard, setCharacterCard] = useState({});

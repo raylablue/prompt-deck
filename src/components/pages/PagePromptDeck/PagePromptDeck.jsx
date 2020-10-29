@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
-import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
-import PromptsDisplay from "../../organisms/PromptsDisplay/PromptsDisplay";
+import PromptsDisplay from '../../organisms/PromptsDisplay/PromptsDisplay';
 
 function PagePromptDeck() {
   const { id } = useParams();
