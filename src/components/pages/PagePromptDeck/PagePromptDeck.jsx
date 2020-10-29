@@ -64,7 +64,7 @@ function PagePromptDeck() {
 
       setIsLoading(false);
     },
-    [cardData],
+    [cardData, id],
   );
 
   useEffect(() => {

@@ -65,44 +65,6 @@ describe('Prompts page', () => {
     expect(component.length).toBe(1);
   });
 
-  describe('Prompt', () => {
-    it('should render the prompt without error', async () => {
-      const decks = [featuredDeckMock(), featuredDeckMock()];
-
-      const { wrapper } = await setup({ decks });
-      wrapper.update();
-      const prompt = findByTestAttr(wrapper, 'p-prompts__prompt');
-      expect(prompt.length).toBe(1);
-    });
-
-    it('should render the character card without error', async () => {
-      const decks = [featuredDeckMock(), featuredDeckMock()];
-
-      const { wrapper } = await setup({ decks });
-      wrapper.update();
-      const characterCard = findByTestAttr(wrapper, 'p-prompts__character-card');
-      expect(characterCard.length).toBe(1);
-    });
-
-    it('should render the circumstance card without error', async () => {
-      const decks = [featuredDeckMock(), featuredDeckMock()];
-
-      const { wrapper } = await setup({ decks });
-      wrapper.update();
-      const circumstanceCard = findByTestAttr(wrapper, 'p-prompts__circumstance-card');
-      expect(circumstanceCard.length).toBe(1);
-    });
-
-    it('should render the conflict card without error', async () => {
-      const decks = [featuredDeckMock(), featuredDeckMock()];
-
-      const { wrapper } = await setup({ decks });
-      wrapper.update();
-      const conflictCard = findByTestAttr(wrapper, 'p-prompts__conflict-card');
-      expect(conflictCard.length).toBe(1);
-    });
-  });
-
   describe('populateData function', () => {
     it('expect populateData to be called', async () => {
       const decks = [featuredDeckMock()];
