@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Else, If } from 'react-if';
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
 
-function PagePrompts() {
-  const user = useSelector((state) => state.user);
+function PagePromptDeck() {
+  const { id } = useParams();
+
   const [characterCard, setCharacterCard] = useState({});
   const [circumstanceCard, setCircumstanceCard] = useState({});
   const [conflictCard, setConflictCard] = useState({});
-  const [decks, setDecks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const cardData = useCallback(
@@ -26,14 +26,12 @@ function PagePrompts() {
 
   const populateData = useCallback(
     async () => {
-      const deckData = await firebaseCollectionsHelper
-        .getAllDecksByUserId(user.uid);
-      setDecks(deckData);
-
-      const randomDeck = deckData[Math.floor(Math.random() * deckData.length)];
+      const initialDeckData = await firebaseCollectionsHelper
+        .getDeckData(id);
 
       // CHARACTER CARDS
-      const characterCardIds = randomDeck.characterCards.map((card) => (card.cardRef.id));
+      const characterCardIds = initialDeckData.characterCards
+        .map((card) => (card.cardRef.id));
       const characterCardOptions = await Promise
         .all(characterCardIds.map((cardId) => cardData(cardId)));
 
@@ -43,7 +41,8 @@ function PagePrompts() {
       setCharacterCard(randomCharacterCard);
 
       // CIRCUMSTANCE CARDS
-      const circumstanceCardIds = randomDeck.circumstanceCards.map((card) => (card.cardRef.id));
+      const circumstanceCardIds = initialDeckData.circumstanceCards
+        .map((card) => (card.cardRef.id));
       const circumstanceCardOptions = await Promise
         .all(circumstanceCardIds.map((cardId) => cardData(cardId)));
 
@@ -53,7 +52,8 @@ function PagePrompts() {
       setCircumstanceCard(randomCircumstanceCard);
 
       // CONFLICT CARDS
-      const conflictCardIds = randomDeck.conflictCards.map((card) => (card.cardRef.id));
+      const conflictCardIds = initialDeckData.conflictCards
+        .map((card) => (card.cardRef.id));
       const conflictCardOptions = await Promise
         .all(conflictCardIds.map((cardId) => cardData(cardId)));
 
@@ -64,10 +64,8 @@ function PagePrompts() {
 
       setIsLoading(false);
     },
-    [cardData, user.uid],
+    [cardData],
   );
-  // @TODO store (Redux) the featured deck data and the cards when app loads
-  // @TODO function to call store to randomly get card data & attach to re-shuffle button
 
   useEffect(() => {
     populateData();
@@ -75,7 +73,7 @@ function PagePrompts() {
 
   return (
     <TemplateDefault data-test="p-prompts">
-      <h1>Random Prompt</h1>
+      <h1>Individual Deck Prompt</h1>
 
       <If condition={isLoading}>
         <LoadingAnim />
@@ -108,24 +106,6 @@ function PagePrompts() {
             </div>
           </div>
 
-          <div className="row my-4">
-            <h2 className="col-12">
-              Select a Deck for deck specific prompts
-            </h2>
-
-            {decks.map((deck) => (
-              <div
-                key={deck.id}
-                data-test="p-decks__deck"
-                className="card col-sm"
-              >
-                <a href={`/prompts/${deck.id}`}>
-                  <h2>{deck.name}</h2>
-                  <p>{deck.description}</p>
-                </a>
-              </div>
-            ))}
-          </div>
         </Else>
       </If>
 
@@ -133,4 +113,4 @@ function PagePrompts() {
   );
 }
 
-export default PagePrompts;
+export default PagePromptDeck;

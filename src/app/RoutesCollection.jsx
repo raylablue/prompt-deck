@@ -8,6 +8,7 @@ import PageHome from '../components/pages/PageHome/PageHome';
 import PageCardsCreate from '../components/pages/PageCardsCreate/PageCardsCreate';
 import PageCardsEdit from '../components/pages/PageCardsEdit/PageCardsEdit';
 import PageCards from '../components/pages/PageCards/PageCards';
+import PagePromptDeck from '../components/pages/PagePromptDeck/PagePromptDeck';
 
 /* istanbul ignore file */
 
@@ -15,6 +16,10 @@ const Routes = [
   {
     path: '/signin',
     component: <PageSignIn />,
+  },
+  {
+    path: '/prompts/:id',
+    component: <PagePromptDeck />,
   },
   {
     path: '/prompts',
