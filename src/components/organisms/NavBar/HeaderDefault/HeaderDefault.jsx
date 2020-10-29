@@ -72,15 +72,6 @@ function HeaderDefault() {
                 Home
               </NavLink>
             </li>
-            <li className="o-nav-bar__nav-item">
-              <NavLink
-                to="/prompts"
-                className="nav-link"
-                activeClassName="chosen"
-              >
-                Prompts
-              </NavLink>
-            </li>
           </ul>
           <UserAuthBtn />
         </div>
