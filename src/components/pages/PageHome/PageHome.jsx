@@ -74,7 +74,13 @@ function PageHome() {
       data-test="p-home"
     >
       <h1>Home</h1>
-      <h2>Prompt</h2>
+      <button
+        className="btn btn-primary"
+        type="button"
+        onClick={populateData}
+      >
+        Generate New Prompt
+      </button>
 
       <If condition={isLoading}>
         <LoadingAnim />

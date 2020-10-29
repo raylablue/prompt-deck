@@ -9,6 +9,7 @@ import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
 function PagePromptDeck() {
   const { id } = useParams();
 
+  const [deck, setDeck] = useState({});
   const [characterCard, setCharacterCard] = useState({});
   const [circumstanceCard, setCircumstanceCard] = useState({});
   const [conflictCard, setConflictCard] = useState({});
@@ -28,6 +29,7 @@ function PagePromptDeck() {
     async () => {
       const initialDeckData = await firebaseCollectionsHelper
         .getDeckData(id);
+      setDeck(initialDeckData);
 
       // CHARACTER CARDS
       const characterCardIds = initialDeckData.characterCards
@@ -73,7 +75,14 @@ function PagePromptDeck() {
 
   return (
     <TemplateDefault data-test="p-prompts">
-      <h1>Individual Deck Prompt</h1>
+      <h1>{`${deck.name} Deck Prompt`}</h1>
+      <button
+        className="btn btn-primary"
+        type="button"
+        onClick={populateData}
+      >
+        Generate New Prompt
+      </button>
 
       <If condition={isLoading}>
         <LoadingAnim />
