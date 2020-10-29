@@ -4,6 +4,7 @@ import TemplateDefault from '../../Templates/TemplateDefault';
 import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
+import PromptsDisplay from "../../organisms/PromptsDisplay/PromptsDisplay";
 
 function PageHome() {
   const [characterCard, setCharacterCard] = useState({});
@@ -86,32 +87,11 @@ function PageHome() {
         <LoadingAnim />
 
         <Else>
-          <div
-            data-test="p-home__prompt"
-            className="row"
-          >
-
-            <div className="col-sm">
-              <CardsDisplay
-                data-test="p-home__character-card"
-                card={characterCard}
-              />
-            </div>
-
-            <div className="col-sm">
-              <CardsDisplay
-                data-test="p-home__circumstance-card"
-                card={circumstanceCard}
-              />
-            </div>
-
-            <div className="col-sm">
-              <CardsDisplay
-                data-test="p-home__conflict-card"
-                card={conflictCard}
-              />
-            </div>
-          </div>
+          <PromptsDisplay
+            characterCard={characterCard}
+            circumstanceCard={circumstanceCard}
+            conflictCard={conflictCard}
+          />
         </Else>
       </If>
 

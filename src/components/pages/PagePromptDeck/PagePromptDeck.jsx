@@ -5,6 +5,7 @@ import TemplateDefault from '../../Templates/TemplateDefault';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
+import PromptsDisplay from "../../organisms/PromptsDisplay/PromptsDisplay";
 
 function PagePromptDeck() {
   const { id } = useParams();
@@ -88,32 +89,12 @@ function PagePromptDeck() {
         <LoadingAnim />
 
         <Else>
-          <div
-            data-test="p-prompts__prompt"
-            className="row my-4"
-          >
 
-            <div className="col-sm">
-              <CardsDisplay
-                data-test="p-prompts__character-card"
-                card={characterCard}
-              />
-            </div>
-
-            <div className="col-sm">
-              <CardsDisplay
-                data-test="p-prompts__circumstance-card"
-                card={circumstanceCard}
-              />
-            </div>
-
-            <div className="col-sm">
-              <CardsDisplay
-                data-test="p-prompts__conflict-card"
-                card={conflictCard}
-              />
-            </div>
-          </div>
+          <PromptsDisplay
+            characterCard={characterCard}
+            circumstanceCard={circumstanceCard}
+            conflictCard={conflictCard}
+          />
 
         </Else>
       </If>
