@@ -244,20 +244,20 @@ describe('firebase collections helper', () => {
         const collection = 'decks';
 
         const { spyCollection } = await setup();
-        await firebaseCollectionsHelper.getDeckDataByVisibilityFeatured();
+        await firebaseCollectionsHelper.getDeckDataByFeaturedTrue();
 
         expect(spyCollection).toBeCalledWith(collection);
       });
 
       it('should call firebase where the userId is equal to createdBy', async () => {
-        const visibility = 'featured';
-        const searchKey = 'visibility';
+        const bool = 'true';
+        const searchKey = 'featured';
         const searchOperator = '==';
 
         const { spyWhere } = await setup();
-        await firebaseCollectionsHelper.getDeckDataByVisibilityFeatured();
+        await firebaseCollectionsHelper.getDeckDataByFeaturedTrue();
 
-        expect(spyWhere).toBeCalledWith(searchKey, searchOperator, visibility);
+        expect(spyWhere).toBeCalledWith(searchKey, searchOperator, bool);
       });
     });
 

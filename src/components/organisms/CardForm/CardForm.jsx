@@ -20,6 +20,7 @@ function CardForm({ initialCard, handleSubmit, content }) {
     setCard({
       ...card,
       createdBy: user.uid,
+      visibility: 'private',
     });
     // eslint-disable-next-line
     // eslint-disable-next-line react-hooks/exhaustive-deps

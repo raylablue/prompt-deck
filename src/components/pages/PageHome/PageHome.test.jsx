@@ -29,7 +29,7 @@ describe('Home page', () => {
     const store = mockStore({ user });
 
     const spyPopulateDeckData = await jest
-      .spyOn(firebaseCollectionsHelper, 'getDeckDataByVisibilityFeatured');
+      .spyOn(firebaseCollectionsHelper, 'getDeckDataByFeaturedTrue');
 
     spyPopulateDeckData.mockReturnValue(Promise.resolve(decks));
 

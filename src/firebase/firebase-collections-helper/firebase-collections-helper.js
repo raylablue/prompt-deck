@@ -38,10 +38,10 @@ const firebaseCollectionsHelper = {
     return response.data();
   },
 
-  getDeckDataByVisibilityFeatured: async () => {
+  getDeckDataByFeaturedTrue: async () => {
     const response = await firebase.db
       .collection('decks')
-      .where('visibility', '==', 'featured')
+      .where('featured', '==', 'true')
       .get();
 
     return response

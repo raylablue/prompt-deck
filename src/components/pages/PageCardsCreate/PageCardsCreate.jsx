@@ -10,6 +10,7 @@ function PageCardsCreate() {
   const initialCard = {
     cardTitle: '',
     createdBy: '',
+    visibility: 'private',
     type: '',
     side1: '',
     side2: '',

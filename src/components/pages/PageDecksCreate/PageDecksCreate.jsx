@@ -22,6 +22,7 @@ function PageDecksCreate() {
     name: '',
     description: '',
     visibility: '',
+    featured: false,
     characterCards: initialSelectedCharacterIds,
     circumstanceCards: initialSelectedCircumstanceIds,
     conflictCards: initialSelectedConflictIds,
@@ -118,6 +119,7 @@ function PageDecksCreate() {
       ...newDeck,
       createdBy: user.uid,
       visibility: 'private',
+      featured: false,
       characterCards: selectedCharacterIds.map((cardId) => (
         {
           cardRef: firebaseCollectionsHelper.getCardRef(cardId.value),

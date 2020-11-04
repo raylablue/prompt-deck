@@ -24,7 +24,7 @@ function PageHome() {
   const populateData = useCallback(
     async () => {
       const deckData = await firebaseCollectionsHelper
-        .getDeckDataByVisibilityFeatured();
+        .getDeckDataByFeaturedTrue();
 
       const randomDeck = deckData[Math.floor(Math.random() * deckData.length)];
 

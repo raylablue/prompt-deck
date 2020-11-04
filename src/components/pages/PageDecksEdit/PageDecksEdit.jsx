@@ -113,6 +113,7 @@ function PageDecksEdit() {
         ...updateDeck,
         createdBy: user.uid,
         visibility: 'private',
+        featured: false,
         characterCards: selectedCharacterIds.map((cardId) => (
           {
             cardRef: firebaseCollectionsHelper.getCardRef(cardId.value),
