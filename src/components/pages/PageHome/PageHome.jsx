@@ -63,7 +63,6 @@ function PageHome() {
     [cardData],
   );
   // @TODO store (Redux) the featured deck data and the cards when app loads
-  // @TODO function to call store to randomly get card data & attach to re-shuffle button
 
   useEffect(() => {
     populateData();

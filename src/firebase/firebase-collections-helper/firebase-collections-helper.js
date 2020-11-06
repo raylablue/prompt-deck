@@ -41,7 +41,7 @@ const firebaseCollectionsHelper = {
   getDeckDataByFeaturedTrue: async () => {
     const response = await firebase.db
       .collection('decks')
-      .where('featured', '==', 'true')
+      .where('featured', '==', true)
       .get();
 
     return response

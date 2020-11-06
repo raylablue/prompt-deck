@@ -250,7 +250,7 @@ describe('firebase collections helper', () => {
       });
 
       it('should call firebase where the userId is equal to createdBy', async () => {
-        const bool = 'true';
+        const bool = true;
         const searchKey = 'featured';
         const searchOperator = '==';
 
