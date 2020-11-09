@@ -6,6 +6,7 @@ import firebase from '../../../firebase/firebase';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import DeckForm from '../../organisms/DeckForm/DeckForm';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
+import ErrorMessage from '../../atoms/ErrorMessage/ErrorMessage';
 
 function PageDecksCreate() {
   const user = useSelector((state) => state.user);
@@ -14,6 +15,8 @@ function PageDecksCreate() {
   const [characterOptions, setCharacterOptions] = useState([]);
   const [circumstanceOptions, setCircumstanceOptions] = useState([]);
   const [conflictOptions, setConflictOptions] = useState([]);
+  const [errMessage, setErrMessage] = useState('');
+  const [defaultErrMessage, setDefaultErrMessage] = useState('');
 
   const initialSelectedCharacterIds = [];
   const initialSelectedCircumstanceIds = [];
@@ -49,7 +52,8 @@ function PageDecksCreate() {
 
         setCharacterOptions(newCharacterOptions);
       } catch (err) {
-        console.error(err);
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the requested data');
       }
     },
     [user.uid],
@@ -76,7 +80,8 @@ function PageDecksCreate() {
 
         setCircumstanceOptions(newCircumstanceOptions);
       } catch (err) {
-        console.error(err);
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the requested data');
       }
     },
     [user.uid],
@@ -103,7 +108,8 @@ function PageDecksCreate() {
 
         setConflictOptions(newConflictOptions);
       } catch (err) {
-        console.error(err);
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the requested data');
       }
     },
     [user.uid],
@@ -143,8 +149,8 @@ function PageDecksCreate() {
     try {
       await firebase.db.collection('decks').add(deck);
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error(err);
+      setErrMessage(err.message);
+      setDefaultErrMessage('An error has occurred in fetching the requested data');
     }
   }
 
@@ -155,24 +161,33 @@ function PageDecksCreate() {
 
   return (
     <TemplateDefault data-test="p-create-decks">
-      <h1>Create A Deck</h1>
-      <If condition={isLoading}>
-        <LoadingAnim />
+      <If condition={defaultErrMessage.length >= 1}>
+        <ErrorMessage
+          defaultErrMessage={defaultErrMessage}
+          errMessage={errMessage}
+        />
 
         <Else>
-          <DeckForm
-            initialDeck={initialDeck}
-            handleSubmit={handleCreateCard}
-            characterOptions={characterOptions}
-            circumstanceOptions={circumstanceOptions}
-            conflictOptions={conflictOptions}
-            initialCharacterIds={initialSelectedCharacterIds}
-            initialCircumstanceIds={initialSelectedCircumstanceIds}
-            initialConflictIds={initialSelectedConflictIds}
-            content="Create"
-          />
-        </Else>
+          <h1>Create A Deck</h1>
+          <If condition={isLoading}>
+            <LoadingAnim />
 
+            <Else>
+              <DeckForm
+                initialDeck={initialDeck}
+                handleSubmit={handleCreateCard}
+                characterOptions={characterOptions}
+                circumstanceOptions={circumstanceOptions}
+                conflictOptions={conflictOptions}
+                initialCharacterIds={initialSelectedCharacterIds}
+                initialCircumstanceIds={initialSelectedCircumstanceIds}
+                initialConflictIds={initialSelectedConflictIds}
+                content="Create"
+              />
+            </Else>
+
+          </If>
+        </Else>
       </If>
     </TemplateDefault>
   );

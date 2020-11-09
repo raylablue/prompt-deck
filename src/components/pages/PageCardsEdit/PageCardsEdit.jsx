@@ -5,11 +5,14 @@ import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import CardForm from '../../organisms/CardForm/CardForm';
+import ErrorMessage from '../../atoms/ErrorMessage/ErrorMessage';
 
 function PageCardsEdit() {
   const { id } = useParams();
   const history = useHistory();
   const [initialCard, setInitialCard] = useState({});
+  const [errMessage, setErrMessage] = useState('');
+  const [defaultErrMessage, setDefaultErrMessage] = useState('');
 
   const populateData = useCallback(
     async () => {
@@ -22,7 +25,8 @@ function PageCardsEdit() {
         const cardData = response.data();
         setInitialCard(cardData);
       } catch (err) {
-        console.error(err);
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the requested data');
       }
     },
     [id],
@@ -38,7 +42,8 @@ function PageCardsEdit() {
 
         history.push('/cards');
       } catch (err) {
-        console.error(err);
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the requested data');
       }
     },
     [id, history],
@@ -54,30 +59,39 @@ function PageCardsEdit() {
       data-test="p-cards-edit"
       className="row"
     >
-      <If condition={!initialCard.cardTitle}>
-        <Then>
-          {() => (
-            <LoadingAnim />
-          )}
-        </Then>
+      <If condition={defaultErrMessage.length >= 1}>
+        <ErrorMessage
+          defaultErrMessage={defaultErrMessage}
+          errMessage={errMessage}
+        />
 
         <Else>
-          <div data-test="p-card-edit__card">
-            <h1>
-              Edit &nbsp;
-              <strong>
-                {initialCard.cardTitle}
-              </strong>
-              &nbsp; Card
-            </h1>
-            <CardForm
-              initialCard={initialCard}
-              handleSubmit={handleUpdate}
-              content="Update"
-            />
-          </div>
-        </Else>
+          <If condition={!initialCard.cardTitle}>
+            <Then>
+              {() => (
+                <LoadingAnim />
+              )}
+            </Then>
 
+            <Else>
+              <div data-test="p-card-edit__card">
+                <h1>
+                  Edit &nbsp;
+                  <strong>
+                    {initialCard.cardTitle}
+                  </strong>
+                  &nbsp; Card
+                </h1>
+                <CardForm
+                  initialCard={initialCard}
+                  handleSubmit={handleUpdate}
+                  content="Update"
+                />
+              </div>
+            </Else>
+
+          </If>
+        </Else>
       </If>
 
     </TemplateDefault>
