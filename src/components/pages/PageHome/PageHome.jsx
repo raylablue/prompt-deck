@@ -4,6 +4,7 @@ import TemplateDefault from '../../Templates/TemplateDefault';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import PromptsDisplay from '../../organisms/PromptsDisplay/PromptsDisplay';
+import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
 
 function PageHome() {
   const [characterCard, setCharacterCard] = useState({});
@@ -90,6 +91,8 @@ function PageHome() {
             circumstanceCard={circumstanceCard}
             conflictCard={conflictCard}
           />
+
+          <ShuffleLoadingAnim />
         </Else>
       </If>
 
