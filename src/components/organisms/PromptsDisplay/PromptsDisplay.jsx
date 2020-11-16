@@ -6,24 +6,24 @@ function PromptsDisplay({ characterCard, circumstanceCard, conflictCard }) {
   return (
     <div
       data-test="o-prompts-display__prompt"
-      className="row"
+      className="row o-prompts-display__prompt my-4"
     >
 
-      <div className="col-sm">
+      <div className="col-sm o-prompts-display__prompt-card">
         <CardsDisplay
           data-test="o-prompts-display__character-card"
           card={characterCard}
         />
       </div>
 
-      <div className="col-sm">
+      <div className="col-sm o-prompts-display__prompt-card">
         <CardsDisplay
           data-test="o-prompts-display__circumstance-card"
           card={circumstanceCard}
         />
       </div>
 
-      <div className="col-sm">
+      <div className="col-sm o-prompts-display__prompt-card">
         <CardsDisplay
           data-test="o-prompts-display__conflict-card"
           card={conflictCard}

@@ -13,4 +13,7 @@ function ShuffleLoadingAnim() {
   );
 }
 
+// This component was adjusted from the codepen "card shuffle" loading animation by Jacob Harris
+// https://codepen.io/ahoy/pen/RpEyLL
+
 export default ShuffleLoadingAnim;

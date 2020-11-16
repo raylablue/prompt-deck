@@ -5,6 +5,8 @@
     position: relative;
     overflow-wrap: break-spaces;
     border-radius: 10%;
+    transition: transform 0.8s ease-in-out;
+    animation-fill-mode: forwards;
   }
 
   &__side-one {
@@ -38,19 +40,28 @@
     text-align: center;
   }
 
+  &__rotate-button {
+    position: absolute;
+    width: 40%;
+    height: 40%;
+    bottom: 30%;
+    left: 30%;
+    border-radius: 50%;
+  }
+
   &__rotation-one {
-    transform: rotate(90deg);
+    transform: rotate(0deg);
   }
 
   &__rotation-two {
-    transform: rotate(180deg);
+    transform: rotate(90deg);
   }
 
   &__rotation-three {
-    transform: rotate(270deg);
+    transform: rotate(180deg);
   }
 
   &__rotation-four {
-    transform: rotate(360deg);
+    transform: rotate(270deg);
   }
 }

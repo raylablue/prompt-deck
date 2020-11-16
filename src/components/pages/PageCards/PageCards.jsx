@@ -13,7 +13,6 @@ function PageCards() {
   const [defaultErrMessage, setDefaultErrMessage] = useState('');
   const user = useSelector((state) => state.user);
 
-  console.log(errMessage);
   const populateCards = useCallback(
     async () => {
       try {
