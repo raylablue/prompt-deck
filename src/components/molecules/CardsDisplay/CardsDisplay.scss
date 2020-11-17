@@ -3,7 +3,7 @@
     width: 100%;
     padding-bottom: 100%;
     position: relative;
-    overflow-wrap: break-spaces;
+    //overflow-wrap: break-spaces;
     border-radius: 10%;
     transition: transform 0.8s ease-in-out;
     animation-fill-mode: forwards;
@@ -47,6 +47,7 @@
     bottom: 30%;
     left: 30%;
     border-radius: 50%;
+    outline: none !important;
   }
 
   &__rotation-one {
