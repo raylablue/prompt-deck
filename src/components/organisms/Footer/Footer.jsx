@@ -7,7 +7,15 @@ function Footer() {
       className="footer py-3 o-footer text-center"
     >
       <div className="container">
-        <span className="text-muted">Place sticky footer content here</span>
+        <a
+          className="btn btn-outline-primary"
+          href="https://github.com/rachel-blue/my-movies"
+          target="_blank"
+          rel="noopener noreferrer"
+          role="button"
+        >
+          View the Source Code
+        </a>
       </div>
     </footer>
   );
