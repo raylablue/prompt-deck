@@ -2,6 +2,7 @@
 @import "../styles/custom-colours";
 @import url("https://fonts.googleapis.com/css?family=Montserrat+Subrayada");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script");
 
 body {
   background-size: cover;
@@ -11,10 +12,11 @@ body {
 }
 
 h1 {
-  font-family: Montserrat Subrayada, sans-serif;
+  font-family: Kaushan Script, sans-serif;
+  font-size: 4rem;
   color: rgb(225, 225, 225);
 }
 
 h2 {
-  font-family: Montserrat Subrayada, sans-serif;
+  font-family: Kaushan Script, sans-serif;
 }

@@ -68,17 +68,17 @@ function PageCards() {
           <h1 className="my-4">Your Cards</h1>
           <CreateCardsBtn>+ Create A Card</CreateCardsBtn>
 
-          <div data-test="p-cards" className="row mt-4">
+          <div data-test="p-cards" className="row my-4">
 
             <If condition={cards.length <= 0}>
 
-              <div data-test="p-cards__alt-message" className="container">
-                <h2>You don&apos;t have any cards yet</h2>
+              <div data-test="p-cards__alt-message">
+                <h2 className="col-12 text-white my-4">You don&apos;t have any cards yet</h2>
                 <CreateCardsBtn>Create A Card</CreateCardsBtn>
               </div>
 
               <Else>
-                <h2 className="col-12 text-white">Character Cards</h2>
+                <h2 className="col-12 text-white mt-4">Character Cards</h2>
                 {cards.map((card, index) => (
                   <If
                     condition={card.type === 'Character'}
@@ -91,7 +91,7 @@ function PageCards() {
                   </If>
                 ))}
 
-                <h2 className="col-12 text-white">Circumstance Cards</h2>
+                <h2 className="col-12 text-white mt-4">Circumstance Cards</h2>
                 {cards.map((card, index) => (
                   <If
                     condition={card.type === 'Circumstance'}
@@ -104,7 +104,7 @@ function PageCards() {
                   </If>
                 ))}
 
-                <h2 className="col-12 text-white">Conflict Cards</h2>
+                <h2 className="col-12 text-white mt-4">Conflict Cards</h2>
                 {cards.map((card, index) => (
                   <If
                     condition={card.type === 'Conflict'}
