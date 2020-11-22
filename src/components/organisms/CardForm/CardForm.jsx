@@ -29,7 +29,7 @@ function CardForm({ initialCard, handleSubmit, content }) {
   return (
     <form
       data-test="o-card-form__submit"
-      className="card bg-secondary p-3"
+      className="p-3"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit(card);

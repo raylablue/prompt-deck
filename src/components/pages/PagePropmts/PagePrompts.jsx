@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
+import './PagePrompts.scss';
 
 function PagePrompts() {
   const user = useSelector((state) => state.user);
@@ -30,7 +31,9 @@ function PagePrompts() {
   return (
     <TemplateDefault data-test="p-prompts">
       <h1>Prompts</h1>
-      <p>select a deck to generate prompts from that deck</p>
+      <p className="p-prompts__text-block">
+        select a deck to generate prompts from that deck
+      </p>
 
       <If condition={isLoading}>
         <LoadingAnim />
@@ -41,7 +44,7 @@ function PagePrompts() {
               <div
                 key={deck.id}
                 data-test="p-decks__deck"
-                className="card col-sm"
+                className="col-sm p-prompts__deck-background"
               >
                 <a href={`/prompts/${deck.id}`}>
                   <h2>{deck.name}</h2>

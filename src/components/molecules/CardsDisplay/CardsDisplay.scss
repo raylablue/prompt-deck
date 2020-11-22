@@ -1,12 +1,16 @@
 .m-cards-display {
-  &__card {
+  &__card-style {
     width: 100%;
     padding-bottom: 100%;
     position: relative;
-    //overflow-wrap: break-spaces;
     border-radius: 10%;
     transition: transform 0.8s ease-in-out;
     animation-fill-mode: forwards;
+    outline: none !important;
+    border: none;
+    background-size: contain;
+    box-shadow: 0 0 2rem 0.05rem black;
+    background-image: linear-gradient(rgba(233, 224, 222, 0.75), rgba(233, 224, 222, 0.75)), url("../../../styles/assets/paper-background.webp");
   }
 
   &__side-one {
@@ -40,14 +44,20 @@
     text-align: center;
   }
 
-  &__rotate-button {
+  &__inset-border {
     position: absolute;
-    width: 40%;
-    height: 40%;
-    bottom: 30%;
-    left: 30%;
-    border-radius: 50%;
+    width: 60%;
+    height: 60%;
+    bottom: 20%;
+    left: 20%;
     outline: none !important;
+    border: 0.5rem solid darkgray;
+    background-color: rgba(233, 224, 222, 0.2);
+  }
+
+  &__icon {
+    position: relative;
+    top: 20%;
   }
 
   &__rotation-one {

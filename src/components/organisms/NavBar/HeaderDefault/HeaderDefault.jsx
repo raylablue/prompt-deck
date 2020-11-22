@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faPenNib, faBars } from '@fortawesome/free-solid-svg-icons';
 import UserAuthBtn from '../UserAuthBtn/UserAuthBtn';
 
 function HeaderDefault() {
@@ -34,16 +34,15 @@ function HeaderDefault() {
   return (
     <nav
       data-test="o-header-default"
-      className="navbar navbar-expand-md bg-secondary px-2"
+      className="navbar navbar-expand-md o-header__background px-2"
     >
       <div className="container">
         <NavLink
           to="/"
-          className="o-nav-bar__ticket-logo"
         >
           <FontAwesomeIcon
-            className="fa-5x fas fa-ticket-alt mr-4 py-0 pl-1"
-            icon={faBook}
+            className="fa-3x fas fa-pen-nib mr-4 py-0 pl-1"
+            icon={faPenNib}
           />
         </NavLink>
         <button
@@ -53,7 +52,7 @@ function HeaderDefault() {
           onClick={toggleClick}
         >
           <FontAwesomeIcon
-            className="fa-3x fas fa-bars o-nav-bar__bars"
+            className="fa-3x fas fa-bars o-header__bars"
             icon={faBars}
           />
         </button>

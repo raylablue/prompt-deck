@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
+import './CardsMap.scss';
 
 function CardsMap({ card, handleDelete }) {
   return (
     <div
-      className="col-12 col-sm-5 col-md-4 col-lg-3"
+      className="col-md m-2 o-cards-map__text-block"
       data-test="p-cards__card"
     >
 

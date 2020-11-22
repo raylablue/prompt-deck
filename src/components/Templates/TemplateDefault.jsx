@@ -10,20 +10,18 @@ const TemplateDefault = ({ children }) => {
   const user = useSelector((state) => state.user);
 
   return (
-    <div className="d-flex flex-column h-100">
+    <>
       <If condition={!user}>
         <HeaderDefault data-test="t-template-default__header-default" />
         <Else>
           <HeaderUser data-test="t-template-default__header-user" />
         </Else>
       </If>
-      <div
-        className="container t-template-default__content"
-      >
+      <div className="container t-template-default my-4 pb-4">
         {children}
       </div>
       <Footer />
-    </div>
+    </>
   );
 };
 

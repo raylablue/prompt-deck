@@ -1,11 +1,15 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
+import { useSelector } from 'react-redux';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import PromptsDisplay from '../../organisms/PromptsDisplay/PromptsDisplay';
 import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
+import UserAuthBtn from '../../organisms/NavBar/UserAuthBtn/UserAuthBtn';
+import './PageHome.scss';
 
 function PageHome() {
+  const user = useSelector((state) => state.user);
   const [characterCard, setCharacterCard] = useState({});
   const [circumstanceCard, setCircumstanceCard] = useState({});
   const [conflictCard, setConflictCard] = useState({});
@@ -72,7 +76,7 @@ function PageHome() {
     <TemplateDefault
       data-test="p-home"
     >
-      <h1>Home</h1>
+      <h1>Prompt deck</h1>
       <button
         className="btn btn-primary"
         type="button"
@@ -80,7 +84,6 @@ function PageHome() {
       >
         Generate New Prompt
       </button>
-
       <If condition={isLoading}>
         <ShuffleLoadingAnim />
 
@@ -93,6 +96,33 @@ function PageHome() {
 
         </Else>
       </If>
+
+      <div className="my-5 p-home__text-block">
+        <p>
+          Blurb about how Prompt Deck will generate writing prompts base off of
+          three categories. Characters, Circumstances, and Conflicts. Tap the
+          card to rotate through several options, or re-draw to get new cards.
+        </p>
+
+        <If condition={!user}>
+          <p>
+            CTA to create their own cards and decks to further the experience.
+            Should check if they are signed in or not and change the display button.
+          </p>
+
+          <p>Sign in to get started!</p>
+
+          <UserAuthBtn />
+
+          <Else>
+            <div>
+              <p>
+                To enjoy the full experience, try making your own cards and decks.
+              </p>
+            </div>
+          </Else>
+        </If>
+      </div>
 
     </TemplateDefault>
   );

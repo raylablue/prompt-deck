@@ -5,6 +5,7 @@ import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import CreateDecksBtn from '../../molecules/CreateDecksBtn';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
+import './PageDecks.scss';
 
 function PageDecks() {
   const user = useSelector((state) => state.user);
@@ -49,7 +50,7 @@ function PageDecks() {
               <div
                 key={deck.id}
                 data-test="p-decks__deck"
-                className="card col-12 col-sm-5 col-md-4 col-lg-3"
+                className="col-12 col-sm-5 col-md-4 col-lg-3 p-decks__deck-background"
               >
                 <h2>{deck.name}</h2>
                 <p>{deck.description}</p>

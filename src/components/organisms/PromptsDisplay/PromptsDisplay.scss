@@ -5,5 +5,11 @@
 
   &__prompt-card {
     overflow: hidden;
+    align-content: center;
+  }
+
+  &__character-icon {
+    color: red;
+    align-content: center;
   }
 }
