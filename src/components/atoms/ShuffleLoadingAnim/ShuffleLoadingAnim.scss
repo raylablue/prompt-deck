@@ -4,10 +4,15 @@
 
 .flickity-container {
   display: flex;
+  padding-top: 4rem;
   justify-content: center;
   align-items: center;
-  margin-left: -70px;
-  height: 100vh;
+  margin-left: -2rem;
+  height: 100%;
+}
+
+.shuffle-body {
+  //height: 100vh;
 }
 
 .hand {

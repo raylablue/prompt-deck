@@ -3,9 +3,9 @@ import { If, Else } from 'react-if';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import TemplateDefault from '../../Templates/TemplateDefault';
-import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import DeckForm from '../../organisms/DeckForm/DeckForm';
+import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
 
 function PageDecksEdit() {
   const { id } = useParams();
@@ -149,7 +149,7 @@ function PageDecksEdit() {
         condition={isLoading}
         data-test="p-decks-edit__loading"
       >
-        <LoadingAnim />
+        <ShuffleLoadingAnim />
 
         <Else>
           <DeckForm

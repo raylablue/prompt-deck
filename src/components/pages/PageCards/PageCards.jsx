@@ -78,7 +78,7 @@ function PageCards() {
               </div>
 
               <Else>
-                <h2 className="col-12">Character Cards</h2>
+                <h2 className="col-12 text-white">Character Cards</h2>
                 {cards.map((card, index) => (
                   <If
                     condition={card.type === 'Character'}
@@ -91,7 +91,7 @@ function PageCards() {
                   </If>
                 ))}
 
-                <h2 className="col-12">Circumstance Cards</h2>
+                <h2 className="col-12 text-white">Circumstance Cards</h2>
                 {cards.map((card, index) => (
                   <If
                     condition={card.type === 'Circumstance'}
@@ -104,7 +104,7 @@ function PageCards() {
                   </If>
                 ))}
 
-                <h2 className="col-12">Conflict Cards</h2>
+                <h2 className="col-12 text-white">Conflict Cards</h2>
                 {cards.map((card, index) => (
                   <If
                     condition={card.type === 'Conflict'}

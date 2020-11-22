@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import './CardForm.scss';
 
 function CardForm({ initialCard, handleSubmit, content }) {
   const user = useSelector((state) => state.user);
@@ -29,7 +30,7 @@ function CardForm({ initialCard, handleSubmit, content }) {
   return (
     <form
       data-test="o-card-form__submit"
-      className="p-3"
+      className="p-3 o-card-form"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit(card);

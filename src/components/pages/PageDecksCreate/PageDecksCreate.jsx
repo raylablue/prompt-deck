@@ -3,10 +3,10 @@ import { If, Else } from 'react-if';
 import { useSelector } from 'react-redux';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
-import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import DeckForm from '../../organisms/DeckForm/DeckForm';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import ErrorMessage from '../../atoms/ErrorMessage/ErrorMessage';
+import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
 
 function PageDecksCreate() {
   const user = useSelector((state) => state.user);
@@ -170,7 +170,7 @@ function PageDecksCreate() {
         <Else>
           <h1>Create A Deck</h1>
           <If condition={isLoading}>
-            <LoadingAnim />
+            <ShuffleLoadingAnim />
 
             <Else>
               <DeckForm

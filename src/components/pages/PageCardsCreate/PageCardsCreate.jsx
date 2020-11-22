@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebase from '../../../firebase/firebase';
 import CardForm from '../../organisms/CardForm/CardForm';
-import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import ErrorMessage from '../../atoms/ErrorMessage/ErrorMessage';
+import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
 
 function PageCardsCreate() {
   const [errMessage, setErrMessage] = useState('');
@@ -48,7 +48,7 @@ function PageCardsCreate() {
           <h1>Create Cards Page</h1>
           <div>{errMessage}</div>
           <If condition={!initialCard}>
-            <LoadingAnim />
+            <ShuffleLoadingAnim />
 
             <Else>
               <CardForm

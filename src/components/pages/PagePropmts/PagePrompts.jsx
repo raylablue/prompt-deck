@@ -29,32 +29,37 @@ function PagePrompts() {
   }, [populateData]);
 
   return (
-    <TemplateDefault data-test="p-prompts">
+    <TemplateDefault
+      data-test="p-prompts"
+    >
       <h1>Prompts</h1>
-      <p className="p-prompts__text-block">
-        select a deck to generate prompts from that deck
-      </p>
 
-      <If condition={isLoading}>
-        <LoadingAnim />
+      <div className="p-prompts__text-block">
+        <p>
+          select a deck to generate prompts from that deck
+        </p>
 
-        <Else>
-          <div className="row my-4">
-            {decks.map((deck) => (
-              <div
-                key={deck.id}
-                data-test="p-decks__deck"
-                className="col-sm p-prompts__deck-background"
-              >
-                <a href={`/prompts/${deck.id}`}>
-                  <h2>{deck.name}</h2>
-                  <p>{deck.description}</p>
-                </a>
-              </div>
-            ))}
-          </div>
-        </Else>
-      </If>
+        <If condition={isLoading}>
+          <LoadingAnim />
+
+          <Else>
+            <div className="row my-4">
+              {decks.map((deck) => (
+                <div
+                  key={deck.id}
+                  data-test="p-decks__deck"
+                  className="col-sm p-prompts__deck-background"
+                >
+                  <a href={`/prompts/${deck.id}`}>
+                    <h2>{deck.name}</h2>
+                    <p>{deck.description}</p>
+                  </a>
+                </div>
+              ))}
+            </div>
+          </Else>
+        </If>
+      </div>
 
     </TemplateDefault>
   );

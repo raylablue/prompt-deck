@@ -3,9 +3,9 @@ import { useParams, useHistory } from 'react-router-dom';
 import { If, Else, Then } from 'react-if';
 import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
-import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import CardForm from '../../organisms/CardForm/CardForm';
 import ErrorMessage from '../../atoms/ErrorMessage/ErrorMessage';
+import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
 
 function PageCardsEdit() {
   const { id } = useParams();
@@ -69,7 +69,7 @@ function PageCardsEdit() {
           <If condition={!initialCard.cardTitle}>
             <Then>
               {() => (
-                <LoadingAnim />
+                <ShuffleLoadingAnim />
               )}
             </Then>
 
