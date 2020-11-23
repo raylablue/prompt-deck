@@ -3,8 +3,9 @@ import { Else, If } from 'react-if';
 import { useSelector } from 'react-redux';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
-import LoadingAnim from '../../atoms/LoadingSpinner/LoadingSpinner';
 import './PagePrompts.scss';
+import DecksDisplay from '../../organisms/DecksDisplay/DecksDisplay';
+import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
 
 function PagePrompts() {
   const user = useSelector((state) => state.user);
@@ -34,32 +35,23 @@ function PagePrompts() {
     >
       <h1>Prompts</h1>
 
-      <div className="p-prompts__text-block">
-        <p>
-          select a deck to generate prompts from that deck
-        </p>
+      <p className="p-prompts__text-block">
+        Select a deck to view prompts from that specific deck
+      </p>
+      <If condition={isLoading}>
+        <ShuffleLoadingAnim />
 
-        <If condition={isLoading}>
-          <LoadingAnim />
-
-          <Else>
-            <div className="row my-4">
-              {decks.map((deck) => (
-                <div
-                  key={deck.id}
-                  data-test="p-decks__deck"
-                  className="col-sm p-prompts__deck-background"
-                >
-                  <a href={`/prompts/${deck.id}`}>
-                    <h2>{deck.name}</h2>
-                    <p>{deck.description}</p>
-                  </a>
-                </div>
-              ))}
-            </div>
-          </Else>
-        </If>
-      </div>
+        <Else>
+          <div className="row my-4">
+            {decks.map((deck) => (
+              <DecksDisplay
+                deck={deck}
+                key={deck.id}
+              />
+            ))}
+          </div>
+        </Else>
+      </If>
 
     </TemplateDefault>
   );

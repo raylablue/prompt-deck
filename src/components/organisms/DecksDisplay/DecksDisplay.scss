@@ -1,4 +1,10 @@
-.p-decks {
+.o-decks-display {
+  &__text-block {
+    background: rgba(225, 225, 225, 0.5);
+    padding: 0.5rem;
+    text-align: center;
+  }
+
   &__deck-background {
     background-size: contain;
     box-shadow: 0 0 2rem 0.05rem black;
@@ -6,5 +12,9 @@
     margin: 1rem;
     padding: 1rem;
     text-align: center;
+  }
+
+  &__buttons-container {
+    width: 100%;
   }
 }

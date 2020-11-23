@@ -4,13 +4,4 @@
     padding: 0.5rem;
     text-align: center;
   }
-
-  &__deck-background {
-    background-size: contain;
-    box-shadow: 0 0 2rem 0.05rem black;
-    background-image: linear-gradient(rgba(233, 224, 222, 0.75), rgba(233, 224, 222, 0.75)), url("../../../styles/assets/paper-background.webp");
-    margin: 1rem;
-    padding: 1rem;
-    text-align: center;
-  }
 }

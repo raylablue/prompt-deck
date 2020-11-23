@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
 import { useSelector } from 'react-redux';
-import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import CreateDecksBtn from '../../molecules/CreateDecksBtn';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
-import './PageDecks.scss';
+import DecksDisplay from '../../organisms/DecksDisplay/DecksDisplay';
 
 function PageDecks() {
   const user = useSelector((state) => state.user);
@@ -20,16 +19,6 @@ function PageDecks() {
     },
     [user.uid],
   );
-
-  const handleDelete = async (e, index) => {
-    e.preventDefault();
-
-    await firebase.db.collection('decks')
-      .doc(decks[index].id)
-      .delete();
-
-    await populateDecks();
-  };
 
   useEffect(() => {
     populateDecks();
@@ -46,30 +35,11 @@ function PageDecks() {
           <CreateDecksBtn>Create Deck</CreateDecksBtn>
 
           <Else>
-            {decks.map((deck, index) => (
-              <div
+            {decks.map((deck) => (
+              <DecksDisplay
+                deck={deck}
                 key={deck.id}
-                data-test="p-decks__deck"
-                className="col-12 col-sm-5 col-md-4 col-lg-3 p-decks__deck-background"
-              >
-                <h2>{deck.name}</h2>
-                <p>{deck.description}</p>
-
-                <a
-                  href={`/decks/${deck.id}`}
-                  className="btn-primary p-1 justify-content-center"
-                >
-                  Edit
-                </a>
-
-                <button
-                  className="btn-warning"
-                  type="button"
-                  onClick={(e) => handleDelete(e, index)}
-                >
-                  Delete
-                </button>
-              </div>
+              />
             ))}
           </Else>
 
