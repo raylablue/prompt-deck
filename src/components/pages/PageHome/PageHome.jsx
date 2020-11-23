@@ -99,15 +99,14 @@ function PageHome() {
 
       <div className="my-5 p-home__text-block">
         <p>
-          Blurb about how Prompt Deck will generate writing prompts base off of
-          three categories. Characters, Circumstances, and Conflicts. Tap the
-          card to rotate through several options, or re-draw to get new cards.
+          Prompt Deck is based on three card categories. Characters, Circumstances, and Conflicts.
+          Tap the card to rotate through several options, or re-draw to get new cards.
+          Use one side from each of the three cards to inspire your imagination and get writing!
         </p>
 
         <If condition={!user}>
           <p>
-            CTA to create their own cards and decks to further the experience.
-            Should check if they are signed in or not and change the display button.
+            Create your own cards and decks to further the experience.
           </p>
 
           <p>Sign in to get started!</p>
@@ -118,6 +117,7 @@ function PageHome() {
             <div>
               <p>
                 To enjoy the full experience, try making your own cards and decks.
+                Each deck you make can generate unique prompts. Check them out in the Prompts page.
               </p>
             </div>
           </Else>
