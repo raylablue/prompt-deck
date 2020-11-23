@@ -37,25 +37,25 @@ function HeaderUser() {
   return (
     <nav
       data-test="o-header-user"
-      className="navbar navbar-expand-md o-header__background px-2"
+      className="navbar navbar-expand-md o-header__background"
     >
-      <div className="container o-header-user__links">
+      <div className="container">
         <NavLink
           to="/"
         >
           <FontAwesomeIcon
-            className="fa-3x fas fa-pen-nib mr-4 py-0 pl-1"
+            className="fa-3x fas fa-pen-nib mr-4 py-1 pl-1"
             icon={faPenNib}
           />
         </NavLink>
         <button
           data-test="o-header-user__dropdown"
-          className={`${toggleClass} navbar-toggler p-1`}
+          className={`${toggleClass} navbar-toggler p-1 o-header__bars`}
           type="button"
           onClick={toggleClick}
         >
           <FontAwesomeIcon
-            className="fa-3x fas fa-bars"
+            className="fa-2x fas fa-bars"
             icon={faBars}
           />
         </button>
