@@ -9,7 +9,7 @@ function Footer() {
       <div className="container">
         <a
           className="btn btn-outline-primary"
-          href="https://github.com/rachel-blue/my-movies"
+          href="https://github.com/rachel-blue/prompt-deck"
           target="_blank"
           rel="noopener noreferrer"
           role="button"
