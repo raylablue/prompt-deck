@@ -44,7 +44,7 @@ function HeaderUser() {
           to="/"
         >
           <FontAwesomeIcon
-            className="fa-3x fas fa-pen-nib mr-4 py-1 pl-1"
+            className="fa-3x fas fa-pen-nib mr-4 py-0 pl-1"
             icon={faPenNib}
           />
         </NavLink>

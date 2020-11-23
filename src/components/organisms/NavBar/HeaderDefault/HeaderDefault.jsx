@@ -47,12 +47,12 @@ function HeaderDefault() {
         </NavLink>
         <button
           data-test="o-header-detault__dropdown"
-          className={`${toggleClass} navbar-toggler p-1`}
+          className={`${toggleClass} navbar-toggler p-1 o-header__bars`}
           type="button"
           onClick={toggleClick}
         >
           <FontAwesomeIcon
-            className="fa-3x fas fa-bars o-header__bars"
+            className="fa-2x fas fa-bars"
             icon={faBars}
           />
         </button>
