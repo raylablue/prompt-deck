@@ -32,15 +32,19 @@ function PagePromptDeck() {
       setDeck(initialDeckData);
 
       // CHARACTER CARDS
-      const characterCardIds = initialDeckData.characterCards
-        .map((card) => (card.cardRef.id));
-      const characterCardOptions = await Promise
-        .all(characterCardIds.map((cardId) => cardData(cardId)));
+      try {
+        const characterCardIds = initialDeckData.characterCards
+          .map((card) => (card.cardRef.id));
+        const characterCardOptions = await Promise
+          .all(characterCardIds.map((cardId) => cardData(cardId)));
 
-      const randomCharacterCard = characterCardOptions[
-        Math.floor(Math.random() * characterCardOptions.length)
-      ];
-      setCharacterCard(randomCharacterCard);
+        const randomCharacterCard = characterCardOptions[
+          Math.floor(Math.random() * characterCardOptions.length)
+        ];
+        setCharacterCard(randomCharacterCard);
+      } catch (err) {
+        console.log('error getting character card');
+      }
 
       // CIRCUMSTANCE CARDS
       const circumstanceCardIds = initialDeckData.circumstanceCards
@@ -75,26 +79,51 @@ function PagePromptDeck() {
 
   return (
     <TemplateDefault data-test="p-prompts">
-      <h1>{`${deck.name} Deck Prompt`}</h1>
-      <button
-        className="btn btn-primary"
-        type="button"
-        onClick={populateData}
-      >
-        Generate New Prompt
-      </button>
-
       <If condition={isLoading}>
         <ShuffleLoadingAnim />
 
         <Else>
+          <h1>{`${deck.name} Deck Prompt`}</h1>
+          <button
+            className="btn btn-primary"
+            type="button"
+            onClick={populateData}
+          >
+            Generate New Prompt
+          </button>
 
-          <PromptsDisplay
-            characterCard={characterCard}
-            circumstanceCard={circumstanceCard}
-            conflictCard={conflictCard}
-          />
+          <If condition={characterCard && circumstanceCard && conflictCard}>
+            <PromptsDisplay
+              characterCard={characterCard}
+              circumstanceCard={circumstanceCard}
+              conflictCard={conflictCard}
+            />
 
+            <Else>
+              <div>
+                <h3 className="alert-danger text-center">
+                  Error
+                </h3>
+                <div className="bg-warning text-center p-2">
+                  <p>
+                    Either this deck does not have all three card types,
+                    or a card that was deleted is trying to display.
+                    <br />
+                    Check the deck to see if it has all card types.
+                    <br />
+                    If it does, simply save the deck. That will purge the
+                    deleted card from the cache and solve the error.
+                  </p>
+                  <a
+                    href={`/decks/${id}`}
+                    className="btn-primary p-1 px-2"
+                  >
+                    Edit Deck
+                  </a>
+                </div>
+              </div>
+            </Else>
+          </If>
         </Else>
       </If>
 

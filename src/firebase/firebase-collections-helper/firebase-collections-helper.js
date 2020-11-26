@@ -17,12 +17,16 @@ const firebaseCollectionsHelper = {
   },
 
   getSelectedCardData: async (cardId) => {
-    const cardRef = await firebase.db
-      .collection('cards')
-      .doc(cardId)
-      .get();
+    try {
+      const cardRef = await firebase.db
+        .collection('cards')
+        .doc(cardId)
+        .get();
 
-    return cardRef.data();
+      return cardRef.data();
+    } catch (err) {
+      console.log('error happened in getSelectedCardData method');
+    }
   },
 
   getCardRef: (cardId) => firebase.db
