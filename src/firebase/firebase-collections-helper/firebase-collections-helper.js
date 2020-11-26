@@ -16,6 +16,7 @@ const firebaseCollectionsHelper = {
       }));
   },
 
+  // eslint-disable-next-line consistent-return
   getSelectedCardData: async (cardId) => {
     try {
       const cardRef = await firebase.db

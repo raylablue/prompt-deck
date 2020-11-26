@@ -1,6 +1,5 @@
 import React from 'react';
 import PageSignIn from '../components/pages/PageSignIn/PageSignIn';
-import PagePrompts from '../components/pages/PagePropmts/PagePrompts';
 import PageDecks from '../components/pages/PageDecks/PageDecks';
 import PageDecksEdit from '../components/pages/PageDecksEdit/PageDecksEdit';
 import PageDecksCreate from '../components/pages/PageDecksCreate/PageDecksCreate';
@@ -20,10 +19,6 @@ const Routes = [
   {
     path: '/prompts/:id',
     component: <PagePromptDeck />,
-  },
-  {
-    path: '/prompts',
-    component: <PagePrompts />,
   },
   {
     path: '/cards/create',
