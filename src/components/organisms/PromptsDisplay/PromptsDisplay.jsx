@@ -9,7 +9,7 @@ function PromptsDisplay({ characterCard, circumstanceCard, conflictCard }) {
       className="row o-prompts-display__prompt my-2"
     >
 
-      <div className="col-md o-prompts-display__prompt-card">
+      <div className="col-lg o-prompts-display__prompt-card">
         <CardsDisplay
           data-test="o-prompts-display__character-card"
           card={characterCard}

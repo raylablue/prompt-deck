@@ -27,6 +27,7 @@ function PageHome() {
 
   const populateData = useCallback(
     async () => {
+      setIsLoading(true);
       const deckData = await firebaseCollectionsHelper
         .getDeckDataByFeaturedTrue();
 

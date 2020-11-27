@@ -42,7 +42,7 @@ function HeaderDefault() {
           className="o-header__logo mr-4"
         >
           <FontAwesomeIcon
-            className="fa-2x fas fa-pen-nib mr-2 pb-3 p-2 d-inline-block align-top"
+            className="fa-2x fas fa-pen-nib d-inline-block align-top"
             icon={faPenNib}
           />
           Prompt Deck

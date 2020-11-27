@@ -6,11 +6,13 @@ import firebase from '../../../firebase/firebase';
 import CreateCardsBtn from '../../molecules/CreateCardsBtn';
 import CardsMap from '../../organisms/CardsMap/CardsMap';
 import ErrorMessage from '../../atoms/ErrorMessage/ErrorMessage';
+import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
 
 function PageCards() {
   const [cards, setCards] = useState([]);
   const [errMessage, setErrMessage] = useState('');
   const [defaultErrMessage, setDefaultErrMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
   const user = useSelector((state) => state.user);
 
   const populateCards = useCallback(
@@ -28,6 +30,7 @@ function PageCards() {
             ...card.data(),
           }));
 
+        setIsLoading(false);
         setCards(transformedCards);
       } catch (err) {
         setErrMessage(err.message);
@@ -57,69 +60,75 @@ function PageCards() {
   }, [user, populateCards]);
 
   return (
-    <TemplateDefault>
-      <If condition={defaultErrMessage.length >= 1}>
-        <ErrorMessage
-          defaultErrMessage={defaultErrMessage}
-          errMessage={errMessage}
-        />
+    <TemplateDefault data-test="p-cards">
+      <If condition={isLoading}>
+        <ShuffleLoadingAnim />
 
         <Else>
-          <h1 className="my-4">Your Cards</h1>
-          <CreateCardsBtn>+ Create A Card</CreateCardsBtn>
+          <If condition={defaultErrMessage.length >= 1}>
+            <ErrorMessage
+              defaultErrMessage={defaultErrMessage}
+              errMessage={errMessage}
+            />
 
-          <div data-test="p-cards" className="row my-4">
+            <Else>
+              <h1 className="my-4">Your Cards</h1>
+              <CreateCardsBtn>+ Create A Card</CreateCardsBtn>
 
-            <If condition={cards.length <= 0}>
+              <div className="row my-4">
 
-              <div data-test="p-cards__alt-message">
-                <h2 className="col-12 text-white my-4">You don&apos;t have any cards yet</h2>
-                <CreateCardsBtn>Create A Card</CreateCardsBtn>
+                <If condition={cards.length <= 0}>
+
+                  <div data-test="p-cards__alt-message">
+                    <h2 className="col-12 text-white my-4">You don&apos;t have any cards yet</h2>
+                    <CreateCardsBtn>Create A Card</CreateCardsBtn>
+                  </div>
+
+                  <Else>
+                    <h2 className="col-12 text-white mt-4">Character Cards</h2>
+                    {cards.map((card, index) => (
+                      <If
+                        condition={card.type === 'Character'}
+                        key={card.id}
+                      >
+                        <CardsMap
+                          card={card}
+                          handleDelete={(e) => handleDelete(e, index)}
+                        />
+                      </If>
+                    ))}
+
+                    <h2 className="col-12 text-white mt-4">Circumstance Cards</h2>
+                    {cards.map((card, index) => (
+                      <If
+                        condition={card.type === 'Circumstance'}
+                        key={card.id}
+                      >
+                        <CardsMap
+                          card={card}
+                          handleDelete={(e) => handleDelete(e, index)}
+                        />
+                      </If>
+                    ))}
+
+                    <h2 className="col-12 text-white mt-4">Conflict Cards</h2>
+                    {cards.map((card, index) => (
+                      <If
+                        condition={card.type === 'Conflict'}
+                        key={card.id}
+                      >
+                        <CardsMap
+                          card={card}
+                          handleDelete={(e) => handleDelete(e, index)}
+                        />
+                      </If>
+                    ))}
+                  </Else>
+
+                </If>
               </div>
-
-              <Else>
-                <h2 className="col-12 text-white mt-4">Character Cards</h2>
-                {cards.map((card, index) => (
-                  <If
-                    condition={card.type === 'Character'}
-                    key={card.id}
-                  >
-                    <CardsMap
-                      card={card}
-                      handleDelete={(e) => handleDelete(e, index)}
-                    />
-                  </If>
-                ))}
-
-                <h2 className="col-12 text-white mt-4">Circumstance Cards</h2>
-                {cards.map((card, index) => (
-                  <If
-                    condition={card.type === 'Circumstance'}
-                    key={card.id}
-                  >
-                    <CardsMap
-                      card={card}
-                      handleDelete={(e) => handleDelete(e, index)}
-                    />
-                  </If>
-                ))}
-
-                <h2 className="col-12 text-white mt-4">Conflict Cards</h2>
-                {cards.map((card, index) => (
-                  <If
-                    condition={card.type === 'Conflict'}
-                    key={card.id}
-                  >
-                    <CardsMap
-                      card={card}
-                      handleDelete={(e) => handleDelete(e, index)}
-                    />
-                  </If>
-                ))}
-              </Else>
-
-            </If>
-          </div>
+            </Else>
+          </If>
         </Else>
       </If>
     </TemplateDefault>

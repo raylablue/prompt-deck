@@ -27,6 +27,8 @@ function PagePromptDeck() {
 
   const populateData = useCallback(
     async () => {
+      setIsLoading(true);
+
       const initialDeckData = await firebaseCollectionsHelper
         .getDeckData(id);
       setDeck(initialDeckData);
