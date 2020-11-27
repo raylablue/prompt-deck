@@ -59,7 +59,7 @@ function PageDecks() {
         </Else>
       </If>
 
-      <p className="p-prompts__text-block mt-3">
+      <p className="p-decks__text-block mt-3">
         Don&apos;t have any decks yet? No problem.
         First make some cards, then you&apos;ll be able to create a deck from those cards.
         Be careful to have at least one of each card type in the deck. The more cards of each type

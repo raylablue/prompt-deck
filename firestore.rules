@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /decks/{deck} {
+    	// user has to be signed in to create
+    	allow create: if request.auth != null;
+      
+      // user can only edit their own data
+      allow update, delete: if resource.data.createdBy == request.auth.uid 
+      
+      // user can only view if they made the card/deck 
+      // or if the card/deck is set to public
+      allow read: if resource.data.createdBy == request.auth.uid ||
+      	resource.data.visibility == 'public' ||
+        resource.data.featured == true;
+    }
+    
+    match /cards/{card} {
+    	// user has to be signed in to create
+    	allow create: if request.auth != null;
+      
+      // user can only edit their own data
+      allow update, delete: if resource.data.createdBy == request.auth.uid 
+      
+      // user can only view if they made the card/deck 
+      // or if the card/deck is set to public
+      allow read: if resource.data.createdBy == request.auth.uid ||
+      	resource.data.visibility == 'public';
+    }
+    
+    match /types/{type} {
+    	allow read: if true;
+    }
+  }
+}

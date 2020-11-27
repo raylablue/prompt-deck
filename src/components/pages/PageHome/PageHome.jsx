@@ -76,7 +76,6 @@ function PageHome() {
     <TemplateDefault
       data-test="p-home"
     >
-      <h1>Prompt deck</h1>
       <button
         className="btn btn-primary"
         type="button"

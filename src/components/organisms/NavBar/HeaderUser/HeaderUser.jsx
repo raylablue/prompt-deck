@@ -42,12 +42,15 @@ function HeaderUser() {
       <div className="container">
         <NavLink
           to="/"
+          className="o-header__logo mr-4"
         >
           <FontAwesomeIcon
-            className="fa-3x fas fa-pen-nib mr-4 py-0 pl-1"
+            className="fa-2x fas fa-pen-nib mr-2 pb-3 p-2 d-inline-block align-top"
             icon={faPenNib}
           />
+          Prompt Deck
         </NavLink>
+
         <button
           data-test="o-header-user__dropdown"
           className={`${toggleClass} navbar-toggler p-1 o-header__bars`}
