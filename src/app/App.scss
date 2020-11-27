@@ -4,6 +4,26 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
 @import url("https://fonts.googleapis.com/css?family=Kaushan+Script");
 
+html,
+body,
+#root,
+.component-app {
+  height: 100%;
+}
+
+.component-app {
+  display: flex;
+  flex-direction: column;
+}
+
+.template-container {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+}
+
 body {
   background-size: cover;
   //image from pixbay https://pixabay.com/photos/wall-wood-background-2423822/

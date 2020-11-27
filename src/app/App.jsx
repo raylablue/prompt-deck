@@ -53,6 +53,7 @@ function App() {
   return (
     <div
       data-test="component-app"
+      className="component-app"
     >
       <BrowserRouter>
         <Switch>
