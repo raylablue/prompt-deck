@@ -7,9 +7,12 @@ function DecksDisplay({ deck }) {
   const handleDelete = async (e) => {
     e.preventDefault();
 
-    await firebase.db.collection('decks')
-      .doc(deck.id)
-      .delete();
+    // eslint-disable-next-line no-alert
+    if (window.confirm('Are you sure, this action cannot be undone?')) {
+      await firebase.db.collection('decks')
+        .doc(deck.id)
+        .delete();
+    }
   };
 
   return (
