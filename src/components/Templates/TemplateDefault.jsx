@@ -17,7 +17,7 @@ const TemplateDefault = ({ children }) => {
           <HeaderUser data-test="t-template-default__header-user" />
         </Else>
       </If>
-      <div className="container t-template-default template-container my-4 py-1">
+      <div className="container t-template-default template-container my-5">
         {children}
       </div>
       <Footer />
