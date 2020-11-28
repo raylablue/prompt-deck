@@ -15,7 +15,7 @@ function DecksDisplay({ deck }) {
   return (
     <div
       data-test="p-decks__deck"
-      className="col-sm o-decks-display__text-block m-2"
+      className="col-sm"
     >
 
       <div className="o-decks-display__deck-background">
@@ -28,13 +28,13 @@ function DecksDisplay({ deck }) {
       <div className="o-decks-display__buttons-container">
         <a
           href={`/decks/${deck.id}`}
-          className="btn-primary p-1 px-2"
+          className="btn btn-primary p-1 px-2 d-inline-block w-50"
         >
           Edit
         </a>
 
         <button
-          className="btn-warning"
+          className="btn btn-warning d-inline-block w-50"
           type="button"
           onClick={(e) => handleDelete(e)}
         >

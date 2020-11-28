@@ -46,7 +46,6 @@ function HeaderUser() {
         >
           <FontAwesomeIcon
             className="fa-2x fas fa-pen-nib pb-4 pt-2 pl-2 d-inline-block align-top"
-            // className="fa-2x fas fa-pen-nib mr-2 pb-3 p-2 d-inline-block align-top"
             icon={faPenNib}
           />
           Prompt Deck

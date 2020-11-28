@@ -42,7 +42,7 @@ function HeaderDefault() {
           className="o-header__logo mr-4"
         >
           <FontAwesomeIcon
-            className="fa-2x fas fa-pen-nib d-inline-block align-top"
+            className="fa-2x fas fa-pen-nib pb-4 pt-2 pl-2 d-inline-block align-top"
             icon={faPenNib}
           />
           Prompt Deck
@@ -50,7 +50,7 @@ function HeaderDefault() {
 
         <button
           data-test="o-header-detault__dropdown"
-          className={`${toggleClass} navbar-toggler p-1 o-header__bars`}
+          className={`${toggleClass} navbar-toggler p-1 o-header__bars p-2 pb-4`}
           type="button"
           onClick={toggleClick}
         >
