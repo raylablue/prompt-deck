@@ -50,7 +50,7 @@ block, and redux could be used in the service layer to lighten the burden on cal
 
 In the project directory, you can run:
 
-### `npm lint`
+### `npm run lint`
 
 Runs the linter. Eslint Airbnb standards and enforced on commit. 
 Alternatively 'npm run lint:js' can be used to run javascript, and 

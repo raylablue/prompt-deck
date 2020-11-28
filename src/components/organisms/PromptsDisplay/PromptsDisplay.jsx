@@ -1,29 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CardsDisplay from '../../molecules/CardsDisplay/CardsDisplay';
+import './PromptsDisplay.scss';
 
 function PromptsDisplay({ characterCard, circumstanceCard, conflictCard }) {
   return (
     <div
       data-test="o-prompts-display__prompt"
-      className="row o-prompts-display__prompt my-2"
+      className="row my-2 o-prompts-display"
     >
-
-      <div className="col-4 o-prompts-display__prompt-card">
+      <div className="col-4">
         <CardsDisplay
           data-test="o-prompts-display__character-card"
           card={characterCard}
         />
       </div>
 
-      <div className="col-4 o-prompts-display__prompt-card">
+      <div className="col-4">
         <CardsDisplay
           data-test="o-prompts-display__circumstance-card"
           card={circumstanceCard}
         />
       </div>
 
-      <div className="col-4 o-prompts-display__prompt-card">
+      <div className="col-4">
         <CardsDisplay
           data-test="o-prompts-display__conflict-card"
           card={conflictCard}

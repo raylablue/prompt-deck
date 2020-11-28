@@ -8,49 +8,59 @@
       height: 17rem;
       width: 100%;
       min-width: 80px;
-      padding-bottom: 10%;
-      padding-top: 5%;
-      border-radius: 10%;
+      //padding-bottom: 10%;
+      //padding-top: 5%;
       outline: none !important;
       border: none;
-      box-shadow: 0 0 2rem 0.05rem black;
-      background-color: rgba(255, 255, 255, 0.75);
       word-wrap: break-word;
       hyphens: auto;
       color: rgb(40, 40, 40);
       font-size: small;
+      background: none;
+      text-align: center;
+      //vertical-align: top;
     }
 
     &__icon {
       padding-top: 10%;
+      position: absolute;
+      top: 10px;
+      color: #79515f;
+      width: 100%;
+      left: 0;
+    }
+
+    &__side-one {
+      margin-top: 40%;
     }
 
     &__rotation-one > &__side-one {
-      color: rgb(0, 0, 0);
+      margin-top: 40%;
       font-size: larger;
       font-weight: bold;
       border-style: solid;
+      background-color: white;
     }
 
     &__rotation-two > &__side-four {
-      color: rgb(0, 0, 0);
       font-size: larger;
       font-weight: bold;
       border-style: solid;
+      background-color: white;
     }
 
     &__rotation-three > &__side-three {
-      color: rgb(0, 0, 0);
       font-size: larger;
       font-weight: bold;
       border-style: solid;
+      background-color: white;
     }
 
     &__rotation-four > &__side-two {
-      color: rgb(0, 0, 0);
       font-size: larger;
       font-weight: bold;
       border-style: solid;
+      background-color: white;
     }
   }
 

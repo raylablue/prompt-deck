@@ -46,7 +46,7 @@ function PageSignIn() {
                 data-test="already-signed-in-message"
               >
                 <h2>You are already signed in</h2>
-                <p>
+                <p className="bg-white">
                   thanks for setting up your account. Sadly not much
                   left to do here unless you would like to log out so
                   you can sign back in again.
