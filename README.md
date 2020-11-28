@@ -1,6 +1,6 @@
-## [PromptDeck](https://prompt-deck-6e03d.web.app)
+## [PromptDeck](https://promptdeck.com)
 This project utilizes the Firebase and Redux to view, create, and generate writing prompts. Current project can be
-viewed at the link [PromptDeck](https://prompt-deck-6e03d.web.app). Hosted by Firebase.
+viewed at the link [PromptDeck](https://promptdeck.com). Hosted by Firebase.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), 
 using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
@@ -21,81 +21,46 @@ The page will reload if you make edits.
 You will also see any lint errors in the console.
 
 ### `Create a Build`
-Run `npm run build` to build the project for produciton. The build artifacts will be stored
+Run `npm run build` to build the project for production. The build artifacts will be stored
 in the `build/` directory. 
 
 ## Project Notes
 ### `Thought Process`
+I realized early that I would need to set aside some additional features to focus on getting
+a MVP complete that showed off Firebase authentication and full CRUD cycle. 
+
+What surprised me was how bad my mobile mocks were when I went to implement them. 
+Completely re-conceptualizing the user experience for mobile was well worthwhile, and as a benefit,
+gave me an opportunity to work with bootstrap media queries to drastically change the styling for different
+device screen sizes. 
 
 
 ### `With more time`
+Currently, all cards are set to private by default and can only be changed by the administrator in the firebase console. 
+With more time I would expand this to allow users to set their decks (and thereby the cards inside the decks)
+to public and share their prompt creations with others. 
 
-
+For optimization, I would streamline firebase calls to make them consistent. The firebaseCollectionsHelper file
+is acting as a service layer, and all firebase calls should go through a similar file (though they should also be
+broken up into multiple files since it's too much content already). From there all calls could be wrapped in a try/catch 
+block, and redux could be used in the service layer to lighten the burden on calling firebase more than needed.
 
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `npm lint`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Runs the linter. Eslint Airbnb standards and enforced on commit. 
+Alternatively 'npm run lint:js' can be used to run javascript, and 
+'npm run lint:css' to check the css.
 
 ### `npm test`
+run npm test in the console to run the test suite.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Also, 'npm test:coverage' launches the test coverage for the project. Current settings require global 80% 
+coverage to push.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
