@@ -86,9 +86,6 @@ function PageCards() {
                   </h2>
                 </div>
 
-
-
-
                 <Else>
                   <div className="row">
                     <h2 className="col-12 text-white mt-4">Character Cards</h2>

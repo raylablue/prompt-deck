@@ -5,6 +5,7 @@ import TemplateDefault from '../../Templates/TemplateDefault';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
 import PromptsDisplay from '../../organisms/PromptsDisplay/PromptsDisplay';
 import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
+import ErrorMessage from '../../atoms/ErrorMessage/ErrorMessage';
 
 function PagePromptDeck() {
   const { id } = useParams();
@@ -13,6 +14,8 @@ function PagePromptDeck() {
   const [characterCard, setCharacterCard] = useState({});
   const [circumstanceCard, setCircumstanceCard] = useState({});
   const [conflictCard, setConflictCard] = useState({});
+  const [errMessage, setErrMessage] = useState('');
+  const [defaultErrMessage, setDefaultErrMessage] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
   const cardData = useCallback(
@@ -45,7 +48,8 @@ function PagePromptDeck() {
         ];
         setCharacterCard(randomCharacterCard);
       } catch (err) {
-        console.log('error getting character card');
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the character card');
       }
 
       // CIRCUMSTANCE CARDS
@@ -85,45 +89,54 @@ function PagePromptDeck() {
         <ShuffleLoadingAnim />
 
         <Else>
-          <h1>{`${deck.name} Deck Prompt`}</h1>
-          <button
-            className="btn btn-primary"
-            type="button"
-            onClick={populateData}
-          >
-            Generate New Prompt
-          </button>
-
-          <If condition={characterCard && circumstanceCard && conflictCard}>
-            <PromptsDisplay
-              characterCard={characterCard}
-              circumstanceCard={circumstanceCard}
-              conflictCard={conflictCard}
+          <If condition={defaultErrMessage.length >= 1}>
+            <ErrorMessage
+              defaultErrMessage={defaultErrMessage}
+              errMessage={errMessage}
             />
 
             <Else>
-              <div>
-                <h3 className="alert-danger text-center">
-                  Error
-                </h3>
-                <div className="bg-warning text-center p-2">
-                  <p>
-                    Either this deck does not have all three card types,
-                    or a card that was deleted is trying to display.
-                    <br />
-                    Check the deck to see if it has all card types.
-                    <br />
-                    If it does, simply save the deck. That will purge the
-                    deleted card from the cache and solve the error.
-                  </p>
-                  <a
-                    href={`/decks/${id}`}
-                    className="btn-primary p-1 px-2"
-                  >
-                    Edit Deck
-                  </a>
-                </div>
-              </div>
+              <h1>{`${deck.name} Deck Prompt`}</h1>
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={populateData}
+              >
+                Generate New Prompt
+              </button>
+
+              <If condition={characterCard && circumstanceCard && conflictCard}>
+                <PromptsDisplay
+                  characterCard={characterCard}
+                  circumstanceCard={circumstanceCard}
+                  conflictCard={conflictCard}
+                />
+
+                <Else>
+                  <div>
+                    <h3 className="alert-danger text-center">
+                      Error
+                    </h3>
+                    <div className="bg-warning text-center p-2">
+                      <p>
+                        Either this deck does not have all three card types,
+                        or a card that was deleted is trying to display.
+                        <br />
+                        Check the deck to see if it has all card types.
+                        <br />
+                        If it does, simply save the deck. That will purge the
+                        deleted card from the cache and solve the error.
+                      </p>
+                      <a
+                        href={`/decks/${id}`}
+                        className="btn-primary p-1 px-2"
+                      >
+                        Edit Deck
+                      </a>
+                    </div>
+                  </div>
+                </Else>
+              </If>
             </Else>
           </If>
         </Else>

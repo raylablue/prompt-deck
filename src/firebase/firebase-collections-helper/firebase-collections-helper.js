@@ -16,18 +16,13 @@ const firebaseCollectionsHelper = {
       }));
   },
 
-  // eslint-disable-next-line consistent-return
   getSelectedCardData: async (cardId) => {
-    try {
-      const cardRef = await firebase.db
-        .collection('cards')
-        .doc(cardId)
-        .get();
+    const cardRef = await firebase.db
+      .collection('cards')
+      .doc(cardId)
+      .get();
 
-      return cardRef.data();
-    } catch (err) {
-      console.log('error happened in getSelectedCardData method');
-    }
+    return cardRef.data();
   },
 
   getCardRef: (cardId) => firebase.db
