@@ -6,7 +6,7 @@ import './CardsMap.scss';
 function CardsMap({ card, handleDelete }) {
   return (
     <div
-      className="col-md m-2 o-cards-map__max-scale"
+      className="col-md-4 col-sm-12"
       data-test="p-cards__card"
     >
 

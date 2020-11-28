@@ -86,45 +86,50 @@ function PageCards() {
                   </h2>
                 </div>
 
+
+
+
                 <Else>
-                  <h2 className="col-12 text-white mt-4">Character Cards</h2>
-                  {cards.map((card, index) => (
-                    <If
-                      condition={card.type === 'Character'}
-                      key={card.id}
-                    >
-                      <CardsMap
-                        card={card}
-                        handleDelete={(e) => handleDelete(e, index)}
-                      />
-                    </If>
-                  ))}
+                  <div className="row">
+                    <h2 className="col-12 text-white mt-4">Character Cards</h2>
+                    {cards.map((card, index) => (
+                      <If
+                        condition={card.type === 'Character'}
+                        key={card.id}
+                      >
+                        <CardsMap
+                          card={card}
+                          handleDelete={(e) => handleDelete(e, index)}
+                        />
+                      </If>
+                    ))}
 
-                  <h2 className="col-12 text-white mt-4">Circumstance Cards</h2>
-                  {cards.map((card, index) => (
-                    <If
-                      condition={card.type === 'Circumstance'}
-                      key={card.id}
-                    >
-                      <CardsMap
-                        card={card}
-                        handleDelete={(e) => handleDelete(e, index)}
-                      />
-                    </If>
-                  ))}
+                    <h2 className="col-12 text-white mt-4">Circumstance Cards</h2>
+                    {cards.map((card, index) => (
+                      <If
+                        condition={card.type === 'Circumstance'}
+                        key={card.id}
+                      >
+                        <CardsMap
+                          card={card}
+                          handleDelete={(e) => handleDelete(e, index)}
+                        />
+                      </If>
+                    ))}
 
-                  <h2 className="col-12 text-white mt-4">Conflict Cards</h2>
-                  {cards.map((card, index) => (
-                    <If
-                      condition={card.type === 'Conflict'}
-                      key={card.id}
-                    >
-                      <CardsMap
-                        card={card}
-                        handleDelete={(e) => handleDelete(e, index)}
-                      />
-                    </If>
-                  ))}
+                    <h2 className="col-12 text-white mt-4">Conflict Cards</h2>
+                    {cards.map((card, index) => (
+                      <If
+                        condition={card.type === 'Conflict'}
+                        key={card.id}
+                      >
+                        <CardsMap
+                          card={card}
+                          handleDelete={(e) => handleDelete(e, index)}
+                        />
+                      </If>
+                    ))}
+                  </div>
                 </Else>
 
               </If>
