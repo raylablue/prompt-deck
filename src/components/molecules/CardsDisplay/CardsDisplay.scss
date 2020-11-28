@@ -22,8 +22,7 @@
     }
 
     &__icon {
-      padding-top: 30%;
-      top: 20%;
+      padding-top: 10%;
     }
 
     &__rotation-one > &__side-one {
@@ -33,7 +32,7 @@
       border-style: solid;
     }
 
-    &__rotation-two > &__side-two {
+    &__rotation-two > &__side-four {
       color: rgb(0, 0, 0);
       font-size: larger;
       font-weight: bold;
@@ -47,7 +46,7 @@
       border-style: solid;
     }
 
-    &__rotation-four > &__side-four {
+    &__rotation-four > &__side-two {
       color: rgb(0, 0, 0);
       font-size: larger;
       font-weight: bold;
