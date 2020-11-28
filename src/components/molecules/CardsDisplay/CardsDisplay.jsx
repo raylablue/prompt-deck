@@ -58,7 +58,7 @@ const CardsDisplay = ({ card }) => {
             <If condition={card.type === 'Character'}>
               <div className="m-cards-display__icon container-fluid">
                 <FontAwesomeIcon
-                  className="fa-5x fas fa-user-circle"
+                  className="fa-4x fas fa-user-circle"
                   icon={faUserCircle}
                 />
                 <br />
@@ -69,7 +69,7 @@ const CardsDisplay = ({ card }) => {
             <If condition={card.type === 'Circumstance'}>
               <div className="m-cards-display__icon">
                 <FontAwesomeIcon
-                  className="fa-5x fas fa-mountain"
+                  className="fa-4x fas fa-mountain"
                   icon={faMountain}
                 />
                 <br />
@@ -80,7 +80,7 @@ const CardsDisplay = ({ card }) => {
             <If condition={card.type === 'Conflict'}>
               <div className="m-cards-display__icon">
                 <FontAwesomeIcon
-                  className="fa-5x fas fa-fire-alt"
+                  className="fa-4x fas fa-fire-alt"
                   icon={faFireAlt}
                 />
                 <br />

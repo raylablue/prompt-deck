@@ -1,78 +1,138 @@
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/_variables.scss";
+@import "~bootstrap/scss/mixins/_breakpoints.scss";
+
 .m-cards-display {
-  &__card-style {
-    width: 100%;
-    padding-bottom: 100%;
-    position: relative;
-    border-radius: 10%;
-    transition: transform 0.8s ease-in-out;
-    animation-fill-mode: forwards;
-    outline: none !important;
-    border: none;
-    background-size: contain;
-    box-shadow: 0 0 2rem 0.05rem black;
-    background-image: linear-gradient(rgba(233, 224, 222, 0.75), rgba(233, 224, 222, 0.75)), url("../../../styles/assets/paper-background.webp");
+  @include media-breakpoint-down(sm) {
+    &__card-style {
+      height: 17rem;
+      width: 100%;
+      min-width: 80px;
+      padding-bottom: 10%;
+      padding-top: 5%;
+      border-radius: 10%;
+      outline: none !important;
+      border: none;
+      box-shadow: 0 0 2rem 0.05rem black;
+      background-color: rgba(255, 255, 255, 0.5);
+      word-wrap: break-word;
+      hyphens: auto;
+      transition: transform 0.8s ease-in-out;
+      color: rgb(40, 40, 40);
+      font-size: small;
+    }
+
+    &__icon {
+      padding-top: 20%;
+      top: 20%;
+    }
+
+    &__rotation-one > &__side-one {
+      color: rgb(0, 0, 0);
+      font-size: larger;
+      font-weight: bold;
+      border-style: solid;
+    }
+
+    &__rotation-two > &__side-two {
+      color: rgb(0, 0, 0);
+      font-size: larger;
+      font-weight: bold;
+      border-style: solid;
+    }
+
+    &__rotation-three > &__side-three {
+      color: rgb(0, 0, 0);
+      font-size: larger;
+      font-weight: bold;
+      border-style: solid;
+    }
+
+    &__rotation-four > &__side-four {
+      color: rgb(0, 0, 0);
+      font-size: larger;
+      font-weight: bold;
+      border-style: solid;
+    }
   }
 
-  &__side-one {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-  }
+  @include media-breakpoint-up(md) {
+    &__card-style {
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+      border-radius: 10%;
+      transition: transform 0.8s ease-in-out;
+      animation-fill-mode: forwards;
+      outline: none !important;
+      border: none;
+      background-size: contain;
+      box-shadow: 0 0 2rem 0.05rem black;
+      background-image: linear-gradient(rgba(233, 224, 222, 0.75), rgba(233, 224, 222, 0.75)), url("../../../styles/assets/paper-background.webp");
+    }
 
-  &__side-two {
-    writing-mode: vertical-rl;
-    position: absolute;
-    right: 0;
-    height: 100%;
-    text-align: center;
-  }
+    &__side-one {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+    }
 
-  &__side-three {
-    transform: scale(-1, -1);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-  }
+    &__side-two {
+      writing-mode: vertical-rl;
+      position: absolute;
+      right: 0;
+      height: 100%;
+      text-align: center;
+    }
 
-  &__side-four {
-    transform: scale(-1, -1);
-    writing-mode: vertical-rl;
-    position: absolute;
-    left: 0;
-    height: 100%;
-    text-align: center;
-  }
+    &__side-three {
+      transform: scale(-1, -1);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
 
-  &__inset-border {
-    position: absolute;
-    width: 60%;
-    height: 60%;
-    bottom: 20%;
-    left: 20%;
-    outline: none !important;
-    border: 0.5rem solid darkgray;
-    background-color: rgba(233, 224, 222, 0.2);
-  }
+    &__side-four {
+      transform: scale(-1, -1);
+      writing-mode: vertical-rl;
+      position: absolute;
+      left: 0;
+      height: 100%;
+      text-align: center;
+    }
 
-  &__icon {
-    position: relative;
-    top: 20%;
-  }
+    &__inset-border {
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      bottom: 20%;
+      left: 20%;
+      outline: none !important;
+      border: 0.5rem solid darkgray;
+      background-color: rgba(233, 224, 222, 0.2);
+    }
 
-  &__rotation-one {
-    transform: rotate(0deg);
-  }
+    &__icon {
+      size: 5em;
+      position: relative;
+      top: 20%;
+    }
 
-  &__rotation-two {
-    transform: rotate(90deg);
-  }
+    &__rotation-one {
+      transform: rotate(0deg);
+    }
 
-  &__rotation-three {
-    transform: rotate(180deg);
-  }
+    &__rotation-two {
+      transform: rotate(90deg);
+    }
 
-  &__rotation-four {
-    transform: rotate(270deg);
+    &__rotation-three {
+      transform: rotate(180deg);
+    }
+
+    &__rotation-four {
+      transform: rotate(270deg);
+    }
   }
 }
