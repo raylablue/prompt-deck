@@ -13,6 +13,10 @@ using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolk
 3. Run `npm install` in the cloned repo's root
 4. Run `npm start` to view the locally hosted site in the browser
 
+Please note that this project was created using firebase. Meaning that the project will not 
+run properly without a config file setup. Because of the sensitive nature of that document it 
+is not included in the github files.
+
 ### `Development server`
 Run `npm start` for a dev server. 
 Page will automatically open in browser, 
