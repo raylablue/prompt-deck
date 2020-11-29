@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script");
+
+.o-header {
+  &__background {
+    background: #262026;
+    box-shadow: 0 0 12px 4px black;
+  }
+
+  &__logo {
+    font-family: Kaushan Script, sans-serif;
+    font-size: 2rem;
+  }
+
+  &__bars {
+    color: #348b98 !important;
+    outline: none !important;
+  }
+  //&.-logged-in {
+  //
+  //}
+}

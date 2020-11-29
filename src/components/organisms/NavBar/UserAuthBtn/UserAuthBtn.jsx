@@ -36,7 +36,7 @@ function UserAuthBtn() {
     <a
       data-test="user-auth-btn"
       href="/signin"
-      className="btn btn-outline-primary p-4 px-5 m-3"
+      className="btn btn-outline-primary px-5 mr-3"
       onClick={handleClick}
     >
       {userLogin}

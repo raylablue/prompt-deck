@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook, faBars } from '@fortawesome/free-solid-svg-icons';
+import { faPenNib, faBars } from '@fortawesome/free-solid-svg-icons';
 import UserAuthBtn from '../UserAuthBtn/UserAuthBtn';
 import NavLinkCollection from '../NavLinkCollection';
 import navLinks from '../nav-links';
+import '../header-styles.scss';
 
 function HeaderUser() {
   const [collapse, setCollapse] = useState(true);
@@ -36,26 +37,28 @@ function HeaderUser() {
   return (
     <nav
       data-test="o-header-user"
-      className="navbar navbar-expand-md bg-secondary px-2"
+      className="navbar navbar-expand-md o-header__background"
     >
       <div className="container">
         <NavLink
           to="/"
-          className="o-nav-bar__ticket-logo"
+          className="o-header__logo mr-4"
         >
           <FontAwesomeIcon
-            className="fa-5x fas fa-ticket-alt mr-4 py-0 pl-1"
-            icon={faBook}
+            className="fa-2x fas fa-pen-nib pb-4 pt-2 pl-2 d-inline-block align-top"
+            icon={faPenNib}
           />
+          Prompt Deck
         </NavLink>
+
         <button
           data-test="o-header-user__dropdown"
-          className={`${toggleClass} navbar-toggler p-1`}
+          className={`${toggleClass} navbar-toggler p-1 o-header__bars p-2 pb-4`}
           type="button"
           onClick={toggleClick}
         >
           <FontAwesomeIcon
-            className="fa-3x fas fa-bars o-nav-bar__bars"
+            className="fa-2x fas fa-bars"
             icon={faBars}
           />
         </button>

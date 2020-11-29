@@ -1,19 +1,11 @@
 const navLinks = [
   {
-    name: 'Home',
-    linkto: '/',
-  },
-  {
-    name: 'Prompts',
-    linkto: '/prompts',
+    name: 'Cards',
+    linkto: '/cards',
   },
   {
     name: 'Decks',
     linkto: '/decks',
-  },
-  {
-    name: 'Cards',
-    linkto: '/cards',
   },
 ];
 

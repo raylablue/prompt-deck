@@ -131,6 +131,7 @@ describe('PageDecksCreate', () => {
         name,
         description,
         visibility: 'private',
+        featured: false,
         createdBy,
         characterCards,
         circumstanceCards,

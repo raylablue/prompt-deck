@@ -48,6 +48,7 @@ describe('Create cards page', () => {
       const cardTitle = 'Sample title';
       const userId = '1234';
       const type = types[0].name;
+      const visibility = 'private';
       const side1 = 'first side text';
       const side2 = 'second side text';
       const side3 = 'third side text';
@@ -57,6 +58,7 @@ describe('Create cards page', () => {
       const updateCard = {
         cardTitle,
         type,
+        visibility,
         createdBy: userId,
         side1,
         side2,
