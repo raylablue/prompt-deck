@@ -1,42 +1,42 @@
-.App {
-  text-align: center;
+@import "../styles/custom-bootstrap";
+@import "../styles/custom-colours";
+@import url("https://fonts.googleapis.com/css?family=Montserrat+Subrayada");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed");
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script");
+
+html,
+body,
+#root,
+.component-app {
+  height: 100%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-  color: #aaa;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-float infinite 3s ease-in-out;
-  }
-}
-
-.App-header {
-  min-height: 100vh;
+.component-app {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
 }
 
-.App-link {
-  color: rgb(112, 76, 182);
+.template-container {
+  flex: 1 0 auto;
 }
 
-@keyframes App-logo-float {
-  0% {
-    transform: translateY(0);
-  }
+.footer {
+  flex-shrink: 0;
+}
 
-  50% {
-    transform: translateY(10px);
-  }
+body {
+  background-size: cover;
+  //image from pixbay https://pixabay.com/photos/wall-wood-background-2423822/
+  background-image: url("../styles/assets/wood-planks.webp");
+  font-family: Roboto Condensed, Arial, sans-serif;
+}
 
-  100% {
-    transform: translateY(0);
-  }
+h1 {
+  font-family: Kaushan Script, sans-serif;
+  font-size: 4rem;
+  color: rgb(225, 225, 225);
+}
+
+h2 {
+  font-family: Kaushan Script, sans-serif;
 }

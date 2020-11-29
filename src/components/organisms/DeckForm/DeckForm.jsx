@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import MultiSelect from 'react-multi-select-component';
 import { useHistory } from 'react-router-dom';
+import './DeckForm.scss';
 
 function DeckForm({
   initialDeck,
@@ -57,6 +58,7 @@ function DeckForm({
   return (
     <form
       data-test="o-deck-form"
+      className="o-deck-form"
       onSubmit={(e) => {
         e.preventDefault();
         handleSubmit(deck, selectedCharacterIds, selectedCircumstanceIds, selectedConflictIds);

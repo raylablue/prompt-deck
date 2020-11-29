@@ -2,7 +2,7 @@ import '../../../tests/mocks/template-default-mocks';
 import '../../../tests/mocks/firebase-mocks';
 import React from 'react';
 import { mount } from 'enzyme';
-import { useParams, MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { act } from 'react-dom/test-utils';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
@@ -256,6 +256,7 @@ describe('Page Cards Edit', () => {
 
       const cardTitle = 'Awesome Quests';
       const type = types[0].name;
+      const visibility = 'private';
       const side1 = 'Go fetch my favourite spoon';
       const side2 = 'Villager needs 5 pieces of wood';
       const side3 = 'How many licks does it take to get to the center of a tootsie pop';
@@ -265,6 +266,7 @@ describe('Page Cards Edit', () => {
       const updateCard = {
         cardTitle,
         type,
+        visibility,
         createdBy: user.uid,
         side1,
         side2,

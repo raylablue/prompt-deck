@@ -29,7 +29,6 @@ module.exports = {
         "assert": "either",
         "depth": 3,
       }],
-      "no-console": "off",
       "no-restricted-syntax": [
         "error",
         {

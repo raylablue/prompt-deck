@@ -16,6 +16,42 @@ const firebaseCollectionsHelper = {
       }));
   },
 
+  getSelectedCardData: async (cardId) => {
+    const cardRef = await firebase.db
+      .collection('cards')
+      .doc(cardId)
+      .get();
+
+    return cardRef.data();
+  },
+
+  getCardRef: (cardId) => firebase.db
+    .collection('cards')
+    .doc(cardId),
+
+  getCardData: async (cardId) => {
+    const response = await firebase.db
+      .collection('cards')
+      .doc(cardId)
+      .get();
+
+    return response.data();
+  },
+
+  getDeckDataByFeaturedTrue: async () => {
+    const response = await firebase.db
+      .collection('decks')
+      .where('featured', '==', true)
+      .get();
+
+    return response
+      .docs
+      .map((deck) => ({
+        id: deck.id,
+        ...deck.data(),
+      }));
+  },
+
   getDeckData: async (deckId) => {
     const response = await firebase.db
       .collection('decks')
@@ -24,10 +60,6 @@ const firebaseCollectionsHelper = {
 
     return response.data();
   },
-
-  getCardRef: (cardId) => firebase.db
-    .collection('cards')
-    .doc(cardId),
 
   updateDeck: async (deckId, deck) => {
     await firebase.db

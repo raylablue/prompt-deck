@@ -1,6 +1,5 @@
 import React from 'react';
 import PageSignIn from '../components/pages/PageSignIn/PageSignIn';
-import PagePrompts from '../components/pages/PagePropmts/PagePrompts';
 import PageDecks from '../components/pages/PageDecks/PageDecks';
 import PageDecksEdit from '../components/pages/PageDecksEdit/PageDecksEdit';
 import PageDecksCreate from '../components/pages/PageDecksCreate/PageDecksCreate';
@@ -8,6 +7,9 @@ import PageHome from '../components/pages/PageHome/PageHome';
 import PageCardsCreate from '../components/pages/PageCardsCreate/PageCardsCreate';
 import PageCardsEdit from '../components/pages/PageCardsEdit/PageCardsEdit';
 import PageCards from '../components/pages/PageCards/PageCards';
+import PagePromptDeck from '../components/pages/PagePromptDeck/PagePromptDeck';
+
+/* istanbul ignore file */
 
 const Routes = [
   {
@@ -15,8 +17,8 @@ const Routes = [
     component: <PageSignIn />,
   },
   {
-    path: '/prompts',
-    component: <PagePrompts />,
+    path: '/prompts/:id',
+    component: <PagePromptDeck />,
   },
   {
     path: '/cards/create',

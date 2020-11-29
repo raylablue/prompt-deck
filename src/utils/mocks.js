@@ -31,3 +31,13 @@ export const deckMock = () => ({
   conflictCards: [{ label: 'Conflict', value: 'ConflictIdPath' }],
   id: v4(),
 });
+
+export const featuredDeckMock = () => ({
+  name: 'Featured Deck',
+  description: 'Everyone can see this',
+  visibility: 'featured',
+  characterCards: [{ quantity: 1, cardRef: 'BapTxzzlsYvWzPPg1pkI' }],
+  circumstanceCards: [{ quantity: 1, cardRef: '1345987' }],
+  conflictCards: [{ quantity: 1, cardRef: 'asdlkfjhasdf' }],
+  id: v4(),
+});

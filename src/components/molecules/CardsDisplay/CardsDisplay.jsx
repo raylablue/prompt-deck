@@ -1,35 +1,98 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { If, Else } from 'react-if';
 import PropTypes from 'prop-types';
 import './CardsDisplay.scss';
+import { faUserCircle, faMountain, faFireAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const CardsDisplay = ({ card }) => (
-  <div className="m-cards-display__card border bg-light">
-    <div
-      data-test="p-cards__side-one"
-      className="m-cards-display__side-one px-2"
-    >
-      {card.side1}
-    </div>
-    <div
-      data-test="p-cards__side-two"
-      className="m-cards-display__side-two py-2"
-    >
-      {card.side2}
-    </div>
-    <div
-      data-test="p-cards__side-three"
-      className="m-cards-display__side-three px-2"
-    >
-      {card.side3}
-    </div>
-    <div
-      data-test="p-cards__side-four"
-      className="m-cards-display__side-four py-2"
-    >
-      {card.side4}
-    </div>
-  </div>
-);
+const CardsDisplay = ({ card }) => {
+  const [rotationStyle, setRotationStyle] = useState('one');
+  const [rotateArr, setRotateArr] = useState([
+    'two', 'three', 'four', 'one',
+  ]);
+
+  function rotate() {
+    const styleEl = rotateArr.shift();
+    rotateArr.push(styleEl);
+
+    setRotationStyle(styleEl);
+    setRotateArr([...rotateArr]);
+  }
+
+  return (
+    <If condition={!card.side1 || !card.side2 || !card.side3 || !card.side4}>
+      <div>ERROR</div>
+
+      <Else>
+        <button
+          className={`m-cards-display__card-style m-cards-display__rotation-${rotationStyle} my-2`}
+          type="button"
+          onClick={rotate}
+        >
+          <div
+            data-test="p-cards__side-one"
+            className="m-cards-display__side-one"
+          >
+            {card.side1}
+          </div>
+          <div
+            data-test="p-cards__side-two"
+            className="m-cards-display__side-two"
+          >
+            {card.side2}
+          </div>
+          <div
+            data-test="p-cards__side-three"
+            className="m-cards-display__side-three"
+          >
+            {card.side3}
+          </div>
+          <div
+            data-test="p-cards__side-four"
+            className="m-cards-display__side-four"
+          >
+            {card.side4}
+          </div>
+
+          <div className="m-cards-display__inset-border">
+            <If condition={card.type === 'Character'}>
+              <div className="m-cards-display__icon container-fluid">
+                <FontAwesomeIcon
+                  className="fa-4x fas fa-user-circle"
+                  icon={faUserCircle}
+                />
+                <br />
+                <small className="mt-2">CHARACTER</small>
+              </div>
+            </If>
+
+            <If condition={card.type === 'Circumstance'}>
+              <div className="m-cards-display__icon">
+                <FontAwesomeIcon
+                  className="fa-4x fas fa-mountain"
+                  icon={faMountain}
+                />
+                <br />
+                <small className="mt-2">CIRCUMSTANCE</small>
+              </div>
+            </If>
+
+            <If condition={card.type === 'Conflict'}>
+              <div className="m-cards-display__icon">
+                <FontAwesomeIcon
+                  className="fa-4x fas fa-fire-alt"
+                  icon={faFireAlt}
+                />
+                <br />
+                <small className="mt-2">CONFLICT</small>
+              </div>
+            </If>
+          </div>
+        </button>
+      </Else>
+    </If>
+  );
+};
 
 CardsDisplay.propTypes = {
   // eslint-disable-next-line react/require-default-props
@@ -38,6 +101,7 @@ CardsDisplay.propTypes = {
     side2: PropTypes.string,
     side3: PropTypes.string,
     side4: PropTypes.string,
+    type: PropTypes.string,
   }),
 };
 export default CardsDisplay;

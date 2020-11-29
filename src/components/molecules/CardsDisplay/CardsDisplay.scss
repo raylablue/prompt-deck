@@ -1,40 +1,146 @@
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/_variables.scss";
+@import "~bootstrap/scss/mixins/_breakpoints.scss";
+
 .m-cards-display {
-  &__card {
-    width: 100%;
-    padding-bottom: 100%;
-    position: relative;
-    overflow-wrap: break-spaces;
-    border-radius: 10%;
+  @include media-breakpoint-down(sm) {
+    &__card-style {
+      height: 17rem;
+      width: 100%;
+      min-width: 80px;
+      //padding-bottom: 10%;
+      //padding-top: 5%;
+      outline: none !important;
+      border: none;
+      word-wrap: break-word;
+      hyphens: auto;
+      color: rgb(40, 40, 40);
+      font-size: small;
+      background: none;
+      text-align: center;
+      //vertical-align: top;
+    }
+
+    &__icon {
+      padding-top: 10%;
+      position: absolute;
+      top: 10px;
+      color: #79515f;
+      width: 100%;
+      left: 0;
+    }
+
+    &__side-one {
+      margin-top: 40%;
+    }
+
+    &__rotation-one > &__side-one {
+      margin-top: 40%;
+      font-size: larger;
+      font-weight: bold;
+      border-style: solid;
+      background-color: white;
+    }
+
+    &__rotation-two > &__side-four {
+      font-size: larger;
+      font-weight: bold;
+      border-style: solid;
+      background-color: white;
+    }
+
+    &__rotation-three > &__side-three {
+      font-size: larger;
+      font-weight: bold;
+      border-style: solid;
+      background-color: white;
+    }
+
+    &__rotation-four > &__side-two {
+      font-size: larger;
+      font-weight: bold;
+      border-style: solid;
+      background-color: white;
+    }
   }
 
-  &__side-one {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-  }
+  @include media-breakpoint-up(md) {
+    &__card-style {
+      width: 100%;
+      padding-bottom: 100%;
+      position: relative;
+      border-radius: 10%;
+      transition: transform 0.8s ease-in-out;
+      animation-fill-mode: forwards;
+      outline: none !important;
+      border: none;
+      background-size: contain;
+      box-shadow: 0 0 2rem 0.05rem black;
+      background-image: linear-gradient(rgba(233, 224, 222, 0.75), rgba(233, 224, 222, 0.75)), url("../../../styles/assets/paper-background.webp");
+    }
 
-  &__side-two {
-    writing-mode: vertical-rl;
-    position: absolute;
-    right: 0;
-    height: 100%;
-    text-align: center;
-  }
+    &__side-one {
+      position: absolute;
+      width: 100%;
+      text-align: center;
+    }
 
-  &__side-three {
-    transform: scale(-1, -1);
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-  }
+    &__side-two {
+      writing-mode: vertical-rl;
+      position: absolute;
+      right: 0;
+      height: 100%;
+      text-align: center;
+    }
 
-  &__side-four {
-    transform: scale(-1, -1);
-    writing-mode: vertical-rl;
-    position: absolute;
-    left: 0;
-    height: 100%;
-    text-align: center;
+    &__side-three {
+      transform: scale(-1, -1);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+    }
+
+    &__side-four {
+      transform: scale(-1, -1);
+      writing-mode: vertical-rl;
+      position: absolute;
+      left: 0;
+      height: 100%;
+      text-align: center;
+    }
+
+    &__inset-border {
+      position: absolute;
+      width: 60%;
+      height: 60%;
+      bottom: 20%;
+      left: 20%;
+      outline: none !important;
+      border: 0.5rem solid darkgray;
+      background-color: rgba(233, 224, 222, 0.2);
+    }
+
+    &__icon {
+      size: 5em;
+      position: relative;
+      top: 20%;
+    }
+
+    &__rotation-one {
+      transform: rotate(0deg);
+    }
+
+    &__rotation-two {
+      transform: rotate(90deg);
+    }
+
+    &__rotation-three {
+      transform: rotate(180deg);
+    }
+
+    &__rotation-four {
+      transform: rotate(270deg);
+    }
   }
 }

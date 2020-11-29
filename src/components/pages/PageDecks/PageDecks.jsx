@@ -1,34 +1,27 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { If, Else } from 'react-if';
 import { useSelector } from 'react-redux';
-import firebase from '../../../firebase/firebase';
 import TemplateDefault from '../../Templates/TemplateDefault';
 import CreateDecksBtn from '../../molecules/CreateDecksBtn';
 import firebaseCollectionsHelper from '../../../firebase/firebase-collections-helper/firebase-collections-helper';
+import DecksDisplay from '../../organisms/DecksDisplay/DecksDisplay';
+import './PageDecks.scss';
+import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
 
 function PageDecks() {
   const user = useSelector((state) => state.user);
   const [decks, setDecks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const populateDecks = useCallback(
     async () => {
       const userDecks = await firebaseCollectionsHelper
         .getAllDecksByUserId(user.uid);
-
+      setIsLoading(false);
       setDecks(userDecks);
     },
     [user.uid],
   );
-
-  const handleDelete = async (e, index) => {
-    e.preventDefault();
-
-    await firebase.db.collection('decks')
-      .doc(decks[index].id)
-      .delete();
-
-    await populateDecks();
-  };
 
   useEffect(() => {
     populateDecks();
@@ -39,41 +32,42 @@ function PageDecks() {
       <h1 className="my-4">Your Decks</h1>
       <CreateDecksBtn>+ Create A Deck</CreateDecksBtn>
 
-      <div className="row mt-4">
-        <If condition={!decks}>
-          <p>Make some decks!</p>
-          <CreateDecksBtn>Create Deck</CreateDecksBtn>
+      <If condition={isLoading}>
+        <ShuffleLoadingAnim />
 
-          <Else>
-            {decks.map((deck, index) => (
-              <div
-                key={deck.id}
-                data-test="p-decks__deck"
-                className="card col-12 col-sm-5 col-md-4 col-lg-3"
-              >
-                <h2>{deck.name}</h2>
-                <p>{deck.description}</p>
+        <Else>
+          <p className="p-decks__text-block mt-4">
+            Select a deck to view prompts from that specific deck
+          </p>
 
-                <a
-                  href={`/decks/${deck.id}`}
-                  className="btn-primary p-1 justify-content-center"
-                >
-                  Edit
-                </a>
+          <div className="row mt-4">
+            <If condition={!decks}>
+              <p>Make some decks!</p>
+              <CreateDecksBtn>Create Deck</CreateDecksBtn>
 
-                <button
-                  className="btn-warning"
-                  type="button"
-                  onClick={(e) => handleDelete(e, index)}
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
-          </Else>
+              <Else>
+                {decks.map((deck) => (
+                  <DecksDisplay
+                    deck={deck}
+                    key={deck.id}
+                  />
+                ))}
+              </Else>
 
-        </If>
-      </div>
+            </If>
+          </div>
+        </Else>
+      </If>
+
+      <p className="p-decks__text-block mt-3">
+        Don&apos;t have any decks yet? No problem.
+        First make some cards, then you&apos;ll be able to create a deck from those cards.
+        Be careful to have at least one of each card type in the deck. The more cards of each type
+        you have, the more varried your prompts will be.
+        <br />
+        Click &apos;view&apos; on the deck to go to the prompt display for it.
+        Happy writing!
+      </p>
 
     </TemplateDefault>
   );
