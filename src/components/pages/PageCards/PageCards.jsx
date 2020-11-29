@@ -7,6 +7,7 @@ import CreateCardsBtn from '../../molecules/CreateCardsBtn';
 import CardsMap from '../../organisms/CardsMap/CardsMap';
 import ErrorMessage from '../../atoms/ErrorMessage/ErrorMessage';
 import ShuffleLoadingAnim from '../../atoms/ShuffleLoadingAnim/ShuffleLoadingAnim';
+import './PageCards.scss';
 
 function PageCards() {
   const [cards, setCards] = useState([]);
@@ -87,7 +88,7 @@ function PageCards() {
                 </div>
 
                 <Else>
-                  <div className="row">
+                  <div className="row p-cards">
                     <h2 className="col-12 text-white mt-4">Character Cards</h2>
                     {cards.map((card, index) => (
                       <If
