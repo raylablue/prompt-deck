@@ -4,10 +4,13 @@ import PropTypes from 'prop-types';
 function ErrorMessage({ defaultErrMessage, errMessage }) {
   return (
     <div>
-      <h1 className="alert-warning">
+      <h3 className="alert-danger text-center">ERROR</h3>
+      <div className="bg-warning text-center p-2">
         {defaultErrMessage}
-      </h1>
-      <h2>{errMessage}</h2>
+        <br />
+        {errMessage}
+        <br />
+      </div>
     </div>
   );
 }
