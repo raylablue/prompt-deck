@@ -49,6 +49,9 @@ is acting as a service layer, and all firebase calls should go through a similar
 broken up into multiple files since it's too much content already). From there all calls could be wrapped in a try/catch 
 block, and redux could be used in the service layer to lighten the burden on calling firebase more than needed.
 
+I'd also sort the cards and decks when they display to be in alphabetical order. 
+Currently it's based on the document ID, which is random, and could be confusing for 
+users. Especially if they have a lot of cards and are trying to find one in particular.
 
 ## Available Scripts
 
