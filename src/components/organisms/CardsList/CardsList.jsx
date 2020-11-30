@@ -4,16 +4,28 @@ import './CardsList.scss';
 
 const CardsList = ({ card }) => (
   <div className="o-cards-list">
-    <p className="o-cards-list__list">
+    <p
+      className="o-cards-list__list"
+      data-test="p-cards__side-one"
+    >
       {card.side1}
     </p>
-    <p className="o-cards-list__list">
+    <p
+      className="o-cards-list__list"
+      data-test="p-cards__side-two"
+    >
       {card.side2}
     </p>
-    <p className="o-cards-list__list">
+    <p
+      className="o-cards-list__list"
+      data-test="p-cards__side-three"
+    >
       {card.side3}
     </p>
-    <p className="o-cards-list__list">
+    <p
+      className="o-cards-list__list"
+      data-test="p-cards__side-four"
+    >
       {card.side4}
     </p>
   </div>
