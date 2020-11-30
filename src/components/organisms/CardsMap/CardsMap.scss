@@ -1,7 +1,47 @@
+@import "~bootstrap/scss/_functions.scss";
+@import "~bootstrap/scss/_variables.scss";
+@import "~bootstrap/scss/mixins/_breakpoints.scss";
+
 .o-cards-map {
+  &__text-break {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  h3 {
+    padding: 8px;
+  }
+
+  @include media-breakpoint-down(md) {
+    h3 {
+      font-size: medium;
+      font-weight: bold;
+    }
+
+    li {
+      font-size: small;
+    }
+  }
+
+  @include media-breakpoint-up(lg) {
+    width: 14rem;
+    height: 200px;
+
+    h3 {
+      font-size: larger;
+      font-weight: bold;
+    }
+
+    li {
+      font-size: large;
+    }
+  }
+
   &__text-block {
     background: rgba(225, 225, 225, 0.5);
     padding: 0.5rem;
     text-align: center;
+    overflow: hidden;
   }
 }
