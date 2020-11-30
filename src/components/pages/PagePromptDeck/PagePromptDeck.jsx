@@ -49,32 +49,42 @@ function PagePromptDeck() {
         setCharacterCard(randomCharacterCard);
       } catch (err) {
         setErrMessage(err.message);
-        setDefaultErrMessage('An error has occurred in fetching the character card');
+        setDefaultErrMessage('An error has occurred in fetching the character card try saving the deck to purge any deleted character cards from this deck');
       }
 
       // CIRCUMSTANCE CARDS
-      const circumstanceCardIds = initialDeckData.circumstanceCards
-        .map((card) => (card.cardRef.id));
-      const circumstanceCardOptions = await Promise
-        .all(circumstanceCardIds.map((cardId) => cardData(cardId)));
+      try {
+        const circumstanceCardIds = initialDeckData.circumstanceCards
+          .map((card) => (card.cardRef.id));
+        const circumstanceCardOptions = await Promise
+          .all(circumstanceCardIds.map((cardId) => cardData(cardId)));
 
-      const randomCircumstanceCard = circumstanceCardOptions[
-        Math.floor(Math.random() * circumstanceCardOptions.length)
-      ];
-      setCircumstanceCard(randomCircumstanceCard);
+        const randomCircumstanceCard = circumstanceCardOptions[
+          Math.floor(Math.random() * circumstanceCardOptions.length)
+        ];
+        setCircumstanceCard(randomCircumstanceCard);
+      } catch (err) {
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the circumstance card try saving the deck to purge any deleted circumstance cards from this deck');
+      }
 
       // CONFLICT CARDS
-      const conflictCardIds = initialDeckData.conflictCards
-        .map((card) => (card.cardRef.id));
-      const conflictCardOptions = await Promise
-        .all(conflictCardIds.map((cardId) => cardData(cardId)));
+      try {
+        const conflictCardIds = initialDeckData.conflictCards
+          .map((card) => (card.cardRef.id));
+        const conflictCardOptions = await Promise
+          .all(conflictCardIds.map((cardId) => cardData(cardId)));
 
-      const randomConflictCard = conflictCardOptions[
-        Math.floor(Math.random() * conflictCardOptions.length)
-      ];
-      setConflictCard(randomConflictCard);
+        const randomConflictCard = conflictCardOptions[
+          Math.floor(Math.random() * conflictCardOptions.length)
+        ];
+        setConflictCard(randomConflictCard);
 
-      setIsLoading(false);
+        setIsLoading(false);
+      } catch (err) {
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the conflict card try saving the deck to purge any deleted conflict cards from this deck');
+      }
     },
     [cardData, id],
   );
@@ -119,13 +129,11 @@ function PagePromptDeck() {
                     </h3>
                     <div className="bg-warning text-center p-2">
                       <p>
-                        Either this deck does not have all three card types,
-                        or a card that was deleted is trying to display.
+                        This deck does not have all three card types. At least one of
+                        each card type is required to generate a prompt.
                         <br />
-                        Check the deck to see if it has all card types.
-                        <br />
-                        If it does, simply save the deck. That will purge the
-                        deleted card from the cache and solve the error.
+                        Edit deck to ensure it has all card types. You may need to
+                        create a new card of the missing type if one does not exist.
                       </p>
                       <a
                         href={`/decks/${id}`}
