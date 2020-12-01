@@ -20,7 +20,6 @@ function PageDecksEdit() {
   const [initialSelectedConflictIds, setInitialSelectedConflictIds] = useState([]);
   const [initialDeck, setInitialDeck] = useState({});
 
-
   const getCardOptions = useCallback(
     async (cardType) => {
       const conflictCards = await firebaseCollectionsHelper
@@ -112,8 +111,8 @@ function PageDecksEdit() {
       const deck = {
         ...updateDeck,
         createdBy: user.uid,
-        visibility: 'private',
-        featured: false,
+        // visibility: 'private',
+        // featured: false,
         characterCards: selectedCharacterIds.map((cardId) => (
           {
             cardRef: firebaseCollectionsHelper.getCardRef(cardId.value),

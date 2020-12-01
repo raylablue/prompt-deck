@@ -18,10 +18,10 @@ function DecksDisplay({ deck }) {
   return (
     <div
       data-test="p-decks__deck"
-      className="col-sm"
+      className="col-sm-6 col-md-4"
     >
 
-      <div className="o-decks-display__deck-background">
+      <div className="o-decks-display__deck-background mt-4">
         <a href={`/prompts/${deck.id}`}>
           <h2>{deck.name}</h2>
           <p>{deck.description}</p>

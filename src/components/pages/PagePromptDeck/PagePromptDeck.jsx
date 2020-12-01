@@ -19,11 +19,17 @@ function PagePromptDeck() {
   const [isLoading, setIsLoading] = useState(true);
 
   const cardData = useCallback(
+    // eslint-disable-next-line consistent-return
     async (cardId) => {
-      const response = await firebaseCollectionsHelper
-        .getSelectedCardData(cardId);
+      try {
+        const response = await firebaseCollectionsHelper
+          .getSelectedCardData(cardId);
 
-      return response;
+        return response;
+      } catch (err) {
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the card try saving the deck to purge any deleted cards from this deck');
+      }
     },
     [],
   );
@@ -49,32 +55,42 @@ function PagePromptDeck() {
         setCharacterCard(randomCharacterCard);
       } catch (err) {
         setErrMessage(err.message);
-        setDefaultErrMessage('An error has occurred in fetching the character card');
+        setDefaultErrMessage('An error has occurred in fetching the character card try saving the deck to purge any deleted character cards from this deck');
       }
 
       // CIRCUMSTANCE CARDS
-      const circumstanceCardIds = initialDeckData.circumstanceCards
-        .map((card) => (card.cardRef.id));
-      const circumstanceCardOptions = await Promise
-        .all(circumstanceCardIds.map((cardId) => cardData(cardId)));
+      try {
+        const circumstanceCardIds = initialDeckData.circumstanceCards
+          .map((card) => (card.cardRef.id));
+        const circumstanceCardOptions = await Promise
+          .all(circumstanceCardIds.map((cardId) => cardData(cardId)));
 
-      const randomCircumstanceCard = circumstanceCardOptions[
-        Math.floor(Math.random() * circumstanceCardOptions.length)
-      ];
-      setCircumstanceCard(randomCircumstanceCard);
+        const randomCircumstanceCard = circumstanceCardOptions[
+          Math.floor(Math.random() * circumstanceCardOptions.length)
+        ];
+        setCircumstanceCard(randomCircumstanceCard);
+      } catch (err) {
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the circumstance card try saving the deck to purge any deleted circumstance cards from this deck');
+      }
 
       // CONFLICT CARDS
-      const conflictCardIds = initialDeckData.conflictCards
-        .map((card) => (card.cardRef.id));
-      const conflictCardOptions = await Promise
-        .all(conflictCardIds.map((cardId) => cardData(cardId)));
+      try {
+        const conflictCardIds = initialDeckData.conflictCards
+          .map((card) => (card.cardRef.id));
+        const conflictCardOptions = await Promise
+          .all(conflictCardIds.map((cardId) => cardData(cardId)));
 
-      const randomConflictCard = conflictCardOptions[
-        Math.floor(Math.random() * conflictCardOptions.length)
-      ];
-      setConflictCard(randomConflictCard);
+        const randomConflictCard = conflictCardOptions[
+          Math.floor(Math.random() * conflictCardOptions.length)
+        ];
+        setConflictCard(randomConflictCard);
 
-      setIsLoading(false);
+        setIsLoading(false);
+      } catch (err) {
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the conflict card try saving the deck to purge any deleted conflict cards from this deck');
+      }
     },
     [cardData, id],
   );
@@ -90,10 +106,20 @@ function PagePromptDeck() {
 
         <Else>
           <If condition={defaultErrMessage.length >= 1}>
-            <ErrorMessage
-              defaultErrMessage={defaultErrMessage}
-              errMessage={errMessage}
-            />
+            <div>
+              <ErrorMessage
+                defaultErrMessage={defaultErrMessage}
+                errMessage={errMessage}
+              />
+
+              <br />
+              <a
+                href={`/decks/${id}`}
+                className="btn-primary p-1 px-2"
+              >
+                Edit Deck
+              </a>
+            </div>
 
             <Else>
               <h1>{`${deck.name} Deck Prompt`}</h1>
@@ -105,36 +131,34 @@ function PagePromptDeck() {
                 Generate New Prompt
               </button>
 
-              <If condition={characterCard && circumstanceCard && conflictCard}>
-                <PromptsDisplay
-                  characterCard={characterCard}
-                  circumstanceCard={circumstanceCard}
-                  conflictCard={conflictCard}
-                />
+              <If condition={!characterCard || !circumstanceCard || !conflictCard}>
+                <div>
+                  <h3 className="alert-danger text-center">
+                    Error
+                  </h3>
+                  <div className="bg-warning text-center p-2">
+                    <p>
+                      This deck does not have all three card types. At least one of
+                      each card type is required to generate a prompt.
+                      <br />
+                      Edit deck to ensure it has all card types. You may need to
+                      create a new card of the missing type if one does not exist.
+                    </p>
+                    <a
+                      href={`/decks/${id}`}
+                      className="btn-primary p-1 px-2"
+                    >
+                      Edit Deck
+                    </a>
+                  </div>
+                </div>
 
                 <Else>
-                  <div>
-                    <h3 className="alert-danger text-center">
-                      Error
-                    </h3>
-                    <div className="bg-warning text-center p-2">
-                      <p>
-                        Either this deck does not have all three card types,
-                        or a card that was deleted is trying to display.
-                        <br />
-                        Check the deck to see if it has all card types.
-                        <br />
-                        If it does, simply save the deck. That will purge the
-                        deleted card from the cache and solve the error.
-                      </p>
-                      <a
-                        href={`/decks/${id}`}
-                        className="btn-primary p-1 px-2"
-                      >
-                        Edit Deck
-                      </a>
-                    </div>
-                  </div>
+                  <PromptsDisplay
+                    characterCard={characterCard}
+                    circumstanceCard={circumstanceCard}
+                    conflictCard={conflictCard}
+                  />
                 </Else>
               </If>
             </Else>
