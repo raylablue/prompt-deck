@@ -13,6 +13,10 @@ using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolk
 3. Run `npm install` in the cloned repo's root
 4. Run `npm start` to view the locally hosted site in the browser
 
+Please note that this project was created using firebase. Meaning that the project will not 
+run properly without a config file setup. Because of the sensitive nature of that document it 
+is not included in the github files.
+
 ### `Development server`
 Run `npm start` for a dev server. 
 Page will automatically open in browser, 
@@ -45,6 +49,9 @@ is acting as a service layer, and all firebase calls should go through a similar
 broken up into multiple files since it's too much content already). From there all calls could be wrapped in a try/catch 
 block, and redux could be used in the service layer to lighten the burden on calling firebase more than needed.
 
+I'd also sort the cards and decks when they display to be in alphabetical order. 
+Currently it's based on the document ID, which is random, and could be confusing for 
+users. Especially if they have a lot of cards and are trying to find one in particular.
 
 ## Available Scripts
 

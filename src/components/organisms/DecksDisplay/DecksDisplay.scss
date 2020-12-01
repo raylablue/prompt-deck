@@ -5,6 +5,18 @@
     background-image: linear-gradient(rgba(233, 224, 222, 0.75), rgba(233, 224, 222, 0.75)), url("../../../styles/assets/paper-background.webp");
     padding: 1rem;
     text-align: center;
+
+    h2 {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    p {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
   }
 
   &__buttons-container {
