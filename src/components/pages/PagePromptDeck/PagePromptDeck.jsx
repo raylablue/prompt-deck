@@ -19,11 +19,17 @@ function PagePromptDeck() {
   const [isLoading, setIsLoading] = useState(true);
 
   const cardData = useCallback(
+    // eslint-disable-next-line consistent-return
     async (cardId) => {
-      const response = await firebaseCollectionsHelper
-        .getSelectedCardData(cardId);
+      try {
+        const response = await firebaseCollectionsHelper
+          .getSelectedCardData(cardId);
 
-      return response;
+        return response;
+      } catch (err) {
+        setErrMessage(err.message);
+        setDefaultErrMessage('An error has occurred in fetching the card try saving the deck to purge any deleted cards from this deck');
+      }
     },
     [],
   );
@@ -100,10 +106,20 @@ function PagePromptDeck() {
 
         <Else>
           <If condition={defaultErrMessage.length >= 1}>
-            <ErrorMessage
-              defaultErrMessage={defaultErrMessage}
-              errMessage={errMessage}
-            />
+            <div>
+              <ErrorMessage
+                defaultErrMessage={defaultErrMessage}
+                errMessage={errMessage}
+              />
+
+              <br />
+              <a
+                href={`/decks/${id}`}
+                className="btn-primary p-1 px-2"
+              >
+                Edit Deck
+              </a>
+            </div>
 
             <Else>
               <h1>{`${deck.name} Deck Prompt`}</h1>
@@ -115,34 +131,34 @@ function PagePromptDeck() {
                 Generate New Prompt
               </button>
 
-              <If condition={characterCard && circumstanceCard && conflictCard}>
-                <PromptsDisplay
-                  characterCard={characterCard}
-                  circumstanceCard={circumstanceCard}
-                  conflictCard={conflictCard}
-                />
+              <If condition={!characterCard || !circumstanceCard || !conflictCard}>
+                <div>
+                  <h3 className="alert-danger text-center">
+                    Error
+                  </h3>
+                  <div className="bg-warning text-center p-2">
+                    <p>
+                      This deck does not have all three card types. At least one of
+                      each card type is required to generate a prompt.
+                      <br />
+                      Edit deck to ensure it has all card types. You may need to
+                      create a new card of the missing type if one does not exist.
+                    </p>
+                    <a
+                      href={`/decks/${id}`}
+                      className="btn-primary p-1 px-2"
+                    >
+                      Edit Deck
+                    </a>
+                  </div>
+                </div>
 
                 <Else>
-                  <div>
-                    <h3 className="alert-danger text-center">
-                      Error
-                    </h3>
-                    <div className="bg-warning text-center p-2">
-                      <p>
-                        This deck does not have all three card types. At least one of
-                        each card type is required to generate a prompt.
-                        <br />
-                        Edit deck to ensure it has all card types. You may need to
-                        create a new card of the missing type if one does not exist.
-                      </p>
-                      <a
-                        href={`/decks/${id}`}
-                        className="btn-primary p-1 px-2"
-                      >
-                        Edit Deck
-                      </a>
-                    </div>
-                  </div>
+                  <PromptsDisplay
+                    characterCard={characterCard}
+                    circumstanceCard={circumstanceCard}
+                    conflictCard={conflictCard}
+                  />
                 </Else>
               </If>
             </Else>

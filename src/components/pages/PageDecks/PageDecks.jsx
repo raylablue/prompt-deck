@@ -61,9 +61,11 @@ function PageDecks() {
 
       <p className="p-decks__text-block mt-3">
         Don&apos;t have any decks yet? No problem.
-        First make some cards, then you&apos;ll be able to create a deck from those cards.
-        Be careful to have at least one of each card type in the deck. The more cards of each type
-        you have, the more varried your prompts will be.
+        First make some cards with the Create Cards button on the Cards page, then
+        you&apos;ll be able to create a deck from those cards with the Create A
+        Deck button on the Decks page. Be careful to have at least one of each
+        card type in the deck. The more cards of each type you have, the more
+        varied your prompts will be.
         <br />
         Click &apos;view&apos; on the deck to go to the prompt display for it.
         Happy writing!
